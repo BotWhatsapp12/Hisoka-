@@ -1,1 +1,1 @@
-worker: npm i -g typescript && npm i github:adiwajshing/keyed-db && node .
+worker: npm install && npm i -g typescript && tsc -p ./node_modules/@adiwajshing/baileys-md && npm start
