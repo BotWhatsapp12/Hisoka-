@@ -1,1 +1,1 @@
-worker: npm i yarn && npm i -g typescript && npm i github:adiwajshing/keyed-db && npm start
+worker: npm install && npm i yarn && npm i -g typescript && npm start
