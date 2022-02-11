@@ -110,7 +110,6 @@ async function startHisoka() {
                     }
                 }), { userJid: m.chat, quoted: m })
                 hisoka.relayMessage(m.chat, template.message, { messageId: template.key.id })
-            }
                 } else if (anu.action == 'remove') {
                     hisoka.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
