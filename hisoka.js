@@ -399,6 +399,14 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                     + 'FN:OwnerBotz.\n' // full name
                     + 'ORG:Creator Bot;\n' // the organization of the contact
                     + 'TEL;type=CELL;type=VOICE;waid=6281229859085:+62 812-2985-9085\n' // WhatsApp ID + phone number
+                    + 'item1.X-ABLabel:ArulGanz\n'
+                    + 'item3.EMAIL;type=INTERNET:syahrulrahmadan819@gmail.com\n'
+                    + 'item3.X-ABLabel:Email\nitem4.URL:https://instagram.com/_daaa_1\n'
+                    + 'item4.X-ABLabel:instagram\n'
+                    + 'item5.ADR:;;Singapura🇸🇬;;;;\n'
+                    + 'item5.X-ABADR:ac\n'
+                    + 'item5.X-ABLabel:🌍 Region\n'
+                    + 'item6.X-ABLabel:Developer GuraBotz'
                     + 'END:VCARD'
 		let vcard2 = 'BEGIN:VCARD\n' // metadata of the contact card
                     + 'VERSION:3.0\n' 
@@ -406,6 +414,14 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                     + 'FN:Nomor Bot.\n' // full name
                     + 'ORG:Owner Bot;\n' // the organization of the contact
                     + 'TEL;type=CELL;type=VOICE;waid=62815788590761:+62 815-7885-90761\n' // WhatsApp ID + phone number
+                    + 'item1.X-ABLabel:ArulGanz\n'
+                    + 'item3.EMAIL;type=INTERNET:syahrulrahmadan819@gmail.com\n'
+                    + 'item3.X-ABLabel:Email\nitem4.URL:https://instagram.com/_daaa_1\n'
+                    + 'item4.X-ABLabel:instagram\n'
+                    + 'item5.ADR:;;Singapura🇸🇬;;;;\n'
+                    + 'item5.X-ABADR:ac\n'
+                    + 'item5.X-ABLabel:🌍 Region\n'
+                    + 'item6.X-ABLabel:Developer GuraBotz'
                     + 'END:VCARD'
                 hisoka.sendMessage(m.chat, { contacts: { displayName: 'OwnerBotz.', contacts: [{ vcard: vcard1 }, { vcard: vcard2 }] } }, { quoted: m })
             }
@@ -413,20 +429,21 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
 ┏━➤ 「 *Menu GuraBotz*」
-┃┃✯ ❒き⃟🐣*${prefix}removebg (reply gambar)*
-┃┃✯ ❒き⃟🐣*${prefix}tomp4 (reply sticker gif)*
-┃┃✯ ❒き⃟🐣*${prefix}togif (reply sticker gif)*
-┃┃✯ ❒き⃟🐣*${prefix}toimg (reply sticker)*
-┃┃✯ ❒き⃟🐣*${prefix}sticker (reply gambar)*
-┃┃✯ ❒き⃟🐣*${prefix}emojimix (masukan emoji)*
-┃┃✯ ❒き⃟🐣*${prefix}ping*
-┃┃✯ ❒き⃟🐣*${prefix}owner*
+┃┃✯ ❒き⃟🐣 *${prefix}removebg (reply gambar)*
+┃┃✯ ❒き⃟🐣 *${prefix}tomp4 (reply sticker gif)*
+┃┃✯ ❒き⃟🐣 *${prefix}togif (reply sticker gif)*
+┃┃✯ ❒き⃟🐣 *${prefix}toimg (reply sticker)*
+┃┃✯ ❒き⃟🐣 *${prefix}sticker (reply gambar)*
+┃┃✯ ❒き⃟🐣 *${prefix}emojimix (masukan emoji)*
+┃┃✯ ❒き⃟🐣 *${prefix}ping*
+┃┃✯ ❒き⃟🐣 *${prefix}owner*
 ┃
 ┃┏━「 *Menu Anonymous*」
-┃┃✯ ❒き⃟🐣*${prefix}anonymous*
-┃┃✯ ❒き⃟🐣*${prefix}start*
-┃┃✯ ❒き⃟🐣*${prefix}keluar*
-┃┃✯ ❒き⃟🐣*${prefix}next*
+┃┃✯ ❒き⃟🐣 *${prefix}anonymous*
+┃┃✯ ❒き⃟🐣 *${prefix}start*
+┃┃✯ ❒き⃟🐣 *${prefix}keluar*
+┃┃✯ ❒き⃟🐣 *${prefix}next*
+┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
@@ -437,6 +454,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                         hydratedTemplate: {
                             imageMessage: message.imageMessage,
                             hydratedContentText: anu,
+                            hydratedFooterText: `GuraBotz by ArulGanz`,
                             hydratedButtons: [{
                                 urlButton: {
                                     displayText: 'Instagram',
