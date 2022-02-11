@@ -40,6 +40,11 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
 	    const isMedia = /image|video|sticker|audio/.test(mime)
+	const isQuotedMsg = type === 'extendedTextMessage' && content.includes('Message')
+const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
+const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
+const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
+const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
 	
         // Group
         const groupMetadata = m.isGroup ? await hisoka.groupMetadata(m.chat).catch(e => {}) : ''
@@ -192,7 +197,8 @@ reply(`Kirim gambar dengan caption ${prefix}sticker\nDurasi Sticker Video 1-9 De
 }
 break
             case 'list': case 'menu': case 'help': case '?': {
-                anu = `Gak Ada Menu, Gak Punya Fitur`
+                anu = `Menu Bot :
+[=] .removebg (reply gambar)`
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: hisoka.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
