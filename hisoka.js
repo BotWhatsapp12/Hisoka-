@@ -147,15 +147,6 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 		m.reply('*Gak Ada Bang*')
 		}
 		break
-	case 'anonymous': {
-                if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
-				this.anonymous = this.anonymous ? this.anonymous : {}
-				let buttons = [
-                    { buttonId: 'start', buttonText: { displayText: 'Start' }, type: 1 }
-                ]
-                hisoka.sendButtonText(m.chat, buttons, `Hi ${await hisoka.getName(m.sender)} Welcome To Anonymous Chat\n\nKlik Button Dibawah Ini Untuk Mencari Partner`, hisoka.user.name, m)
-            }
-			break
             case 'keluar': case 'leave': {
                 if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
                 this.anonymous = this.anonymous ? this.anonymous : {}
@@ -173,6 +164,14 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                 delete this.anonymous[room.id]
                 if (command === 'leave') break
             }
+            case 'anonymous':{
+            	non = `*Menu Anonymous :*
+1. start
+2. next
+3. keluar`
+            	m.reply(non)
+            }
+            break
             case 'mulai': case 'start': {
                 if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
                 this.anonymous = this.anonymous ? this.anonymous : {}
