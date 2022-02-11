@@ -142,63 +142,6 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 	    })
 	    }
 	    break
-	case 'gifstiker': 
-case 's':
-case 'stickergif': 
-case 'sticker': 
-case 'stiker':
-if ((isMedia && !m.message.videoMessage || isQuotedImage) && args.length == 0) {
-encmedia = isQuotedImage ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
-media = await hisoka.downloadAndSaveMediaMessage(encmedia)
-ran = '666.webp'
-await ffmpeg(`./${media}`)
-.input(media)
-.on('start', function (cmd) {
- console.log(`Started : ${cmd}`)
-})
-.on('error', function (err) {
- console.log(`Error : ${err}`)
-fs.unlinkSync(media)
-reply('error')
-})
-.on('end', function () {
-console.log('Finish')
-await hisoka.sendImageAsSticker(m.chat, media, m)
- fs.unlinkSync(media)
-fs.unlinkSync(ran)
-})
-.addOutputOptions([`-vcodec`, `libwebp`, `-vf`, `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-.toFormat('webp')
-.save(ran)
-} else if ((isMedia && m.message.videoMessage.seconds < 11 || isQuotedVideo && m.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
-encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
-media = await hisoka.downloadAndSaveMediaMessage(encmedia)
-ran = '999.webp'
-reply(monospace(mess.wait))
-await ffmpeg(`./${media}`)
-.inputFormat(media.split('.')[1])
-.on('start', function (cmd) {
-console.log(`Started : ${cmd}`)
-})
-.on('error', function (err) {
-console.log(`Error : ${err}`)
-fs.unlinkSync(media)
-tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-reply(`Gagal, pada saat mengkonversi ${tipe} ke stiker`)
-})
-.on('end', function () {
-console.log('Finish')
-hisoka.sendMessage(from, fs.readFileSync(ran), sticker, {quoted:ftrol})
-fs.unlinkSync(media)
-fs.unlinkSync(ran)
-})
-.addOutputOptions([`-vcodec`, `libwebp`, `-vf`, `scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
-.toFormat('webp')
-.save(ran)
-} else {
-reply(`Kirim gambar dengan caption ${prefix}sticker\nDurasi Sticker Video 1-9 Detik`)
-}
-break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `Menu Bot :
 [=] .removebg (reply gambar)`
