@@ -153,7 +153,7 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 				let buttons = [
                     { buttonId: 'start', buttonText: { displayText: 'Start' }, type: 1 }
                 ]
-                hisoka.sendButtonText(m.chat, buttons, Hi ${await hisoka.getName(m.sender)} Welcome To Anonymous Chat\n\nKlik Button Dibawah Ini Untuk Mencari Partner`, `Anonymous Gura`, m)
+                hisoka.sendButtonText(m.chat, buttons, Hi ${await hisoka.getName(m.sender)} Welcome To Anonymous Chat\n\nKlik Button Dibawah Ini Untuk Mencari Partner`, hisoka.user.name, m)
             }
 			break
             case 'keluar': case 'leave': {
@@ -189,10 +189,10 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                         { buttonId: 'next', buttonText: { displayText: 'Skip' }, type: 1 },
                         { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
                     ]
-                    await hisoka.sendButtonText(room.a, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan dengan temanmu lewat bot*`, `Anonymous Gura`, m)
+                    await hisoka.sendButtonText(room.a, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan dengan temanmu lewat bot*`, hisoka.user.name, m)
                     room.b = m.sender
                     room.state = 'CHATTING'
-                    await hisoka.sendButtonText(room.b, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan dengan temanmu lewat bot`, `Anonymous Gura`, m)
+                    await hisoka.sendButtonText(room.b, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan dengan temanmu lewat bot`, hisoka.user.name, m)
                 } else {
                     let id = + new Date
                     this.anonymous[id] = {
@@ -210,7 +210,7 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                     let buttons = [
                         { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
                     ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Mohon Tunggu Sedang Mencari Partner*`, `Anonymous Gura`, m)
+                    await hisoka.sendButtonText(m.chat, buttons, `*Mohon Tunggu Sedang Mencari Partner*`, hisoka.user.name, m)
                 }
                 break
             }
@@ -234,10 +234,10 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                         { buttonId: 'next', buttonText: { displayText: 'Skip' }, type: 1 },
                         { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
                     ]
-                    await hisoka.sendButtonText(room.a, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan*`, `Anonymous Gura`, m)
+                    await hisoka.sendButtonText(room.a, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan*`, hisoka.user.name, m)
                     room.b = m.sender
                     room.state = 'CHATTING'
-                    await hisoka.sendButtonText(room.b, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan*`, `Anonymous Gura`, m)
+                    await hisoka.sendButtonText(room.b, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan*`, hisoka.user.name, m)
                 } else {
                     let id = + new Date
                     this.anonymous[id] = {
@@ -255,7 +255,7 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                     let buttons = [
                         { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
                     ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Mohon Tunggu Sedang Mencari Partner*`, `Anonymous Gura`, m)
+                    await hisoka.sendButtonText(m.chat, buttons, `*Mohon Tunggu Sedang Mencari Partner*`, hisoka.user.name, m)
                 }
                 break
             }
