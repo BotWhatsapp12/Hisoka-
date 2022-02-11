@@ -5,12 +5,13 @@
 */
 
 require('./config')
-const { default: hisokaConnect, useSingleFileAuthState, DisconnectReason, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode } = require("@adiwajshing/baileys")
+const { default: hisokaConnect, useSingleFileAuthState, DisconnectReason, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
 const pino = require('pino')
 const fs = require('fs')
 const chalk = require('chalk')
 const FileType = require('file-type')
+const ffmpeg = require('fluent-ffmpeg')
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer } = require('./lib/myfunc')
@@ -67,49 +68,7 @@ async function startHisoka() {
                 }
 
                 if (anu.action == 'add') {
-                	anu = `
-                Hai kak @${num.split("@")[0]} Welcome To ${metadata.subject}
-                Kenalan Dulu Kak :
-                1. Namanya Siapa? 
-                2. Umurnya Berapa? 
-                3. Punya Pacar Ga?  😅
-                Semoga Betah, Jangan Rusuh dan Patuhi Aturan Group`
-                	let message = await prepareWAMessageMedia({ image: ppuser}, { upload: hisoka.waUploadToServer })
-                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-                    templateMessage: {
-                        hydratedTemplate: {
-                            imageMessage: message.imageMessage,
-                            hydratedContentText: anu,
-                            hydratedButtons: [{
-                                urlButton: {
-                                    displayText: 'Instagram',
-                                    url: 'https://instagram.com/_daaa_1'
-                                }
-                            }, {
-                                callButton: {
-                                    displayText: 'Number Phone Owner',
-                                    phoneNumber: '+62 812-2985-9085'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Status Bot',
-                                    id: 'ping'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Contact Owner',
-                                    id: 'owner'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Script',
-                                    id: 'sc'
-                                }
-                            }]
-                        }
-                    }
-                }), { userJid: m.chat, quoted: m })
-                hisoka.relayMessage(m.chat, template.message, { messageId: template.key.id })
+                    hisoka.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Welcome To ${metadata.subject} @${num.split("@")[0]}` })
                 } else if (anu.action == 'remove') {
                     hisoka.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
