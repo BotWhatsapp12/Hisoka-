@@ -143,6 +143,10 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 	    })
 	    }
 	    break
+	case 'sc': {
+		m.reply('*Gak Ada Bang*')
+		}
+		break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
             m.reply(mess.wait)
@@ -158,6 +162,21 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
             } else {
                 throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
                 }
+            }
+            break
+	case 'toimage': case 'toimg': {
+                if (!quoted) throw 'Reply Image'
+                if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+                m.reply(mess.wait)
+                let media = await hisoka.downloadAndSaveMediaMessage(quoted)
+                let ran = await getRandom('.png')
+                exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+                    fs.unlinkSync(media)
+                    if (err) throw err
+                    let buffer = fs.readFileSync(ran)
+                    hisoka.sendMessage(m.chat, { image: buffer }, { quoted: m })
+                    fs.unlinkSync(ran)
+                })
             }
             break
 	        case 'tomp4': case 'tovideo': {
@@ -180,12 +199,56 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                 await fs.unlinkSync(media)
             }
             break
+              case 'ping': case 'botstatus': case 'statusbot': {
+                let timestamp = speed()
+                let latensi = speed() - timestamp
+                neww = performance.now()
+                oldd = performance.now()
+                respon = `
+Kecepatan Respon ${latensi.toFixed(4)} _Second_ \n ${oldd - neww} _miliseconds_\n\nRuntime : ${runtime(process.uptime())}
+
+🗂Info Server
+RAM: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
+
+_NodeJS Memory Usaage_
+${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
+
+${cpus[0] ? `_Total CPU Usage_
+${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}
+_CPU Core(s) Usage (${cpus.length} Core CPU)_
+${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
+                `.trim()
+                m.reply(respon)
+            }
+            break
+            case 'owner': case 'creator': {
+                let vcard1 = 'BEGIN:VCARD\n' // metadata of the contact card
+                    + 'VERSION:3.0\n' 
+                    + 'N:;ArulGanz.;;;'
+                    + 'FN:OwnerBotz.\n' // full name
+                    + 'ORG:Creator Bot;\n' // the organization of the contact
+                    + 'TEL;type=CELL;type=VOICE;waid=6281229859085:+62 812-2985-9085\n' // WhatsApp ID + phone number
+                    + 'END:VCARD'
+		let vcard2 = 'BEGIN:VCARD\n' // metadata of the contact card
+                    + 'VERSION:3.0\n' 
+                    + 'N:;ArulGanz.;;;'
+                    + 'FN:Nomor Bot.\n' // full name
+                    + 'ORG:Owner Bot;\n' // the organization of the contact
+                    + 'TEL;type=CELL;type=VOICE;waid=62815788590761:+62 815-7885-90761\n' // WhatsApp ID + phone number
+                    + 'END:VCARD'
+                hisoka.sendMessage(m.chat, { contacts: { displayName: 'OwnerBotz.', contacts: [{ vcard: vcard1 }, { vcard: vcard2 }] } }, { quoted: m })
+            }
+            break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
 ┏━➤ 「 *Menu GuraBotz*」
 ┃┃✯ *${prefix}removebg (reply gambar)*
 ┃┃✯ *${prefix}tomp4 (reply sticker gif)*
 ┃┃✯ *${prefix}togif (reply sticker gif)*
+┃┃✯ *${prefix}toimg (reply sticker)*
+┃┃✯ *${prefix}sticker (reply gambar)*
+┃┃✯ *${prefix}ping*
+┃┃✯ *${prefix}owner*
 ┗━━━━━━━`
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: hisoka.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
