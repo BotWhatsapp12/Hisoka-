@@ -163,7 +163,7 @@ reply('error')
 })
 .on('end', function () {
 console.log('Finish')
-await hisoka.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+await hisoka.sendImageAsSticker(m.chat, media, m)
  fs.unlinkSync(media)
 fs.unlinkSync(ran)
 })
