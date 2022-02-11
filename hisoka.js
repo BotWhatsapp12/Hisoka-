@@ -99,6 +99,12 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
         }
 
         // Respon Cmd with media
+        var menubutlist = [
+  {buttonId: `sc`, buttonText: {displayText: 'Script'}, type: 1},
+  {buttonId: `ping`, buttonText: {displayText: 'Bot Status'}, type: 1},
+    {buttonId: `owner`, buttonText: {displayText: 'Creator Bot'}, type: 1}
+]
+
         if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in cmdmedia)) {
         let hash = cmdmedia[m.msg.fileSha256.toString('base64')]
         let { text, mentionedJid } = hash
@@ -147,6 +153,27 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 		m.reply('*Gak Ada Bang*')
 		}
 		break
+		case 'tes':
+      hisoka.sendMessage(from,{
+      contentText: "Bot Sudah Online Kak",
+      footerText: "© GuraBotz",
+      buttons: menubutlist,
+      headerType: "template",
+      templateButtonMessage: {
+        button: {
+        urlButton: {
+        displayText: "Instagram Owner",
+        url: "https://instagram.com/_daaa_1"
+        },
+        callButton: {
+        displayText: "Owner",
+        phoneNumber: "6281229859085@s.whatsapp.net"
+        }
+        },
+        index: "6281229859085@s.whatsapp.net"
+      }
+      },'buttonsMessage')
+      break
             case 'keluar': case 'leave': {
                 if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
                 this.anonymous = this.anonymous ? this.anonymous : {}
