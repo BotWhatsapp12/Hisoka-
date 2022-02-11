@@ -197,11 +197,6 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 		m.reply('*Gak Ada Bang*')
 		}
 		break
-		case 'tes':{
-			tes = `Bot Sudah Online Kak`
-      await sendButton5(from, tes, await hisoka.createMessage(from, {image: {url: https://telegra.ph/file/dad68cf43f5137cfd8543.jpg, caption: tes}}))
-      }
-      break
             case 'keluar': case 'leave': {
                 if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
                 this.anonymous = this.anonymous ? this.anonymous : {}
