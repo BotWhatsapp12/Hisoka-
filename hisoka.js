@@ -99,6 +99,50 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
         }
 
         // Respon Cmd with media
+const sendButton5 = async (id, text1, desc1, yo) => {
+var buatpesan = await generateWAMessageFromContent(from, {
+    "templateMessage": {
+      "hydratedTemplate": {
+        ...yo.message,
+        "hydratedContentText": text1,
+        "hydratedFooterText": desc1,
+        "hydratedButtons": [
+          {
+            "urlButton": {
+              "displayText": "Github",
+              "url": "https://github.com/BotWhatsapp12"
+            }
+          },
+          {
+            "urlButton": {
+              "displayText": "Instagram",
+              "url": "https://instagram.com/_daaa_1"
+            }
+          },
+          {
+            "quickReplyButton": {
+              "displayText": "Bot Status",
+              "id": `ping`
+            }
+          },
+          {
+            "quickReplyButton": {
+              "displayText": "Script",
+              "id": `sc`,
+            }
+          },
+          {
+            "quickReplyButton": {
+              "displayText": "Owner",
+              "id": `owner`
+            }
+          }
+        ]
+      }
+    }
+  }, {})
+hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
+}
         var menubutlist = [
   {buttonId: `sc`, buttonText: {displayText: 'Script'}, type: 1},
   {buttonId: `ping`, buttonText: {displayText: 'Bot Status'}, type: 1},
@@ -153,26 +197,10 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 		m.reply('*Gak Ada Bang*')
 		}
 		break
-		case 'tes':
-      hisoka.sendMessage(from,{
-      contentText: "Bot Sudah Online Kak",
-      footerText: "© GuraBotz",
-      buttons: menubutlist,
-      headerType: "template",
-      templateButtonMessage: {
-        button: {
-        urlButton: {
-        displayText: "Instagram Owner",
-        url: "https://instagram.com/_daaa_1"
-        },
-        callButton: {
-        displayText: "Owner",
-        phoneNumber: "6281229859085@s.whatsapp.net"
-        }
-        },
-        index: "6281229859085@s.whatsapp.net"
+		case 'tes':{
+			tes = `Bot Sudah Online Kak`
+      await sendButton5(from, tes, await hisoka.createMessage(from, {image: {url: https://telegra.ph/file/dad68cf43f5137cfd8543.jpg, caption: tes}}))
       }
-      },'buttonsMessage')
       break
             case 'keluar': case 'leave': {
                 if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
@@ -390,19 +418,23 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
 ┏━➤ 「 *Menu GuraBotz*」
-┃┃✯ *${prefix}removebg (reply gambar)*
-┃┃✯ *${prefix}tomp4 (reply sticker gif)*
-┃┃✯ *${prefix}togif (reply sticker gif)*
-┃┃✯ *${prefix}toimg (reply sticker)*
-┃┃✯ *${prefix}sticker (reply gambar)*
-┃┃✯ *${prefix}emojimix (masukan emoji)*
-┃┃✯ *${prefix}ping*
-┃┃✯ *${prefix}owner*
-┃「 *Menu Anonymous*」
-┃┃✯ *${prefix}anonymous*
-┃┃✯ *${prefix}start*
-┃┃✯ *${prefix}keluar*
-┃┃✯ *${prefix}next*
+┃┃✯ ❒き⃟🐣*${prefix}removebg (reply gambar)*
+┃┃✯ ❒き⃟🐣*${prefix}tomp4 (reply sticker gif)*
+┃┃✯ ❒き⃟🐣*${prefix}togif (reply sticker gif)*
+┃┃✯ ❒き⃟🐣*${prefix}toimg (reply sticker)*
+┃┃✯ ❒き⃟🐣*${prefix}sticker (reply gambar)*
+┃┃✯ ❒き⃟🐣*${prefix}emojimix (masukan emoji)*
+┃┃✯ ❒き⃟🐣*${prefix}ping*
+┃┃✯ ❒き⃟🐣*${prefix}owner*
+┃
+┃┏━「 *Menu Anonymous*」
+┃┃✯ ❒き⃟🐣*${prefix}anonymous*
+┃┃✯ ❒き⃟🐣*${prefix}start*
+┃┃✯ ❒き⃟🐣*${prefix}keluar*
+┃┃✯ ❒き⃟🐣*${prefix}next*
+┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
+┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
+┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
 ┗━━━━━━━`
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: hisoka.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
