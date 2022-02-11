@@ -5,7 +5,7 @@
 */
 
 require('./config')
-const { BufferJSON, WA_DEFAULT_EPHEMERAL, MessageType, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser } = require('@adiwajshing/baileys')
+const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
@@ -24,7 +24,6 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 const content = JSON.stringify(m.message)
 const from = m.key.remoteJid
 const type = Object.keys(m.message)[0]
-const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
 
 let cmdmedia = JSON.parse(fs.readFileSync('./src/cmdmedia.json'))
 
@@ -164,7 +163,7 @@ reply('error')
 })
 .on('end', function () {
 console.log('Finish')
-hisoka.sendMessage(from, fs.readFileSync(ran), sticker, {quoted:m})
+await hisoka.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
  fs.unlinkSync(media)
 fs.unlinkSync(ran)
 })
