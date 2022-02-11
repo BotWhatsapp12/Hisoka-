@@ -393,36 +393,40 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'owner': case 'creator': {
-                let vcard1 = 'BEGIN:VCARD\n' // metadata of the contact card
-                    + 'VERSION:3.0\n' 
-                    + 'N:;ArulGanz.;;;'
-                    + 'FN:OwnerBotz.\n' // full name
-                    + 'ORG:Creator Bot;\n' // the organization of the contact
-                    + 'TEL;type=CELL;type=VOICE;waid=6281229859085:+62 812-2985-9085\n' // WhatsApp ID + phone number
-                    + 'item1.X-ABLabel:ArulGanz\n'
-                    + 'item3.EMAIL;type=INTERNET:syahrulrahmadan819@gmail.com\n'
-                    + 'item3.X-ABLabel:Email\nitem4.URL:https://instagram.com/_daaa_1\n'
-                    + 'item4.X-ABLabel:instagram\n'
-                    + 'item5.ADR:;;Singapura🇸🇬;;;;\n'
-                    + 'item5.X-ABADR:ac\n'
-                    + 'item5.X-ABLabel:🌍 Region\n'
-                    + 'item6.X-ABLabel:Developer GuraBotz'
-                    + 'END:VCARD'
-		let vcard2 = 'BEGIN:VCARD\n' // metadata of the contact card
-                    + 'VERSION:3.0\n' 
-                    + 'N:;ArulGanz.;;;'
-                    + 'FN:Nomor Bot.\n' // full name
-                    + 'ORG:Owner Bot;\n' // the organization of the contact
-                    + 'TEL;type=CELL;type=VOICE;waid=62815788590761:+62 815-7885-90761\n' // WhatsApp ID + phone number
-                    + 'item1.X-ABLabel:ArulGanz\n'
-                    + 'item3.EMAIL;type=INTERNET:syahrulrahmadan819@gmail.com\n'
-                    + 'item3.X-ABLabel:Email\nitem4.URL:https://instagram.com/_daaa_1\n'
-                    + 'item4.X-ABLabel:instagram\n'
-                    + 'item5.ADR:;;Singapura🇸🇬;;;;\n'
-                    + 'item5.X-ABADR:ac\n'
-                    + 'item5.X-ABLabel:🌍 Region\n'
-                    + 'item6.X-ABLabel:Developer GuraBotz'
-                    + 'END:VCARD'
+                let vcard1 = 'BEGIN:VCARD\n'
++ 'VERSION:3.0\n'
++ 'N:Sy;Bot;;;\n'
++ 'FN:GuraBotz\n'
++ 'item1.TEL;waid=6281229859085:6281229859085\n'
++ 'item1.X-ABLabel:ArulGanz\n'
++ 'item2.TEL;waid=62815788590760:62815788590760\n'
++ 'item2.X-ABLabel:GuraBotz\n'
++ 'item3.EMAIL;type=INTERNET:arulganz119@gmail.com\n'
++ 'item3.X-ABLabel:Email\n'
++ 'item4.URL:https://instagram.com/_daaa_1\n'
++ 'item4.X-ABLabel:instagram\n'
++ 'item5.ADR:;;Singapura🇸🇬;;;;\n'
++ 'item5.X-ABADR:ac\n'
++ 'item5.X-ABLabel:🌍 Region\n'
++ 'item6.X-ABLabel:Developer GuraBotz\n'
++ 'END:VCARD'
+		let vcard2 ='BEGIN:VCARD\n'
++ 'VERSION:3.0\n'
++ 'N:Sy;Bot;;;\n'
++ 'FN:GuraBotz\n'
++ 'item1.TEL;waid=6285869134434:6285869134434\n'
++ 'item1.X-ABLabel:ArulGanz\n'
++ 'item2.TEL;waid=62858691344341:62858691344341\n'
++ 'item2.X-ABLabel:GuraBotz\n'
++ 'item3.EMAIL;type=INTERNET:arulganz119@gmail.com\n'
++ 'item3.X-ABLabel:Email\n'
++ 'item4.URL:https://instagram.com/_daaa_1\n'
++ 'item4.X-ABLabel:instagram\n'
++ 'item5.ADR:;;Singapura🇸🇬;;;;\n'
++ 'item5.X-ABADR:ac\n'
++ 'item5.X-ABLabel:🌍 Region\n'
++ 'item6.X-ABLabel:Developer GuraBotz\n'
++ 'END:VCARD'
                 hisoka.sendMessage(m.chat, { contacts: { displayName: 'OwnerBotz.', contacts: [{ vcard: vcard1 }, { vcard: vcard2 }] } }, { quoted: m })
             }
             break
