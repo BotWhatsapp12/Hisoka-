@@ -361,14 +361,13 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             
-            /*Menu Download
             case 'tiktok': case 'tiktoknowm': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
-                let anu = await fetchJson(api('zenz', '/api/downloader/tiktok', { url: text }, 'apikey'))
+                let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
-                    {buttonId: `tiktokwm ${text}`, buttonText: {displayText: ' With Watermark'}, type: 1},
-                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: ' Audio'}, type: 1}
+                    {buttonId: `tiktokwm ${text}`, buttonText: {displayText: 'With Watermark'}, type: 1},
+                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: 'Audio'}, type: 1}
                 ]
                 let buttonMessage = {
                     video: { url: anu.result.nowatermark },
@@ -383,7 +382,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             case 'tiktokwm': case 'tiktokwatermark': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
-                let anu = await fetchJson(api('zenz', '/api/downloader/tiktok', { url: text }, 'apikey'))
+                let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: ' No Watermark'}, type: 1},
                     {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: ' Audio'}, type: 1}
@@ -401,7 +400,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             case 'tiktokmp3': case 'tiktokaudio': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
-                let anu = await fetchJson(api('zenz', '/api/downloader/tiktok', { url: text }, 'apikey'))
+                let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: ' No Watermark'}, type: 1},
                     {buttonId: `tiktokwm ${text}`, buttonText: {displayText: ' With Watermark'}, type: 1}
@@ -416,26 +415,12 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 hisoka.sendMessage(m.chat, { audio: { url: anu.result.audio } }, { quoted: msg })
             }
             break
-	        case 'igdl': case 'ig': case 'instagram': {
-                if (!text) throw 'Masukkan Query Link!'
-                m.reply(mess.wait)
-                let anu = await fetchJson(api('zenz', '/api/downloader/instagram2', { url: text }, 'apikey'))
-                hisoka.sendMessage(m.chat, { video: { url: anu.data[0] }, caption: `Download From ${text}` }, { quoted: m})
-            } 
-            break
-            case 'igdltv': case 'igreels': case 'igdl2': {
-                if (!text) throw 'Masukkan Query Link!'
-                m.reply(mess.wait)
-                let anu = await fetchJson(api('zenz', '/api/downloader/instagram', { url: text }, 'apikey'))
-                hisoka.sendMessage(m.chat, { video: { url: anu.result.link }, caption: ` Desc : ${anu.result.caption.desc}`}, { quoted: m })
-            }
-            break
 	        case 'twitdl': case 'twitter': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
-                let anu = await fetchJson(api('zenz', '/api/downloader/twitter', { url: text }, 'apikey'))
+                let anu = await fetchJson('https://zenzapi.xyz/downloader/twitter?url=${text}&apikey=87d718524e2a')
                 let buttons = [
-                    {buttonId: `twittermp3 ${text}`, buttonText: {displayText: ' Audio'}, type: 1}
+                    {buttonId: `twittermp3 ${text}`, buttonText: {displayText: 'Audio'}, type: 1}
                 ]
                 let buttonMessage = {
                     video: { url: anu.result.HD || anu.result.SD },
@@ -450,7 +435,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             case 'twittermp3': case 'twitteraudio': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
-                let anu = await fetchJson(api('zenz', '/api/downloader/twitter', { url: text }, 'apikey'))
+                let anu = await fetchJson('https://zenzapi.xyz/downloader/twitter?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `twitter ${text}`, buttonText: {displayText: ' Video'}, type: 1}
                 ]
@@ -472,8 +457,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 hisoka.sendMessage(m.chat, { video: { url: anu.result.url }, caption: ` Title : ${anu.result.title}`}, { quoted: m })
             }
             break
-            
-           */
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
 ┏━➤ 「 *Menu GuraBotz*」
