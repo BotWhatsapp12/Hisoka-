@@ -210,7 +210,7 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                     let buttons = [
                         { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
                     ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Mohon Tunggu Sedang Mencari Partner*`, hisoka.user.name, m)
+                    await hisoka.sendButtonText(m.chat, buttons, `*Anda Sudah Tidak Berada Di Sesi Annonymous*`, hisoka.user.name, m)
                 }
                 break
             }
@@ -255,7 +255,7 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                     let buttons = [
                         { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
                     ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Mohon Tunggu Sedang Mencari Partner*`, hisoka.user.name, m)
+                    await hisoka.sendButtonText(m.chat, buttons, `*Anda Sudah Tidak Berada Di Sesi Annonymous*`, hisoka.user.name, m)
                 }
                 break
             }
