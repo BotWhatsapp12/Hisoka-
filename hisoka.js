@@ -153,7 +153,7 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 				let buttons = [
                     { buttonId: 'start', buttonText: { displayText: 'Start' }, type: 1 }
                 ]
-                hisoka.sendButtonText(m.chat, buttons, Hi ${await hisoka.getName(m.sender)} Welcome To Anonymous Chat\n\nKlik Button Dibawah Ini Untuk Mencari Partner`, hisoka.user.name, m)
+                hisoka.sendButtonText(m.chat, buttons, `Hi ${await hisoka.getName(m.sender)} Welcome To Anonymous Chat\n\nKlik Button Dibawah Ini Untuk Mencari Partner`, hisoka.user.name, m)
             }
 			break
             case 'keluar': case 'leave': {
@@ -169,7 +169,7 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                 }
                 m.reply('Ok')
                 let other = room.other(m.sender)
-                if (other) await hisoka.sendText(other, *Partner Telah Meninggalkan Sesi Anonymous*`, m)
+                if (other) await hisoka.sendText(other, `*Partner Telah Meninggalkan Sesi Anonymous*`, m)
                 delete this.anonymous[room.id]
                 if (command === 'leave') break
             }
