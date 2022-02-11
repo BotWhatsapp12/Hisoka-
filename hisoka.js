@@ -21,6 +21,10 @@ const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
+const content = JSON.stringify(m.message)
+const from = m.key.remoteJid
+const type = Object.keys(m.message)[0]
+const { text, extendedText, contact, location, liveLocation, image, video, sticker, document, audio, product } = MessageType
 
 let cmdmedia = JSON.parse(fs.readFileSync('./src/cmdmedia.json'))
 
