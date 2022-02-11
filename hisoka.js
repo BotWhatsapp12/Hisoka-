@@ -143,38 +143,6 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 	    })
 	    }
 	    break
-	case 'sticker': case 's': case 'stickergif': case 'sgif': {
-            if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
-                    if (/image/.test(mime)) {
-                let media = await quoted.download()
-                let encmedia = await hisoka.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
-                await fs.unlinkSync(encmedia)
-            } else if (/video/.test(mime)) {
-                if ((quoted.msg || quoted).seconds > 11) return m.reply('Maksimal 10 detik!')
-                let media = await quoted.download()
-                let encmedia = await hisoka.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
-                await fs.unlinkSync(encmedia)
-            } else {
-                throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
-                }
-            }
-            break
-            case 'toimage': case 'toimg': {
-                if (!quoted) throw 'Reply Image'
-                if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
-                let media = await hisoka.downloadAndSaveMediaMessage(quoted)
-                let ran = await getRandom('.png')
-                exec(`ffmpeg -i ${media} ${ran}`, (err) => {
-                    fs.unlinkSync(media)
-                    if (err) throw err
-                    let buffer = fs.readFileSync(ran)
-                    hisoka.sendMessage(m.chat, { image: buffer }, { quoted: m })
-                    fs.unlinkSync(ran)
-                })
-            }
-            break
 	        case 'tomp4': case 'tovideo': {
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
@@ -195,22 +163,13 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
                 await fs.unlinkSync(media)
             }
             break
-	        case 'tourl': {
-                m.reply(mess.wait)
-                let media = await hisoka.downloadAndSaveMediaMessage(quoted)
-                if (/image/.test(mime)) {
-                    let anu = await TelegraPh(media)
-                    m.reply(util.format(anu))
-                } else if (!/image/.test(mime)) {
-                    let anu = await UploadFileUgu(media)
-                    m.reply(util.format(anu))
-                }
-                await fs.unlinkSync(media)
-            }
-            break
             case 'list': case 'menu': case 'help': case '?': {
-                anu = `Menu Bot :
-[=] .removebg (reply gambar)`
+                anu = `
+┏━➤ 「 *Menu GuraBotz*」
+┃┃✯ *${prefix}removebg (reply gambar)*
+┃┃✯ *${prefix}tomp4 (reply sticker gif)*
+┃┃✯ *${prefix}togif (reply sticker gif)*
+┗━━━━━━━`
                 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: hisoka.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
