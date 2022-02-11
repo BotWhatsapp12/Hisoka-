@@ -131,7 +131,7 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
 	    m.reply(mess.wait)
 	    remobg.removeBackgroundFromImageFile({
 	      path: localFile,
-	      apikey: apinobg,
+	      apiKey: apinobg,
 	      size: "regular",
 	      type: "auto",
 	      scale: "100%",
