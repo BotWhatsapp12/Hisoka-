@@ -10,6 +10,7 @@ const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
 const { exec, spawn, execSync } = require("child_process")
+const xfar = require('xfarr-api');
 const axios = require('axios')
 const { fromBuffer } = require('file-type')
 const path = require('path')
@@ -40,6 +41,7 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
         const botNumber = hisoka.user.id ? hisoka.user.id.split(":")[0]+"@s.whatsapp.net" : hisoka.user.id
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == botNumber ? true : false
+        const k = chats.slice(command.length + 1, chats.length)
         const text = q = args.join(" ")
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
@@ -49,6 +51,9 @@ const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageM
 const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
 const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
+const isUrl = (uri) => {
+	    return uri.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%.+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%+.~#?&/=]*)/, 'gi'))
+	}
         // Group
         const groupMetadata = m.isGroup ? await hisoka.groupMetadata(m.chat).catch(e => {}) : ''
         const groupName = m.isGroup ? groupMetadata.subject : ''
@@ -98,6 +103,24 @@ const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stic
         }
 
         // Respon Cmd with media
+const sendFileFromUrl = async (from, url, caption, msg, men) => {
+            let mime = '';
+            let res = await axios.head(url)
+            mime = res.headers['content-type']
+            if (mime.split("/")[1] === "gif") {
+                return chika.sendMessage(from, { video: await convertGif(url), caption: caption, gifPlayback: true, mentions: men ? men : []}, {quoted: msg})
+                }
+            let type = mime.split("/")[0]+"Message"
+            if(mime.split("/")[0] === "image"){
+                return hisoka.sendMessage(from, { image: await getBuffer(url), caption: caption, mentions: men ? men : []}, {quoted: m})
+            } else if(mime.split("/")[0] === "video"){
+                return hisoka.sendMessage(from, { video: await getBuffer(url), caption: caption, mentions: men ? men : []}, {quoted: m})
+            } else if(mime.split("/")[0] === "audio"){
+                return hisoka.sendMessage(from, { audio: await getBuffer(url), caption: caption, mentions: men ? men : [], mimetype: 'audio/mpeg'}, {quoted: m })
+            } else {l
+                return hisoka.sendMessage(from, { document: await getBuffer(url), mimetype: mime, caption: caption, mentions: men ? men : []}, {quoted: m })
+            }
+        }
 const sendButton5 = async (id, text1, desc1, yo) => {
 var buatpesan = await generateWAMessageFromContent(from, {
     "templateMessage": {
@@ -245,7 +268,7 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
                 m.reply(mess.wait)
                 let media = await hisoka.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
-                await hisoka.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m })
+                await hisoka.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: mess.success} }, { quoted: m })
                 await fs.unlinkSync(media)
             }
             break
@@ -332,16 +355,16 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 let buttonMessage = {
                     image: { url: anu.thumbnail },
                     caption: `
-🎶 Title : ${anu.title}
-🎶 Ext : Search
+🐣 Title : ${anu.title}
+🗂 Ext : Search
 🎶 ID : ${anu.videoId}
-🎶 Duration : ${anu.timestamp}
-🎶 Viewers : ${anu.views}
-🎶 Upload At : ${anu.ago}
-🎶 Author : ${anu.author.name}
-🎶 Channel : ${anu.author.url}
-🎶 Description : ${anu.description}
-🎶 Url : ${anu.url}`,
+⏳ Duration : ${anu.timestamp}
+📷 Viewers : ${anu.views}
+🗓 Upload At : ${anu.ago}
+🚹 Author : ${anu.author.name}
+🎬 Channel : ${anu.author.url}
+📃 Description : ${anu.description}
+🖇 Url : ${anu.url}`,
                     footer: hisoka.user.name,
                     buttons: buttons,
                     headerType: 4
@@ -358,7 +381,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 let quality = args[1] ? args[1] : '128kbps'                
                 let media = medias.filter(v => v.videoAvailable == false && v.audioAvailable == true && v.quality == quality).map(v => v)
                 if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
-                hisoka.sendImage(m.chat, thumbnail, ` Title : ${title}\n File Size : ${media[0].formattedSize}\n Url : ${url}\n Ext : MP3\n Resolusi : ${args[1] || '128kbps'}\n *Mohon Tunggu Sebentar Media Sedang Dikirim*`, m)
+                hisoka.sendImage(m.chat, thumbnail, `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n🎶 Ext : MP3\n🗃 Resolusi : ${args[1] || '128kbps'}\n *Mohon Tunggu Sebentar Media Sedang Dikirim*`, m)
                 hisoka.sendMessage(m.chat, { audio: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3` }, { quoted: m })
             }
             break
@@ -371,8 +394,28 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 let quality = args[1] ? args[1] : '360p'                
                 let media = medias.filter(v => v.videoAvailable == true && v.audioAvailable == false && v.quality == quality).map(v => v)
                 if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
-                hisoka.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: ` Title : ${title}\n File Size : ${media[0].formattedSize}\n Url : ${url}\n Ext : MP4\n Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+                hisoka.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n Ext : MP4\n🗃 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
+            break
+            case prefix+'tiktok':{
+                if (!k.includes('tiktok.com')) return m.reply('Link Tiktok Ngab... ')
+                await m.reply(mess.wait())
+                xfar.Tiktok(args[1]).then(async data => {
+                    let txt = `*----「 TIKTOK DOWNLOADER 」----*\n\n`
+                    txt += `*📫 Title :* ${data.title}\n`
+                    txt += `*🎞️ Type :* ${data.medias[0].extension}\n`
+                    txt += `*📟 Quality :* ${data.medias[0].quality}\n`
+                    txt += `*💾 Size :* ${data.medias[0].formattedSize}\n`
+                    txt += `*📚 Url :* ${data.url}`
+                    sendFileFromUrl(from, data.medias[0].url, txt, m)
+                })
+                .catch((err) => {
+                    for (let x of ownerNumber) {
+                        sendMessage(x, `${command.split(prefix)[1]} Error: \n\n` + err)
+                    }
+                    m.reply(mess.err())
+                })
+                }
             break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
