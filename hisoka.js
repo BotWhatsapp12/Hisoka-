@@ -25,7 +25,7 @@ const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, slee
 const content = JSON.stringify(m.message)
 const from = m.key.remoteJid
 const type = Object.keys(m.message)[0]
-
+const ofrply = fs.readFileSync('./lib/hisoka.jpg')
 let cmdmedia = JSON.parse(fs.readFileSync('./src/cmdmedia.json'))
 
 module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
@@ -49,7 +49,9 @@ const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageM
 const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
 const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-	
+const reply2 = (teks) => {
+			hisoka.sendMessage(from, teks, text, { thumbnail: ofrply, sendEphemeral: true, quoted: m, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title: `𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!`,body:"Bot WhatsApp by ArulGanz",previewType:"PHOTO",thumbnail:ofrply,sourceUrl:`https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn`}}})
+		}
         // Group
         const groupMetadata = m.isGroup ? await hisoka.groupMetadata(m.chat).catch(e => {}) : ''
         const groupName = m.isGroup ? groupMetadata.subject : ''
@@ -169,9 +171,9 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         }
         switch(command) {
             case 'imagenobg': case 'removebg': case 'remove-bg': {
-	    if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	    if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	    if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+	    if (!quoted) reply2(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	    if (!/image/.test(mime)) reply2(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	    if (/webp/.test(mime)) reply2(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 	    let remobg = require('remove.bg')
 	    let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
 	    let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
@@ -194,123 +196,13 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 	    }
 	    break
 	case 'sc': {
-		m.reply('*Gak Ada Bang*')
+		reply2('*Gak Ada Bang*')
 		}
 		break
-            case 'keluar': case 'leave': {
-                if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
-                this.anonymous = this.anonymous ? this.anonymous : {}
-                let room = Object.values(this.anonymous).find(room => room.check(m.sender))
-                if (!room) {
-                    let buttons = [
-                        { buttonId: 'start', buttonText: { displayText: 'Start' }, type: 1 }
-                    ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Kamu Sedang Tidak Berada Di Sesi Anonymous*, Tekan Button Untuk Mencari Partner`)
-                    throw false
-                }
-                m.reply('Ok')
-                let other = room.other(m.sender)
-                if (other) await hisoka.sendText(other, `*Partner Telah Meninggalkan Sesi Anonymous*`, m)
-                delete this.anonymous[room.id]
-                if (command === 'leave') break
-            }
-            case 'anonymous':{
-            	non = `*Menu Anonymous :*
-1. start
-2. next
-3. keluar`
-            	m.reply(non)
-            }
-            break
-            case 'mulai': case 'start': {
-                if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
-                this.anonymous = this.anonymous ? this.anonymous : {}
-                if (Object.values(this.anonymous).find(room => room.check(m.sender))) {
-                    let buttons = [
-                        { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
-                    ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Kamu Masih Berada Di dalam Sesi Anonymous, Tekan Button Dibawah Ini Untuk Menghentikan Sesi Anonymous Anda*`, hisoka.user.name, m)
-                    throw false
-                }
-                let room = Object.values(this.anonymous).find(room => room.state === 'WAITING' && !room.check(m.sender))
-                if (room) {
-                    let buttons = [
-                        { buttonId: 'next', buttonText: { displayText: 'Skip' }, type: 1 },
-                        { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
-                    ]
-                    await hisoka.sendButtonText(room.a, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan dengan temanmu lewat bot*`, hisoka.user.name, m)
-                    room.b = m.sender
-                    room.state = 'CHATTING'
-                    await hisoka.sendButtonText(room.b, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan dengan temanmu lewat bot`, hisoka.user.name, m)
-                } else {
-                    let id = + new Date
-                    this.anonymous[id] = {
-                        id,
-                        a: m.sender,
-                        b: '',
-                        state: 'WAITING',
-                        check: function (who = '') {
-                            return [this.a, this.b].includes(who)
-                        },
-                        other: function (who = '') {
-                            return who === this.a ? this.b : who === this.b ? this.a : ''
-                        },
-                    }
-                    let buttons = [
-                        { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
-                    ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Anda Sudah Tidak Berada Di Sesi Annonymous*`, hisoka.user.name, m)
-                }
-                break
-            }
-            case 'next': case 'lanjut': {
-                if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
-                this.anonymous = this.anonymous ? this.anonymous : {}
-                let romeo = Object.values(this.anonymous).find(room => room.check(m.sender))
-                if (!romeo) {
-                    let buttons = [
-                        { buttonId: 'start', buttonText: { displayText: 'Start' }, type: 1 }
-                    ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Kamu Sedang Tidak Berada Di Sesi Anonymous, Tekan Button Untuk Mencari Partner*`)
-                    throw false
-                }
-                let other = romeo.other(m.sender)
-                if (other) await hisoka.sendText(other, `*Partner Telah Meninggalkan Sesi Anonymous*`, m)
-                delete this.anonymous[romeo.id]
-                let room = Object.values(this.anonymous).find(room => room.state === 'WAITING' && !room.check(m.sender))
-                if (room) {
-                    let buttons = [
-                        { buttonId: 'next', buttonText: { displayText: 'Skip' }, type: 1 },
-                        { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
-                    ]
-                    await hisoka.sendButtonText(room.a, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan*`, hisoka.user.name, m)
-                    room.b = m.sender
-                    room.state = 'CHATTING'
-                    await hisoka.sendButtonText(room.b, buttons, `*Berhasil Menemukan Partner, sekarang kamu dapat mengirim pesan*`, hisoka.user.name, m)
-                } else {
-                    let id = + new Date
-                    this.anonymous[id] = {
-                        id,
-                        a: m.sender,
-                        b: '',
-                        state: 'WAITING',
-                        check: function (who = '') {
-                            return [this.a, this.b].includes(who)
-                        },
-                        other: function (who = '') {
-                            return who === this.a ? this.b : who === this.b ? this.a : ''
-                        },
-                    }
-                    let buttons = [
-                        { buttonId: 'keluar', buttonText: { displayText: 'Stop' }, type: 1 }
-                    ]
-                    await hisoka.sendButtonText(m.chat, buttons, `*Anda Sudah Tidak Berada Di Sesi Annonymous*`, hisoka.user.name, m)
-                }
-                break
-            }
+            
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
-            if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
+            if (!quoted) reply2(`Balas Video/Image Dengan Caption ${prefix + command}`)
+            reply2(mess.wait)
                     if (/image/.test(mime)) {
                 let media = await quoted.download()
                 let encmedia = await hisoka.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
@@ -321,14 +213,14 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
                 let encmedia = await hisoka.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
             } else {
-                throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
+                reply2(`Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`)
                 }
             }
             break
 	case 'toimage': case 'toimg': {
-                if (!quoted) throw 'Reply Image'
-                if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                if (!quoted) reply2('Reply Image')
+                if (!/webp/.test(mime)) repky2(`balas stiker dengan caption *${prefix + command}*`)
+                reply2(mess.wait)
                 let media = await hisoka.downloadAndSaveMediaMessage(quoted)
                 let ran = await getRandom('.png')
                 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -341,7 +233,7 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
             }
             break
             case 'emojimix': {
-	        if (!text) throw `Example : ${prefix + command} +`
+	        if (!text) reply2(`Example : ${prefix + command} 😀+😁`)
 		let [emoji1, emoji2] = text.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
 		for (let res of anu.results) {
@@ -351,9 +243,9 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 	    }
 	    break
 	        case 'tomp4': case 'tovideo': {
-                if (!quoted) throw 'Reply Image'
+                if (!quoted) reply2('Reply Sticker Gif')
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                reply2(mess.wait)
                 let media = await hisoka.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
                 await hisoka.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m })
@@ -361,9 +253,9 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
             }
             break
             case 'togif': {
-                if (!quoted) throw 'Reply Image'
+                if (!quoted) reply2('Reply Image')
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                reply2(mess.wait)
                 let media = await hisoka.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
                 await hisoka.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m })
@@ -441,12 +333,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ┃┃✯ ❒き⃟🐣 *${prefix}emojimix (masukan emoji)*
 ┃┃✯ ❒き⃟🐣 *${prefix}ping*
 ┃┃✯ ❒き⃟🐣 *${prefix}owner*
-┃
-┃┏━「 *Menu Anonymous*」
-┃┃✯ ❒き⃟🐣 *${prefix}anonymous*
-┃┃✯ ❒き⃟🐣 *${prefix}start*
-┃┃✯ ❒き⃟🐣 *${prefix}keluar*
-┃┃✯ ❒き⃟🐣 *${prefix}next*
 ┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 

@@ -19,7 +19,7 @@ global.APIKeys = {
 
 // Other
 global.owner = ['6281229859085','6281229859085','6281229859085','6281229859085']
-global.packname = 'WibuBot by'
+global.packname = 'GuraBot by'
 global.author = 'ArulGanz'
 global.sessionName = 'hisoka'
 global.prefa = ['','!','.','🐦','🐤','🗿']
