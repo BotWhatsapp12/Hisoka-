@@ -49,9 +49,6 @@ const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageM
 const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
 const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-const reply2 = async (teks) => {
-			hisoka.sendMessage(m.chat, teks, text, { thumbnail: ofrply, sendEphemeral: true, quoted: m, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title: `𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!`,body:"Bot WhatsApp by ArulGanz",previewType:"PHOTO",thumbnail:ofrply,sourceUrl:`https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn`}}})
-		}
         // Group
         const groupMetadata = m.isGroup ? await hisoka.groupMetadata(m.chat).catch(e => {}) : ''
         const groupName = m.isGroup ? groupMetadata.subject : ''
@@ -171,9 +168,9 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         }
         switch(command) {
             case 'imagenobg': case 'removebg': case 'remove-bg': {
-	    if (!quoted) reply2(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
-	    if (!/image/.test(mime)) reply2(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
-	    if (/webp/.test(mime)) reply2(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	    if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+	    if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+	    if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 	    let remobg = require('remove.bg')
 	    let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
 	    let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
@@ -196,13 +193,13 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 	    }
 	    break
 	case 'sc': {
-		reply2('*Gak Ada Bang*')
+		m.reply('*Gak Ada Bang*')
 		}
 		break
             
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
-            if (!quoted) reply2(`Balas Video/Image Dengan Caption ${prefix + command}`)
-            reply2(mess.wait)
+            if (!quoted) throw`Balas Video/Image Dengan Caption ${prefix + command}`
+            m.reply(mess.wait)
                     if (/image/.test(mime)) {
                 let media = await quoted.download()
                 let encmedia = await hisoka.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
@@ -213,14 +210,14 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
                 let encmedia = await hisoka.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
             } else {
-                reply2(`Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`)
+                throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
                 }
             }
             break
 	case 'toimage': case 'toimg': {
-                if (!quoted) reply2('Reply Image')
-                if (!/webp/.test(mime)) repky2(`balas stiker dengan caption *${prefix + command}*`)
-                reply2(mess.wait)
+                if (!quoted) m.reply('Reply Sticker')
+                if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+                m.reply(mess.wait)
                 let media = await hisoka.downloadAndSaveMediaMessage(quoted)
                 let ran = await getRandom('.png')
                 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -233,7 +230,7 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
             }
             break
             case 'emojimix': {
-	        if (!text) reply2('Example : ${prefix + command} 😀+😁')
+	        if (!text) throw `Example : ${prefix + command} 😀+😁`
 		let [emoji1, emoji2] = text.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
 		for (let res of anu.results) {
@@ -243,9 +240,9 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 	    }
 	    break
 	        case 'tomp4': case 'tovideo': {
-                if (!quoted) reply2('Reply Sticker Gif')
+                if (!quoted) m.reply('Reply Sticker Gif')
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                reply2(mess.wait)
+                m.reply(mess.wait)
                 let media = await hisoka.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
                 await hisoka.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m })
@@ -253,9 +250,9 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
             }
             break
             case 'togif': {
-                if (!quoted) reply2('Reply Image')
+                if (!quoted) m.reply('Reply Image')
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                reply2(mess.wait)
+                m.reply(mess.wait)
                 let media = await hisoka.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
                 await hisoka.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m })
