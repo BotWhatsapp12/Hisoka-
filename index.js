@@ -79,7 +79,7 @@ async function startHisoka() {
                     buttons: buttons,
                     headerType: 4
                 }
-                hisoka.sendMessage(jid, anu.id, m.chat, buttonMessage, { quoted: m })
+                hisoka.sendMessage(anu.id, m.chat, buttonMessage, { quoted: m })
                 } else if (anu.action == 'remove') {
                     hisoka.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
