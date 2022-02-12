@@ -41,7 +41,6 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
         const botNumber = hisoka.user.id ? hisoka.user.id.split(":")[0]+"@s.whatsapp.net" : hisoka.user.id
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == botNumber ? true : false
-        const k = chat.slice(command.length + 1, chat.length)
         const text = q = args.join(" ")
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
@@ -397,8 +396,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 hisoka.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n Ext : MP4\n🗃 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
-            case prefix+'tiktok':{
-                if (!k.includes('tiktok.com')) return m.reply('Link Tiktok Ngab... ')
+            case 'tiktok':{
+                if (!q.includes('tiktok.com')) return m.reply('Link Tiktok Ngab... ')
                 await m.reply(mess.wait())
                 xfar.Tiktok(args[1]).then(async data => {
                     let txt = `*----「 TIKTOK DOWNLOADER 」----*\n\n`
