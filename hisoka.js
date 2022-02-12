@@ -398,7 +398,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             case 'tiktok':{
                 if (!q.includes('tiktok.com')) return m.reply('Link Tiktok Ngab... ')
-                await m.reply(mess.wait())
+                m.reply(mess.wait)
                 xfar.Tiktok(args[1]).then(async data => {
                     let txt = `*----「 TIKTOK DOWNLOADER 」----*\n\n`
                     txt += `*📫 Title :* ${data.title}\n`
@@ -407,12 +407,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                     txt += `*💾 Size :* ${data.medias[0].formattedSize}\n`
                     txt += `*📚 Url :* ${data.url}`
                     sendFileFromUrl(from, data.medias[0].url, txt, m)
-                })
-                .catch((err) => {
-                    for (let x of ownerNumber) {
-                        sendMessage(x, `${command.split(prefix)[1]} Error: \n\n` + err)
-                    }
-                    m.reply(mess.err())
                 })
                 }
             break
