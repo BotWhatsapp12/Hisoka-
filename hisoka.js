@@ -303,6 +303,88 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 m.reply(respon)
             }
             break
+            case 'bcgc': case 'bcgroup': {
+                if (!isCreator) throw mess.owner
+                if (!text) throw `Text mana?\n\nExample : ${prefix + command} BroadCast`
+                let getGroups = await hisoka.groupFetchAllParticipating()
+                let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
+                let anu = groups.map(v => v.id)
+                m.reply(`Mengirim Broadcast Ke ${anu.length} Group Chat, Waktu Selesai ${anu.length * 1.5} detik`)
+                for (let i of anu) {
+                    await sleep(1500)
+                    let btn = [{
+                                urlButton: {
+                                    displayText: 'Github Owner',
+                                    url: 'https://github.com/BotWhatsapp12'
+                                }
+                            }, {
+                                urlButton: {
+                                    displayText: 'Instagram Owner',
+                                    url: 'https://instagram.com/_daaa_1'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Status Bot',
+                                    id: 'ping'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Contact Owner',
+                                    id: 'owner'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Script',
+                                    id: 'sc'
+                                }
+                            }]
+                      fatihgans = fs.readFileSync('./lib/hisoka.jpg')
+                      let txt = `「 Broadcast Bot 」\n\n${text}`
+                      hisoka.send5ButImg(i, txt, hisoka.user.name, fatihgans, btn)
+                    }
+                m.reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
+            }
+            break
+            case 'bc': case 'broadcast': case 'bcall': {
+                if (!isCreator) throw mess.owner
+                if (!text) throw `Text mana?\n\nExample : ${prefix + command} BroadCast`
+                let anu = await store.chats.all().map(v => v.id)
+                m.reply(`Mengirim Broadcast Ke ${anu.length} Chat\nWaktu Selesai ${anu.length * 1.5} detik`)
+		for (let yoi of anu) {
+		    await sleep(1500)
+		    let btn = [{
+                                urlButton: {
+                                    displayText: 'Github Owner',
+                                    url: 'https://github.com/BotWhatsapp12'
+                                }
+                            }, {
+                                urlButton: {
+                                    displayText: 'Instagram Owner',
+                                    url: 'https://instagram.com/_daaa_1'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Status Bot',
+                                    id: 'ping'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Contact Owner',
+                                    id: 'owner'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Script',
+                                    id: 'sc'
+                                }
+                            }]
+                      fatihgans = fs.readFileSync('./lib/hisoka.jpg')
+                      let txt = `「 Broadcast Bot 」\n\n${text}`
+                      hisoka.send5ButImg(yoi, txt, hisoka.user.name, fatihgans, btn)
+		}
+		m.reply('Sukses Broadcast')
+            }
+            break
             case 'owner': case 'creator': {
                 let vcard1 = 'BEGIN:VCARD\n'
 + 'VERSION:3.0\n'
@@ -421,18 +503,28 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 hisoka.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n Ext : MP4\n🗃 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
-            case 'tagall': case 'infoall':
-                if (!m.isGroup) return m.reply('Khusus Group Mas')
-                let tekss = `══✪〘 *👥 Mention All* 〙✪══\n\n➲ *Message : ${q ? q : 'Nothing'}*\n\n`
-		      	for (let mem of groupMembers) {
-		            tekss += `࿃➡️ @${mem.id.split('@')[0]}\n`
-				}
-                teks += `\n⋙ *Made with Gura Botz by ArulGanz* ⋘`
-                hisoka.sendMessage(from, { text: tekss, mentions: groupMembers.map(a => a.id) }, { quoted: m })
+            case 'delete': case 'del': {
+                if (!m.quoted) throw false
+                let { chat, fromMe, id, isBaileys } = m.quoted
+                if (!isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'
+                hisoka.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
+            }
             break
-            case 'hidetag':
-                if (!m.isGroup) return m.reply('khusus group mas')
-                hisoka.sendMessage(from, { text : q ? q : '' , mentions: groupMembers.map(a => a.id)})
+            case 'tagall': {
+                if (!m.isGroup) throw mess.group
+let teks = `══✪〘 *👥 Tag All* 〙✪══
+ 
+ ➲ *Pesan : ${q ? q : 'kosong'}*\n\n`
+                for (let mem of participants) {
+                teks += `⭔ @${mem.id.split('@')[0]}\n`
+                }
+                hisoka.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
+                }
+                break
+                case 'hidetag': {
+            if (!m.isGroup) throw mess.group
+            hisoka.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
+            }
             break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
@@ -445,13 +537,21 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ┃┃✯ ❒き⃟🐣 *${prefix}emojimix (masukan emoji)*
 ┃┃✯ ❒き⃟🐣 *${prefix}ping*
 ┃┃✯ ❒き⃟🐣 *${prefix}owner*
+┃┃✯ ❒き⃟🐣 *${prefix}del (reply pesan bot)*
 ┃┃
 ┃┏━「 *Menu Download*」
 ┃┃✯ ❒き⃟🐣 *${prefix}play (judul lagu)* 
 ┃┃✯ ❒き⃟🐣 *${prefix}ytmp3 (link youtube)* 
 ┃┃✯ ❒き⃟🐣 *${prefix}ytmp4 (link youtube)*
-┃
-┃
+┃┃
+┃┏━「 *Menu Owner*」
+┃┃✯ ❒き⃟🐣 *${prefix}bcgc* 
+┃┃✯ ❒き⃟🐣 *${prefix}bcall* 
+┃┃
+┃┏━「 *Menu Group*」
+┃┃✯ ❒き⃟🐣 *${prefix}tagall* 
+┃┃✯ ❒き⃟🐣 *${prefix}hidetag* 
+┃┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
