@@ -347,13 +347,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 let yts = require("yt-search")
                 let search = await yts(text)
                 let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
-                let buttons = [
-                    {buttonId: `ytmp3 ${anu.url} 128kbps`, buttonText: {displayText: ' Audio'}, type: 1},
-                    {buttonId: `ytmp4 ${anu.url} 360p`, buttonText: {displayText: ' Video'}, type: 1}
-                ]
-                let buttonMessage = {
-                    image: { url: anu.thumbnail },
-                    caption: `
+                    caption =`
 🐣 Title : ${anu.title}
 🗂 Ext : Search
 🎶 ID : ${anu.videoId}
@@ -362,13 +356,44 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 🗓 Upload At : ${anu.ago}
 🚹 Author : ${anu.author.name}
 🎬 Channel : ${anu.author.url}
-📃 Description : ${anu.description}
-🖇 Url : ${anu.url}`,
-                    footer: hisoka.user.name,
-                    buttons: buttons,
-                    headerType: 4
-                }
-                hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })
+📃 Description : ${anu.description}`
+            let message = await prepareWAMessageMedia({ image: { url: anu.thumbnail } }, { upload: hisoka.waUploadToServer })
+                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: caption,
+                            hydratedFooterText: `GuraBotz by ArulGanz`,
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'Tautan Video',
+                                    url: `${anu.url}`
+                                }
+                            }, {
+                                urlButton: {
+                                    displayText: 'Number Phone Owner',
+                                    phoneNumber: '+62 812-2985-9085'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Music 128kbps',
+                                    id: `ytmp3 ${anu.url} 128kbps`
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Video 360p',
+                                    id: `ytmp4 ${anu.url} 360p`
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Command Bot',
+                                    id: 'menu'
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: m.chat, quoted: m })
+                hisoka.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
 	    case 'ytmp3': case 'ytaudio': {
