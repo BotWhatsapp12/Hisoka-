@@ -396,19 +396,23 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 hisoka.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n Ext : MP4\n🗃 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
-            case 'tiktok':{
-                if (!q.includes('tiktok.com')) return m.reply('Link Tiktok Ngab... ')
-                m.reply(mess.wait)
-                xfar.Tiktok(args[1]).then(async data => {
-                    let txt = `*----「 TIKTOK DOWNLOADER 」----*\n\n`
-                    txt += `*📫 Title :* ${data.title}\n`
-                    txt += `*🎞️ Type :* ${data.medias[0].extension}\n`
-                    txt += `*📟 Quality :* ${data.medias[0].quality}\n`
-                    txt += `*💾 Size :* ${data.medias[0].formattedSize}\n`
-                    txt += `*📚 Url :* ${data.url}`
-                    sendFileFromUrl(from, data.medias[0].url, txt, m)
-                })
+            case 'ig': case 'igphoto': case 'instaphoto': case 'instafoto': case 'igfoto': case 'igvideo': case 'instavideo': case 'instavid': case 'igreels': case 'instareels': case 'instareel': case 'igtv': case 'instatv':{
+		if (!text) throw 'Masukkan Query Link!'
+		m.reply(mess.wait)
+		let urlnya = q
+hx.igdl(text)
+	    .then(async(result) => {
+for(let i of result.medias){
+                if(i.url.includes('mp4')){
+                    let link = await getBuffer(i.url)
+                    hisoka.sendMessage(m.chat,link,video,{thumbnail: Buffer.alloc(0), quoted: m,caption: `Instagram •  ${i.type}`})
+                } else {
+                    let link = await getBuffer(i.url)
+                    hisoka.sendMessage(m.chat,link,image,{thumbnail: Buffer.alloc(0), quoted: m,caption: `Instagram • ${i.type}`})                  
                 }
+            }
+            }).catch((err) => m.reply(`Link tidak valid atau mungkin user private`))
+            }
             break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
