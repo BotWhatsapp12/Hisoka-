@@ -319,6 +319,58 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 hisoka.sendMessage(m.chat, { contacts: { displayName: 'OwnerBotz.', contacts: [{ vcard: vcard1 }, { vcard: vcard2 }] } }, { quoted: m })
             }
             break
+            case 'play': case 'ytplay': {
+                if (!text) throw `Example : ${prefix + command} story wa anime`
+                let yts = require("yt-search")
+                let search = await yts(text)
+                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+                let buttons = [
+                    {buttonId: `ytmp3 ${anu.url} 128kbps`, buttonText: {displayText: ' Audio'}, type: 1},
+                    {buttonId: `ytmp4 ${anu.url} 360p`, buttonText: {displayText: ' Video'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: { url: anu.thumbnail },
+                    caption: `
+🎶 Title : ${anu.title}
+🎶 Ext : Search
+🎶 ID : ${anu.videoId}
+🎶 Duration : ${anu.timestamp}
+🎶 Viewers : ${anu.views}
+🎶 Upload At : ${anu.ago}
+🎶 Author : ${anu.author.name}
+🎶 Channel : ${anu.author.url}
+🎶 Description : ${anu.description}
+🎶 Url : ${anu.url}`,
+                    footer: hisoka.user.name,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break
+	    case 'ytmp3': case 'ytaudio': {
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
+		let { aiovideodl } = require('./lib/scraper')
+                let result = await aiovideodl(isUrl(text)[0])
+                let { url, title, thumbnail, duration, medias } = result
+                let quality = args[1] ? args[1] : '128kbps'                
+                let media = medias.filter(v => v.videoAvailable == false && v.audioAvailable == true && v.quality == quality).map(v => v)
+                if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
+                hisoka.sendImage(m.chat, thumbnail, ` Title : ${title}\n File Size : ${media[0].formattedSize}\n Url : ${url}\n Ext : MP3\n Resolusi : ${args[1] || '128kbps'}`, m)
+                hisoka.sendMessage(m.chat, { audio: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3` }, { quoted: m })
+            }
+            break
+            case 'ytmp4': case 'ytvideo': {
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
+		let { aiovideodl } = require('./lib/scraper')
+                let result = await aiovideodl(isUrl(text)[0])
+                let { url, title, thumbnail, duration, medias } = result
+                let quality = args[1] ? args[1] : '360p'                
+                let media = medias.filter(v => v.videoAvailable == true && v.audioAvailable == false && v.quality == quality).map(v => v)
+                if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
+                hisoka.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: ` Title : ${title}\n File Size : ${media[0].formattedSize}\n Url : ${url}\n Ext : MP4\n Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+            }
+            break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
 ┏━➤ 「 *Menu GuraBotz*」
