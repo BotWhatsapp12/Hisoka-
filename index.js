@@ -68,7 +68,7 @@ async function startHisoka() {
                 }
 
                 if (anu.action == 'add') {
-                	let message = await prepareWAMessageMedia({ image: { image: { url: ppuser } }, { upload: hisoka.waUploadToServer })
+                	let message = await prepareWAMessageMedia(anu.id, { image: { url: ppuser } }, { upload: hisoka.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
                         hydratedTemplate: {
