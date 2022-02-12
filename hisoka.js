@@ -49,8 +49,8 @@ const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageM
 const isQuotedAudio = type === 'extendedTextMessage' && content.includes('audioMessage')
 const isQuotedVideo = type === 'extendedTextMessage' && content.includes('videoMessage')
 const isQuotedSticker = type === 'extendedTextMessage' && content.includes('stickerMessage')
-const reply2 = (teks) => {
-			hisoka.sendMessage(from, teks, text, { thumbnail: ofrply, sendEphemeral: true, quoted: m, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title: `𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!`,body:"Bot WhatsApp by ArulGanz",previewType:"PHOTO",thumbnail:ofrply,sourceUrl:`https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn`}}})
+const reply2 = async (teks) => {
+			hisoka.sendMessage(m.chat, teks, text, { thumbnail: ofrply, sendEphemeral: true, quoted: m, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title: `𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!`,body:"Bot WhatsApp by ArulGanz",previewType:"PHOTO",thumbnail:ofrply,sourceUrl:`https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn`}}})
 		}
         // Group
         const groupMetadata = m.isGroup ? await hisoka.groupMetadata(m.chat).catch(e => {}) : ''
