@@ -246,7 +246,7 @@ hisoka.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
                     fs.unlinkSync(media)
                     if (err) throw err
                     let buffer = fs.readFileSync(ran)
-                    hisoka.sendMessage(m.chat, { image: buffer }, { quoted: m })
+                    hisoka.sendMessage(m.chat, { image: buffer, caption : mess.success}, { quoted: m })
                     fs.unlinkSync(ran)
                 })
             }
@@ -371,8 +371,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                                 }
                             }, {
                                 urlButton: {
-                                    displayText: 'Number Phone Owner',
-                                    phoneNumber: '+62 812-2985-9085'
+                                    displayText: 'Instagram Owner',
+                                    url: 'https://instagram.com/_daaa_1'
                                 }
                             }, {
                                 quickReplyButton: {
@@ -421,23 +421,18 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 hisoka.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n Ext : MP4\n🗃 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
-            case 'ig': case 'igphoto': case 'instaphoto': case 'instafoto': case 'igfoto': case 'igvideo': case 'instavideo': case 'instavid': case 'igreels': case 'instareels': case 'instareel': case 'igtv': case 'instatv':{
-		if (!text) throw 'Masukkan Query Link!'
-		m.reply(mess.wait)
-		let urlnya = q
-hx.igdl(text)
-	    .then(async(result) => {
-for(let i of result.medias){
-                if(i.url.includes('mp4')){
-                    let link = await getBuffer(i.url)
-                    hisoka.sendMessage(m.chat,link,video,{thumbnail: Buffer.alloc(0), quoted: m,caption: `Instagram •  ${i.type}`})
-                } else {
-                    let link = await getBuffer(i.url)
-                    hisoka.sendMessage(m.chat,link,image,{thumbnail: Buffer.alloc(0), quoted: m,caption: `Instagram • ${i.type}`})                  
-                }
-            }
-            }).catch((err) => m.reply(`Link tidak valid atau mungkin user private`))
-            }
+            case 'tagall': case 'infoall':
+                if (!m.isGroup) return m.reply('Khusus Group Mas')
+                let tekss = `══✪〘 *👥 Mention All* 〙✪══\n\n➲ *Message : ${q ? q : 'Nothing'}*\n\n`
+		      	for (let mem of groupMembers) {
+		            tekss += `࿃➡️ @${mem.id.split('@')[0]}\n`
+				}
+                teks += `\n⋙ *Made with Gura Botz by ArulGanz* ⋘`
+                hisoka.sendMessage(from, { text: tekss, mentions: groupMembers.map(a => a.id) }, { quoted: m })
+            break
+            case 'hidetag':
+                if (!m.isGroup) return m.reply('khusus group mas')
+                hisoka.sendMessage(from, { text : q ? q : '' , mentions: groupMembers.map(a => a.id)})
             break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
@@ -474,9 +469,9 @@ for(let i of result.medias){
                                     url: 'https://instagram.com/_daaa_1'
                                 }
                             }, {
-                                callButton: {
-                                    displayText: 'Number Phone Owner',
-                                    phoneNumber: '+62 812-2985-9085'
+                                urlButton: {
+                                    displayText: 'Github Owner',
+                                    url: 'https://github.com/BotWhatsapp12'
                                 }
                             }, {
                                 quickReplyButton: {
