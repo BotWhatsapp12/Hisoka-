@@ -41,7 +41,7 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
         const botNumber = hisoka.user.id ? hisoka.user.id.split(":")[0]+"@s.whatsapp.net" : hisoka.user.id
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == botNumber ? true : false
-        const k = chats.slice(command.length + 1, chats.length)
+        const k = chat.slice(command.length + 1, chat.length)
         const text = q = args.join(" ")
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
