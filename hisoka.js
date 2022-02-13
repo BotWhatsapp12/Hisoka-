@@ -338,7 +338,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                                     id: 'sc'
                                 }
                             }]
-                      fatihgans = fs.readFileSync('./lib/bcgc.jpg')
+                      fatihgans = fs.readFileSync('./lib/bc.jpg')
                       let txt = `「 Broadcast Bot 」\n\n${text}`
                       hisoka.send5ButImg(i, txt, hisoka.user.name, fatihgans, btn)
                     }
@@ -378,7 +378,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                                     id: 'sc'
                                 }
                             }]
-                      fatihgans = fs.readFileSync('./lib/bcall.jpg')
+                      fatihgans = fs.readFileSync('./lib/bc.jpg')
                       let txt = `「 Broadcast Bot 」\n\n${text}`
                       hisoka.send5ButImg(yoi, txt, hisoka.user.name, fatihgans, btn)
 		}
