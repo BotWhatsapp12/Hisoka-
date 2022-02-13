@@ -385,6 +385,52 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 		m.reply('Sukses Broadcast')
             }
             break
+            case 'gimage': {
+        if (!text) throw `Example : ${prefix + command} kaori cicak`
+        let gis = require('g-i-s')
+        gis(text, async (error, result) => {
+        n = result
+        images = n[Math.floor(Math.random() * n.length)].url})
+        cap =`*Query* : ${text}`
+                let message = await prepareWAMessageMedia({ image: { url: images } }, { upload: hisoka.waUploadToServer })
+                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: cap,
+                            hydratedFooterText: `GuraBotz by ArulGanz`,
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'URL Hasil',
+                                    url: `${images}`
+                                }
+                            }, {
+                                urlButton: {
+                                    displayText: 'Github Owner',
+                                    url: `https://github.com/_daaa_1`
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Owner',
+                                    id: `owner`
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Command Bot',
+                                    id: `menu`
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Next',
+                                    id: `gimage ${text}`
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: m.chat, quoted: m })
+                hisoka.relayMessage(m.chat, template.message, { messageId: template.key.id })
+            }
+            break
             case 'wallpaper': {
                 if (!text) throw 'Masukkan Query Title'
 		let { wallpaper } = require('./lib/scraper')
@@ -421,7 +467,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Next',
-                                    id: `wikipedia ${text}`
+                                    id: `wallpaper ${text}`
                                 }
                             }]
                         }
@@ -641,6 +687,11 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┏━「 *Menu Group*」
 ┃┃✯ ❒き⃟🐣 *${prefix}tagall* 
 ┃┃✯ ❒き⃟🐣 *${prefix}hidetag* 
+┃┃
+┃┏━「 *Menu Search*」
+┃┃✯ ❒き⃟🐣 *${prefix}wallpaper* 
+┃┃✯ ❒き⃟🐣 *${prefix}wikipedia* 
+┃┃✯ ❒き⃟🐣 *${prefix}gimage*
 ┃┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
