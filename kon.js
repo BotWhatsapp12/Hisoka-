@@ -609,12 +609,12 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Music 128kbps',
-                                    id: `ytmp3 ${anu.url} 128kbps`
+                                    id: `ytmp32 ${anu.url}`
                                 }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Video 360p',
-                                    id: `ytmp4 ${anu.url} 360p`
+                                    id: `ytmp42 ${anu.url}`
                                 }  
                             }, {
                                 quickReplyButton: {
