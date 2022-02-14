@@ -266,11 +266,12 @@ console.log(res)
             break
     case'twitter':{
             if (!text) throw 'Linknya?'
-            m.reply(mess.wait)
+            m.reply('Sedang Di Proses, Jika Video Lama, Mungkin Eror Atau User Private')
             var res = await hx.twitter(`${text}`)
             ren = `${res.HD}`
             let buttons = [
-                    {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1}
+                    {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1},
+                    {buttonId: `menu`, buttonText: {displayText: 'Back To Menu'}, type: 1}
                 ]
                 let buttonMessage = {
                     video: { url: res.HD },
@@ -653,6 +654,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}ytmp4 (link youtube)*
 ┃┃✯ ❒き⃟🐣 *${prefix}tiktoknowm (link tiktok)*
 ┃┃✯ ❒き⃟🐣 *${prefix}tiktokwm (link tiktok)*
+┃┃✯ ❒き⃟🐣 *${prefix}twitter (link twitter)*
 ┃┃
 ┃┏━「 *Menu Owner*」
 ┃┃✯ ❒き⃟🐣 *${prefix}bcgc* 
