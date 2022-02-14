@@ -385,97 +385,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 		m.reply('Sukses Broadcast')
             }
             break
-            case 'gimage': {
-        if (!text) throw `Example : ${prefix + command} kaori cicak`
-        let gis = require('g-i-s')
-        gis(text, async (error, result) => {
-        n = result
-        images = n[Math.floor(Math.random() * n.length)].url})
-        cap =`*Query* : ${text}`
-                let message = await prepareWAMessageMedia({ image: { url: images } }, { upload: kon.waUploadToServer })
-                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-                    templateMessage: {
-                        hydratedTemplate: {
-                            imageMessage: message.imageMessage,
-                            hydratedContentText: cap,
-                            hydratedFooterText: `GuraBotz by ArulGanz`,
-                            hydratedButtons: [{
-                                urlButton: {
-                                    displayText: 'URL Hasil',
-                                    url: `${images}`
-                                }
-                            }, {
-                                urlButton: {
-                                    displayText: 'Github Owner',
-                                    url: `https://github.com/_daaa_1`
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Owner',
-                                    id: `owner`
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Command Bot',
-                                    id: `menu`
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Next',
-                                    id: `gimage ${text}`
-                                }
-                            }]
-                        }
-                    }
-                }), { userJid: m.chat, quoted: m })
-                kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
-            }
-            break
-            case 'wallpaper': {
-                if (!text) throw 'Masukkan Query Title'
-		let { wallpaper } = require('./lib/scraper')
-                anu = await wallpaper(text)
-                result = anu[Math.floor(Math.random() * anu.length)]
-                cap =`🐣Title : ${result.title}\📷 Category : ${result.type}`
-                let message = await prepareWAMessageMedia({ image: { url: result.image[0] } }, { upload: kon.waUploadToServer })
-                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-                    templateMessage: {
-                        hydratedTemplate: {
-                            imageMessage: message.imageMessage,
-                            hydratedContentText: cap,
-                            hydratedFooterText: `GuraBotz by ArulGanz`,
-                            hydratedButtons: [{
-                                urlButton: {
-                                    displayText: 'DETAIL Hasil',
-                                    url: `${result.source}`
-                                }
-                            }, {
-                                urlButton: {
-                                    displayText: 'Media URL',
-                                    url: `${result.image[2] || result.image[1] || result.image[0]}`
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Owner',
-                                    id: `owner`
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Command Bot',
-                                    id: `menu`
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Next',
-                                    id: `wallpaper ${text}`
-                                }
-                            }]
-                        }
-                    }
-                }), { userJid: m.chat, quoted: m })
-                kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
-            }
-            break
             case 'wikipedia': {
                 if (!text) throw 'Masukkan Query Title'
 		let { wikimedia } = require('./lib/scraper')
@@ -662,6 +571,66 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
             kon.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
             }
             break
+            case 'ass':
+case 'ahegao':
+case 'bdsm':
+case 'blowjob':
+case 'cuckold':
+case 'cum':
+case 'ero':
+case 'femdom':
+case 'foot':
+case 'glasses':
+case 'gangbang':
+case 'hentai':
+case 'jahy':
+case 'orgy':
+case 'pussy':
+case 'panties':
+case 'thighs':
+case 'yuri':
+case 'nsfwneko':{
+get = await fetchJson(`https://lexxy-api.herokuapp.com/docs/nsfw/${command}?apikey=Alphabot`)
+ini = await getBuffer(get.result)
+ let message = await prepareWAMessageMedia({ image: fs.readFileSync(ini) }, { upload: kon.waUploadToServer })
+                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: mess.success,
+                            hydratedFooterText: `GuraBotz by ArulGanz`,
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'Instagram',
+                                    url: 'https://instagram.com/_daaa_1'
+                                }
+                            }, {
+                                urlButton: {
+                                    displayText: 'Github Owner',
+                                    url: 'https://github.com/BotWhatsapp12'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Status Bot',
+                                    id: 'ping'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Contact Owner',
+                                    id: 'owner'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Script',
+                                    id: 'sc'
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: m.chat, quoted: m })
+                kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
+}
+break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
 ┏━➤ 「 *Menu GuraBotz*」
@@ -689,9 +658,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}hidetag* 
 ┃┃
 ┃┏━「 *Menu Search*」
-┃┃✯ ❒き⃟🐣 *${prefix}wallpaper* 
 ┃┃✯ ❒き⃟🐣 *${prefix}wikipedia* 
-┃┃✯ ❒き⃟🐣 *${prefix}gimage*
 ┃┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 

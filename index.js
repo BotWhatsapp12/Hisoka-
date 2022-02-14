@@ -18,7 +18,15 @@ const { smsg, isUrl, generateMessageTag, getBuffer } = require('./lib/myfunc')
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'fatal', stream: 'store' }) })
-
+const welcome =`
+𝙃𝙖𝙞 𝙆𝙖𝙠 @${num.split("@")[0]} 𝙎𝙚𝙡𝙖𝙢𝙖𝙩 𝘿𝙖𝙩𝙖𝙣𝙜 𝙙𝙞 ${metadata.subject}
+𝙅𝙖𝙣𝙜𝙖𝙣 𝙇𝙪𝙥𝙖 𝙄𝙣𝙩𝙧𝙤 : 
+𝙉𝙖𝙢𝙖 : 
+𝙐𝙢𝙪𝙧 : 
+𝙎𝙚𝙢𝙤𝙜𝙖 𝘽𝙚𝙩𝙖𝙝, 𝙅𝙖𝙣𝙜𝙖𝙣 𝙍𝙪𝙨𝙪𝙝 𝙆𝙖𝙠 
+𝙆𝙚𝙩𝙞𝙠 #𝙢𝙚𝙣𝙪 𝙐𝙣𝙩𝙪𝙠 𝙈𝙚𝙡𝙞𝙝𝙖𝙩 𝘾𝙤𝙢𝙢𝙖𝙣𝙙 𝘽𝙤𝙩`
+const bye =`𝙔𝙖𝙝 @${num.split("@")[0]} 𝙆𝙚𝙡𝙪𝙖𝙧 𝘿𝙖𝙧𝙞 ${metadata.subject}, 
+𝙈𝙪𝙣𝙜𝙠𝙞𝙣 𝘿𝙞𝙖 𝘽𝙪𝙩𝙪𝙝 𝙆𝙚𝙩𝙚𝙣𝙖𝙣𝙜𝙖𝙣`
 
 async function startkon() {
     const kon = konConnect({
@@ -67,9 +75,9 @@ async function startkon() {
                 }
 
                 if (anu.action == 'add') {
-                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Welcome To ${metadata.subject} @${num.split("@")[0]}\nBaca Rules Groupnya` })
+                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: ${welcome} })
                 } else if (anu.action == 'remove') {
-                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
+                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: ${bye} })
                 }
             }
         } catch (err) {
