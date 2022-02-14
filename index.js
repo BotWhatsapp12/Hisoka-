@@ -75,9 +75,9 @@ async function startkon() {
                 }
 
                 if (anu.action == 'add') {
-                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: ${welcome} })
+                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: ${welcome} }})
                 } else if (anu.action == 'remove') {
-                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: ${bye} })
+                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: ${bye} }})
                 }
             }
         } catch (err) {
