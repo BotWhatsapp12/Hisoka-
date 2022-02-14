@@ -218,7 +218,14 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 		m.reply('*Gak Ada Bang*')
 		}
 		break
-            
+     case 'attp':{
+     if (!text) throw `Example : ${prefix + command} Gura`
+       m.reply(mess.wait) 
+              media = await getBuffer(`https://api.xteam.xyz/attp?file&text=${text}`)
+              let encmedia = await kon.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+              await fs.unlinkSync(encmedia)
+              }
+              break       
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw`Balas Video/Image Dengan Caption ${prefix + command}`
             m.reply(mess.wait)
