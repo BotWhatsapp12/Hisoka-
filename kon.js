@@ -229,7 +229,7 @@ console.log(res)
                 let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktokwm ${text}`, buttonText: {displayText: 'With Watermark'}, type: 1},
-                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: 'Audio'}, type: 1}
+                    {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1}
                 ]
                 let buttonMessage = {
                     video: { url: res.result.nowatermark },
@@ -252,7 +252,7 @@ console.log(res)
                 let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: 'No Watermark'}, type: 1},
-                    {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: 'Audio'}, type: 1}
+                    {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1}
                 ]
                 let buttonMessage = {
                     video: { url: res.result.watermark },
@@ -264,37 +264,22 @@ console.log(res)
                 kon.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
-            case 'tiktokmp3': case 'tiktokaudio': {
-                if (!text) throw 'Masukkan Query Link!'
-                m.reply(mess.wait)
-                var { TiktokDownloader } = require('./lib/tiktokdl')
-res = await TiktokDownloader(`${text}`).catch(e => {
-m.reply('error')
-})
-console.log(res)
-                let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
-                let buttons = [
-                    {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: 'No Watermark'}, type: 1},
-                    {buttonId: `tiktokwm ${text}`, buttonText: {displayText: 'With Watermark'}, type: 1}
-                ]
-                let buttonMessage = {
-                    text: `Download From ${text}`,
-                    footer: 'Press The Button Below',
-                    buttons: buttons,
-                    headerType: 2
+    case 'ig': case 'igphoto': case 'instaphoto': case 'instafoto': case 'igfoto': case 'igvideo': case 'instavideo': case 'instavid': case 'igreels': case 'instareels': case 'instareel': case 'igtv': case 'instatv':{
+		if (!text) throw 'Masukkan Query Link!'
+hx.igdl(text)
+	    .then(async(result) => {
+for(let i of result.medias){
+                if(i.url.includes('mp4')){
+                    let link = await getBuffer(i.url)
+                    kon.sendMessage(m.chat, { video: { url: link }, quoted: m,caption: `Instagram •  ${i.type}`})
+                } else {
+                    let link = await getBuffer(i.url)
+                    kon.sendMessage(m.chat, { image: { url: link }, quoted: m,caption: `Instagram • ${i.type}`})                  
                 }
-                let msg = await kon.sendMessage(m.chat, buttonMessage, { quoted: m })
-                kon.sendMessage(m.chat, { audio: { url: res.result.audio } }, { quoted: msg })
+            }
+            }).catch((err) => m.reply(`Link tidak valid atau mungkin user private`))
             }
             break
-     case 'attp':{
-     if (!text) throw `Example : ${prefix + command} Gura`
-       m.reply(mess.wait) 
-              media = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURI(text)}`)
-              let encmedia = await kon.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
-              await fs.unlinkSync(encmedia)
-              }
-              break       
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw`Balas Video/Image Dengan Caption ${prefix + command}`
             m.reply(mess.wait)
@@ -647,66 +632,6 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
             kon.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
             }
             break
-            case 'ass':
-case 'ahegao':
-case 'bdsm':
-case 'blowjob':
-case 'cuckold':
-case 'cum':
-case 'ero':
-case 'femdom':
-case 'foot':
-case 'glasses':
-case 'gangbang':
-case 'hentai':
-case 'jahy':
-case 'orgy':
-case 'pussy':
-case 'panties':
-case 'thighs':
-case 'yuri':
-case 'nsfwneko':{
-get = await fetchJson(`https://lexxy-api.herokuapp.com/docs/nsfw/${command}?apikey=Alphabot`)
-ini = await getBuffer(get.result)
- let message = await prepareWAMessageMedia({ image: fs.readFileSync(ini) }, { upload: kon.waUploadToServer })
-                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-                    templateMessage: {
-                        hydratedTemplate: {
-                            imageMessage: message.imageMessage,
-                            hydratedContentText: mess.success,
-                            hydratedFooterText: `GuraBotz by ArulGanz`,
-                            hydratedButtons: [{
-                                urlButton: {
-                                    displayText: 'Instagram',
-                                    url: 'https://instagram.com/_daaa_1'
-                                }
-                            }, {
-                                urlButton: {
-                                    displayText: 'Github Owner',
-                                    url: 'https://github.com/BotWhatsapp12'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Status Bot',
-                                    id: 'ping'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Contact Owner',
-                                    id: 'owner'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Script',
-                                    id: 'sc'
-                                }
-                            }]
-                        }
-                    }
-                }), { userJid: m.chat, quoted: m })
-                kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
-}
-break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
 ┏━➤ 「 *Menu GuraBotz*」
@@ -724,6 +649,8 @@ break
 ┃┃✯ ❒き⃟🐣 *${prefix}play (judul lagu)* 
 ┃┃✯ ❒き⃟🐣 *${prefix}ytmp3 (link youtube)* 
 ┃┃✯ ❒き⃟🐣 *${prefix}ytmp4 (link youtube)*
+┃┃✯ ❒き⃟🐣 *${prefix}tiktoknowm (link tiktok)*
+┃┃✯ ❒き⃟🐣 *${prefix}tiktokwm (link tiktok)*
 ┃┃
 ┃┏━「 *Menu Owner*」
 ┃┃✯ ❒き⃟🐣 *${prefix}bcgc* 
