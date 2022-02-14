@@ -201,7 +201,7 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
                     buttons: buttons,
                     headerType: 2
                 }
-           hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })
+           kon.sendMessage(m.chat, buttonMessage, { quoted: m })
                 }
                 break
          case 'ig1':{
