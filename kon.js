@@ -211,9 +211,9 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 			     m.reply(teks)
 			     for (let i of data.medias) {
 				  if (i.extension === "mp4") {
-				   kon.sendMessage(from, { video: { url: i.url }})
+				   kon.sendMessage(m.chat, { video: { url: i.url }})
 				  } else if (i.extension === "jpg") {
-				   kon.sendMessage(from, { image: { url: i.url }})
+				   kon.sendMessage(m.chat, { image: { url: i.url }})
 			      }
 			     }
 			    }).catch(() => m.reply('Eror Awokawok'))
@@ -297,7 +297,7 @@ console.log(res)
     case 'tiktokaudio1':{
      if (!text) throw 'Masukkan Query Link!'
 			    hx.ttdownloader(args[1]).then( data => {
-			      kon.sendMessage(from, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: m })
+			      kon.sendMessage(m.chat, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: m })
 				}).catch(() => reply('Hmm Erorr Awoakwoakwok'))
 				}
 		        break
