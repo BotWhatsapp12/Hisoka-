@@ -1,8 +1,3 @@
-/**
-   * Create By Dika Ardnt.
-   * Contact Me on wa.me/6288292024190
-   * Follow https://github.com/DikaArdnt
-*/
 
 require('./config')
 const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser } = require('@adiwajshing/baileys')
@@ -197,7 +192,7 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
                 ]
                 let buttonMessage = {
                     text: `Hasil Download Dari ${text}`,
-                    footer: 'Press The Button Below',
+                    footer: 'Downloader Instagram GuraBotz',
                     buttons: buttons,
                     headerType: 2
                 }
@@ -245,9 +240,18 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 	    }
 	    break
 	case 'sc': {
-		m.reply('*Gak Ada Bang*')
-		}
-		break
+		let buttons = [
+                    {buttonId: `menu`, buttonText: {displayText: 'Back to Menu'}, type: 1},
+                ]
+                let buttonMessage = {
+                    text: `*Gak Ada Bang*`,
+                    footer: 'Downloader Instagram GuraBotz',
+                    buttons: buttons,
+                    headerType: 2
+                }
+           kon.sendMessage(m.chat, buttonMessage, { quoted: m })
+                }
+                break
 	case 'tiktok': case 'tiktoknowm': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
@@ -264,7 +268,7 @@ console.log(res)
                 let buttonMessage = {
                     video: { url: res.result.nowatermark },
                     caption: `Download From ${text}`,
-                    footer: 'Press The Button Below',
+                    footer: 'Downloader TikTok GuraBotz',
                     buttons: buttons,
                     headerType: 5
                 }
@@ -287,7 +291,7 @@ console.log(res)
                 let buttonMessage = {
                     video: { url: res.result.watermark },
                     caption: `Download From ${text}`,
-                    footer: 'Press The Button Below',
+                    footer: 'Downloader TikTok GuraBotz',
                     buttons: buttons,
                     headerType: 5
                 }
@@ -313,7 +317,7 @@ console.log(res)
                 let buttonMessage = {
                     video: { url: res.HD },
                     caption: mess.success,
-                    footer: 'Press The Button Below',
+                    footer: 'Downloader Twitter GuraBotz',
                     buttons: buttons,
                     headerType: 5
                 }
@@ -647,6 +651,22 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 let media = medias.filter(v => v.videoAvailable == true && v.audioAvailable == false && v.quality == quality).map(v => v)
                 if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
                 kon.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n Ext : MP4\n🗃 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+            }
+            break
+            case 'ytmp32':{
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27`
+                m.reply(mess.wait)
+                ini = await fetchJson(`https://api.dapuhy.xyz/api/socialmedia/ytmp3?url=${text}&apikey=wC7ZLKWUPR`)
+                thumb = await getBuffer(ini.result.thumb)
+                kon.sendImage(m.chat, thumb, `🐣 Title : ${ini.result.title}\n📤 File Size : ${ini.result.size}\n🖇 Url : ${ini.result.url}\n🎶 Ext : MP3\n\n *Mohon Tunggu Sebentar Media Sedang Dikirim*`, m)
+                kon.sendMessage(m.chat, { audio: { url: ini.result.url }, mimetype: 'audio/mp4', fileName: `${ini.result.title}.mp3` }, { quoted: m })
+            }
+            break
+            case 'ytmp42':{
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27`
+                m.reply(mess.wait)
+                ini = await fetchJson(`https://api.dapuhy.xyz/api/socialmedia/ytmp4?url=${text}&apikey=wC7ZLKWUPR`)
+                kon.sendMessage(m.chat, { video: { url: ini.result.url}, fileName: `${ini.result.title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${ini.result.title}\n📤 File Size : ${ini.result.size}\n🖇 Url : ${ini.result.url}\n Ext : MP4\n🗃 Resolusi : ${ini.result.quality}` }, { quoted: m })
             }
             break
             case 'delete': case 'del': {
