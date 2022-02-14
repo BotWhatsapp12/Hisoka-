@@ -264,6 +264,14 @@ console.log(res)
                 kon.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
+    case 'tiktokaudio':{
+     if (!text) throw 'Masukkan Query Link!'
+			    m.reply(mess.wait)
+			    hx.ttdownloader(args[1]).then( data => {
+			      kon.sendMessage(from, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: m })
+				}).catch(() => reply('Hmm Erorr Awoakwoakwok'))
+				}
+		        break
     case'twitter':{
             if (!text) throw 'Linknya?'
             m.reply('Sedang Di Proses, Jika Video Lama, Mungkin Eror Atau User Private')
