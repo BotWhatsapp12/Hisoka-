@@ -229,7 +229,7 @@ console.log(res)
                 let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktokwm ${text}`, buttonText: {displayText: 'With Watermark'}, type: 1},
-                    {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1}
+                    {buttonId: `tiktokaudio1 tiktokaudio1 ${text}`, buttonText: {displayText: 'Music'}, type: 1}
                 ]
                 let buttonMessage = {
                     video: { url: res.result.nowatermark },
@@ -252,7 +252,7 @@ console.log(res)
                 let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: 'No Watermark'}, type: 1},
-                    {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1}
+                    {buttonId: `tiktokaudio1 tiktokaudio1 ${text}`, buttonText: {displayText: 'Music'}, type: 1}
                 ]
                 let buttonMessage = {
                     video: { url: res.result.watermark },
@@ -264,9 +264,8 @@ console.log(res)
                 kon.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
-    case 'tiktokaudio':{
+    case 'tiktokaudio1':{
      if (!text) throw 'Masukkan Query Link!'
-			    m.reply(mess.wait)
 			    hx.ttdownloader(args[1]).then( data => {
 			      kon.sendMessage(from, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: m })
 				}).catch(() => reply('Hmm Erorr Awoakwoakwok'))
