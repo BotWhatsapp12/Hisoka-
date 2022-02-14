@@ -73,11 +73,10 @@ async function startkon() {
                 } catch {
                     ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
-
-                if (anu.action == 'add') {
-                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: ${welcome} }})
+                   if (anu.action == 'add') {
+                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `𝙃𝙖𝙞 𝙆𝙖𝙠 @${num.split("@")[0]} 𝙎𝙚𝙡𝙖𝙢𝙖𝙩 𝘿𝙖𝙩𝙖𝙣𝙜 𝙙𝙞 ${metadata.subject}\n𝙅𝙖𝙣𝙜𝙖𝙣 𝙇𝙪𝙥𝙖 𝙄𝙣𝙩𝙧𝙤 : \n𝙉𝙖𝙢𝙖 : \n𝙐𝙢𝙪𝙧 : \n𝙎𝙚𝙢𝙤𝙜𝙖 𝘽𝙚𝙩𝙖𝙝, 𝙅𝙖𝙣𝙜𝙖𝙣 𝙍𝙪𝙨𝙪𝙝 𝙆𝙖𝙠 \n𝙆𝙚𝙩𝙞𝙠 #𝙢𝙚𝙣𝙪 𝙐𝙣𝙩𝙪𝙠 𝙈𝙚𝙡𝙞𝙝𝙖𝙩 𝘾𝙤𝙢𝙢𝙖𝙣𝙙 𝘽𝙤𝙩`})
                 } else if (anu.action == 'remove') {
-                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: ${bye} }})
+                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
             }
         } catch (err) {
