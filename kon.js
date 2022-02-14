@@ -692,6 +692,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}tiktoknowm (link tiktok)*
 ┃┃✯ ❒き⃟🐣 *${prefix}tiktokwm (link tiktok)*
 ┃┃✯ ❒き⃟🐣 *${prefix}twitter (link twitter)*
+┃┃✯ ❒き⃟🐣 *${prefix}instagram (link instagram)*
 ┃┃
 ┃┏━「 *Menu Owner*」
 ┃┃✯ ❒き⃟🐣 *${prefix}bcgc* 
