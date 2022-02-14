@@ -191,6 +191,20 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         }
         switch(command) {
         	case 'igdl': case 'instagram': case 'ig':{
+        	if (!text) throw 'Masukkan Query Link!'
+			let buttons = [
+                    {buttonId: `ig1 ig1 ${text}`, buttonText: {displayText: 'Hasil Pencarian'}, type: 1},
+                ]
+                let buttonMessage = {
+                    text: `Hasil Download Dari ${text}`,
+                    footer: 'Press The Button Below',
+                    buttons: buttons,
+                    headerType: 2
+                }
+           hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })
+                }
+                break
+         case 'ig1':{
 			    m.reply(mess.wait)
 			    xfar.Instagram(args[1]).then( data => {
 			     var teks = `*Instagram Downloader*\n\n*≻ Title :* ${data.title}\n*≻ Jumlah Media :* ${data.medias.length}\n*≻ Url Source :* ${data.url}\n\n_wait a minute sending media..._`
