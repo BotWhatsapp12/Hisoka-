@@ -221,13 +221,18 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 	case 'tiktok': case 'tiktoknowm': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
+                var { TiktokDownloader } = require('./lib/tiktokdl')
+res = await TiktokDownloader(`${text}`).catch(e => {
+m.reply('error')
+})
+console.log(res)
                 let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktokwm ${text}`, buttonText: {displayText: 'With Watermark'}, type: 1},
                     {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: 'Audio'}, type: 1}
                 ]
                 let buttonMessage = {
-                    video: { url: anu.result.nowatermark },
+                    video: { url: res.result.nowatermark },
                     caption: `Download From ${text}`,
                     footer: 'Press The Button Below',
                     buttons: buttons,
@@ -239,13 +244,18 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
             case 'tiktokwm': case 'tiktokwatermark': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
+                var { TiktokDownloader } = require('./lib/tiktokdl')
+res = await TiktokDownloader(`${text}`).catch(e => {
+m.reply('error')
+})
+console.log(res)
                 let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: 'No Watermark'}, type: 1},
                     {buttonId: `tiktokmp3 ${text}`, buttonText: {displayText: 'Audio'}, type: 1}
                 ]
                 let buttonMessage = {
-                    video: { url: anu.result.watermark },
+                    video: { url: res.result.watermark },
                     caption: `Download From ${text}`,
                     footer: 'Press The Button Below',
                     buttons: buttons,
@@ -257,6 +267,11 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
             case 'tiktokmp3': case 'tiktokaudio': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
+                var { TiktokDownloader } = require('./lib/tiktokdl')
+res = await TiktokDownloader(`${text}`).catch(e => {
+m.reply('error')
+})
+console.log(res)
                 let anu = await fetchJson('https://zenzapi.xyz/downloader/tiktok?url=${text}&apikey=87d718524e2a')
                 let buttons = [
                     {buttonId: `tiktoknowm ${text}`, buttonText: {displayText: 'No Watermark'}, type: 1},
@@ -269,7 +284,7 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
                     headerType: 2
                 }
                 let msg = await kon.sendMessage(m.chat, buttonMessage, { quoted: m })
-                kon.sendMessage(m.chat, { audio: { url: anu.result.audio } }, { quoted: msg })
+                kon.sendMessage(m.chat, { audio: { url: res.result.audio } }, { quoted: msg })
             }
             break
      case 'attp':{
