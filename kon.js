@@ -189,6 +189,21 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+        	case 'igdl': case 'instagram': case 'ig':{
+			    m.reply(mess.wait)
+			    xfar.Instagram(args[1]).then( data => {
+			     var teks = `*Instagram Downloader*\n\n*≻ Title :* ${data.title}\n*≻ Jumlah Media :* ${data.medias.length}\n*≻ Url Source :* ${data.url}\n\n_wait a minute sending media..._`
+			     m.reply(teks)
+			     for (let i of data.medias) {
+				  if (i.extension === "mp4") {
+				   kon.sendMessage(from, { video: { url: i.url }})
+				  } else if (i.extension === "jpg") {
+				   kon.sendMessage(from, { image: { url: i.url }})
+			      }
+			     }
+			    }).catch(() => m.reply('Eror Awokawok'))
+			}
+			    break
             case 'imagenobg': case 'removebg': case 'remove-bg': {
 	    if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 	    if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
