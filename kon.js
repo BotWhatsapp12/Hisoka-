@@ -264,20 +264,22 @@ console.log(res)
                 kon.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
-    case 'ig': case 'igphoto': case 'instaphoto': case 'instafoto': case 'igfoto': case 'igvideo': case 'instavideo': case 'instavid': case 'igreels': case 'instareels': case 'instareel': case 'igtv': case 'instatv':{
-		if (!text) throw 'Masukkan Query Link!'
-hx.igdl(text)
-	    .then(async(result) => {
-for(let i of result.medias){
-                if(i.url.includes('mp4')){
-                    let link = await getBuffer(i.url)
-                    kon.sendMessage(m.chat, { video: { url: link }, quoted: m,caption: `Instagram •  ${i.type}`})
-                } else {
-                    let link = await getBuffer(i.url)
-                    kon.sendMessage(m.chat, { image: { url: link }, quoted: m,caption: `Instagram • ${i.type}`})                  
+    case'twitter':{
+            if (!text) throw 'Linknya?'
+            m.reply(mess.wait)
+            var res = await hx.twitter(`${text}`)
+            ren = `${res.HD}`
+            let buttons = [
+                    {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1}
+                ]
+                let buttonMessage = {
+                    video: { url: res.HD },
+                    caption: mess.success,
+                    footer: 'Press The Button Below',
+                    buttons: buttons,
+                    headerType: 5
                 }
-            }
-            }).catch((err) => m.reply(`Link tidak valid atau mungkin user private`))
+                kon.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
