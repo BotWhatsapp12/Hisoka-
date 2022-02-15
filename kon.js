@@ -576,19 +576,19 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             case 'joox':{
 if(!text)return reply(`Judul lagu nya mana?`)
 m.reply(mess.wait)
-jx = await fetchJson(`https://api.vhtear.com/music?query=${text}&apikey=NOT-PREMIUM`)
-thumb = await getBuffer(jx.result.linkImg)
+jx = await fetchJson(`https://api.lolhuman.xyz/api/jooxplay?apikey=687424ba062dfbbc4c7a6d59&query=${text}`)
+thumb = await getBuffer(jx.result.image)
 jxx = `🌹 *JOOX DOWNLOADER*
 
-🔖 *Size* : ${jx.result.filesize}
-🔖 *Judul* : ${jx.result.judul}
-🔖 *Url* : ${jx.result.linkMp3}
-🔖 *Album* : ${jx.result.album}
+🔖 *Size* : ${jx.result.audio.size}
+🔖 *Judul* : ${jx.result.info.song}
+🔖 *Url* : ${jx.result.audio.link}
+🔖 *Album* : ${jx.result.info.album}
 
 _Tunggu Sebentar Bot Sedang Mengirimkan Audio_
 `
 kon.sendImage(m.chat, thumb, jxx)
-kon.sendMessage(m.chat, { audio: { url: jx.result.linkMp3 }, mimetype: 'audio/mp4', fileName: `${jx.result.judul}.mp3` }, { quoted: m })
+kon.sendMessage(m.chat, { audio: { url: jx.result.audio.link }, mimetype: 'audio/mp4', fileName: `${jx.result.judul}.mp3` }, { quoted: m })
 }
 break          
             case 'play': case 'ytplay': {
