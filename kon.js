@@ -858,7 +858,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}hidetag*
 ┃┃✯ ❒き⃟🐣 *${prefix}grup*  
 ┃┃✯ ❒き⃟🐣 *${prefixeditinfo* 
-┃┃✯ ❒き⃟🐣 *${prefix}linkgc.* 
+┃┃✯ ❒き⃟🐣 *${prefix}linkgc* 
 ┃┃
 ┃┏━「 *Menu Search*」
 ┃┃✯ ❒き⃟🐣 *${prefix}wikipedia* 
