@@ -535,111 +535,52 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
-            case 'owner': case 'creator': {
-                let vcard1 = 'BEGIN:VCARD\n'
-+ 'VERSION:3.0\n'
-+ 'N:Sy;Bot;;;\n'
-+ 'FN:GuraBotz\n'
-+ 'item1.TEL;waid=6281229859085:6281229859085\n'
-+ 'item1.X-ABLabel:ArulGanz\n'
-+ 'item2.TEL;waid=62815788590760:62815788590760\n'
-+ 'item2.X-ABLabel:GuraBotz\n'
-+ 'item3.EMAIL;type=INTERNET:arulganz119@gmail.com\n'
-+ 'item3.X-ABLabel:Email\n'
-+ 'item4.URL:https://instagram.com/_daaa_1\n'
-+ 'item4.X-ABLabel:instagram\n'
-+ 'item5.ADR:;;Singapura🇸🇬;;;;\n'
-+ 'item5.X-ABADR:ac\n'
-+ 'item5.X-ABLabel:🌍 Region\n'
-+ 'item6.X-ABLabel:Developer GuraBotz\n'
-+ 'END:VCARD'
-		let vcard2 ='BEGIN:VCARD\n'
-+ 'VERSION:3.0\n'
-+ 'N:Sy;Bot;;;\n'
-+ 'FN:GuraBotz\n'
-+ 'item1.TEL;waid=6285869134434:6285869134434\n'
-+ 'item1.X-ABLabel:ArulGanz\n'
-+ 'item2.TEL;waid=62858691344341:62858691344341\n'
-+ 'item2.X-ABLabel:GuraBotz\n'
-+ 'item3.EMAIL;type=INTERNET:arulganz119@gmail.com\n'
-+ 'item3.X-ABLabel:Email\n'
-+ 'item4.URL:https://instagram.com/_daaa_1\n'
-+ 'item4.X-ABLabel:instagram\n'
-+ 'item5.ADR:;;Singapura🇸🇬;;;;\n'
-+ 'item5.X-ABADR:ac\n'
-+ 'item5.X-ABLabel:🌍 Region\n'
-+ 'item6.X-ABLabel:Developer GuraBotz\n'
-+ 'END:VCARD'
-                kon.sendMessage(m.chat, { contacts: { displayName: 'OwnerBotz.', contacts: [{ vcard: vcard1 }, { vcard: vcard2 }] } }, { quoted: m })
-            }
-            break
-            case 'joox':{
-if(!text)return reply(`Judul lagu nya mana?`)
-m.reply(mess.wait)
-jx = await fetchJson(`https://zenzapi.xyz/downloader/joox?query=${text}&apikey=87d718524e2a`)
-thumb = await getBuffer(jx.result.img)
-jxx = `🌹 *JOOX DOWNLOADER*
-
-🔖 *Judul* : ${jx.result.lagu}
-🔖 *Url* : ${jx.result.mp3Link}
-🔖 *Album* : ${jx.result.album}
-🔖 *Penyanyi* : ${jx.result.penyanyi}
-
-_Tunggu Sebentar Bot Sedang Mengirimkan Audio_
-
-🔖 *Lirik* : ${jx.result.lirik.result}
-`
-kon.sendImage(m.chat, thumb, jxx)
-kon.sendMessage(m.chat, { audio: { url: jx.result.mp3Link }, mimetype: 'audio/mp3', fileName: `${jx.result.lagu}.mp3` }, { quoted: m })
-}
-break          
-            case 'play': case 'ytplay': {
-                if (!text) throw `Example : ${prefix + command} story wa anime`
-                m.reply(mess.wait)
-                let yts = require("yt-search")
-                let search = await yts(text)
-                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
-                    caption =`
-🐣 Title : ${anu.title}
-🗂 Ext : Search
-🎶 ID : ${anu.videoId}
-⏳ Duration : ${anu.timestamp}
-📷 Viewers : ${anu.views}
-🗓 Upload At : ${anu.ago}
-🚹 Author : ${anu.author.name}
-🎬 Channel : ${anu.author.url}
-📃 Description : ${anu.description}`
-            let message = await prepareWAMessageMedia({ image: { url: anu.thumbnail } }, { upload: kon.waUploadToServer })
+            case 'info':{
+   let timestamp = speed()
+                let latensi = speed() - timestamp
+                neww = performance.now()
+                oldd = performance.now()
+nat = `
+➤ *Info Bot*➤
+┃❒ *Kecepatan Bot* ${latensi.toFixed(4)} detik
+┃❒ *Runtime Bot* ${runtime(process.uptime())}
+┃
+┃
+┃𝐆𝐮𝐫𝐚𝐁𝐨𝐭𝐳 𝐀𝐝𝐚𝐥𝐚𝐡 𝐁𝐨𝐭 𝐁𝐞𝐭𝐚 𝐌𝐮𝐥𝐭𝐢-𝐃𝐞𝐯𝐢𝐜𝐞 𝐉𝐢𝐤𝐚 
+┃𝐌𝐞𝐧𝐞𝐦𝐮𝐤𝐚𝐧 𝐁𝐮𝐠 𝐀𝐭𝐚𝐮 𝐄𝐫𝐨𝐫𝐫 𝐌𝐨𝐡𝐨𝐧 𝐝𝐢 𝐌𝐚𝐤𝐥𝐮𝐦𝐢. 
+┃𝐔𝐧𝐭𝐮𝐤 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐁𝐨𝐭 𝐓𝐞𝐫𝐝𝐚𝐩𝐚𝐭 𝐝𝐢 𝐌𝐞𝐧𝐮, 𝐔𝐧𝐭𝐮𝐤 
+┃𝐏𝐫𝐞𝐟𝐢𝐱 𝐁𝐨𝐭 𝐚𝐝𝐚𝐥𝐚𝐡 𝐌𝐮𝐥𝐭𝐢𝐩𝐫𝐞𝐟𝐢𝐱.
+┃
+┃❒*RULES BOT :*
+┃[𝙸𝚗𝚏𝚘 & 𝚁𝚞𝚕𝚎𝚜 𝙱𝚘𝚝] 
+┃1. 𝙱𝚘𝚝 𝚝𝚒𝚍𝚊𝚔 𝚙𝚎𝚛𝚗𝚊𝚑 𝚖𝚎𝚗𝚢𝚒𝚖𝚙𝚊𝚗 𝚍𝚊𝚝𝚊 
+┃     𝚙𝚎𝚗𝚐𝚐𝚞𝚗𝚊 
+┃2. 𝙱𝚘𝚝 𝚝𝚒𝚍𝚊𝚔 𝚊𝚔𝚊𝚗 𝚖𝚎𝚛𝚎𝚜𝚙𝚘𝚗 𝚓𝚒𝚔𝚊 𝚜𝚊𝚕𝚊𝚑 
+┃     𝚙𝚎𝚗𝚐𝚎𝚝𝚒𝚔𝚊𝚗 𝚌𝚘𝚖𝚖𝚊𝚗𝚍 
+┃3. 𝙲𝚊𝚕𝚕 & 𝚅𝚌 𝙱𝚘𝚝 = 𝙱𝚕𝚘𝚌𝚔 
+┃4. 𝚂𝚙𝚊𝚖 = 𝙱𝚕𝚘𝚌𝚔 & 𝙾𝚞𝚝 𝙶𝚌 
+┃5. 𝙹𝚒𝚔𝚊 𝚃𝚒𝚍𝚊𝚔 𝙼𝚎𝚛𝚎𝚜𝚙𝚘𝚗 𝙼𝚞𝚗𝚐𝚔𝚒𝚗 𝙱𝚘𝚝 𝙾𝚏𝚏
+┃6. 𝚂𝚎𝚗𝚍 𝚟𝚒𝚛𝚝𝚎𝚡/𝚋𝚞𝚐 = 𝙱𝚕𝚘𝚌𝚔 
+┃7. 𝙳𝚒𝚕𝚊𝚛𝚊𝚗𝚐 𝙼𝚎𝚗𝚌𝚞𝚕𝚒𝚔 𝙱𝚘𝚝 
+┃8. 𝙶𝚞𝚗𝚊𝚔𝚊𝚗 𝙵𝚒𝚝𝚞𝚛 𝙼𝚒𝚗𝚒𝚖𝚊𝚕 40 𝙳𝚎𝚝𝚒𝚔 
+┃     𝚂𝚎𝚔𝚊𝚕𝚒 
+┃9. 𝚃𝚞𝚝𝚘𝚛 𝙹𝚊𝚍𝚒 𝙱𝚘𝚝 𝚍𝚒 𝚈𝚘𝚞𝚝𝚞𝚋𝚎 
+┃10. 𝙹𝚊𝚗𝚐𝚊𝚗 𝚂𝚙𝚊𝚖 𝙵𝚒𝚝𝚞𝚛 𝙼𝚎𝚗𝚞!!
+┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
+┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
+┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
+┗━━━━━━━ `
+let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: kon.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
                         hydratedTemplate: {
                             imageMessage: message.imageMessage,
-                            hydratedContentText: caption,
+                            hydratedContentText: nat,
                             hydratedFooterText: `GuraBotz by ArulGanz`,
                             hydratedButtons: [{
                                 urlButton: {
-                                    displayText: 'Tautan Video',
-                                    url: `${anu.url}`
-                                }
-                            }, {
-                                urlButton: {
-                                    displayText: 'Instagram Owner',
-                                    url: 'https://instagram.com/_daaa_1'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Music 128kbps',
-                                    id: `ytmp32 ${anu.url}`
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Video 360p',
-                                    id: `ytmp42 ${anu.url}`
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Command Bot',
-                                    id: 'menu'
+                                    displayText: 'Group GuraBotz',
+                                    url: 'https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn'
                                 }
                             }]
                         }
@@ -778,8 +719,8 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
                                 }  
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Script',
-                                    id: 'sc'
+                                    displayText: 'InfoBot',
+                                    id: 'info'
                                 }
                             }]
                         }
