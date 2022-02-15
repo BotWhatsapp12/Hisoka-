@@ -576,7 +576,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             case 'joox':{
 if(!text)return reply(`Judul lagu nya mana?`)
 m.reply(mess.wait)
-jx = await fetchJson(`https://zenzapi.xyz/downloader/joox?query=${joox}&apikey=87d718524e2a`)
+jx = await fetchJson(`https://zenzapi.xyz/downloader/joox?query=${text}&apikey=87d718524e2a`)
 thumb = await getBuffer(jx.result.img)
 jxx = `🌹 *JOOX DOWNLOADER*
 
