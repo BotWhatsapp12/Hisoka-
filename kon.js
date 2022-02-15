@@ -575,6 +575,13 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
                 kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
+  case 'glasses': case 'gangbang': case 'foot': case 'femdom': case 'ero': case 'cum': case 'cuckkold': case 'blowjob': case 'bdsm': case 'ahegao': case 'ass':{
+  m.reply(mess.wait)
+  var data = await fetchJson(`https://docs-jojoapi.herokuapp.com/api/nsfw/ass?apikey=Syaa`)
+var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, type: 1 }]
+					kon.sendMessage(from, { caption: mess.success, image: { url: data.result }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
+					}
+					break
         case 'yts': case 'ytsearch': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")
@@ -635,7 +642,7 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
                 let quality = args[1] ? args[1] : '128kbps'                
                 let media = medias.filter(v => v.videoAvailable == false && v.audioAvailable == true && v.quality == quality).map(v => v)
                 if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
-                kon.sendImage(m.chat, thumbnail, `â­” Title : ${title}\nâ­” File Size : ${media[0].formattedSize}\nâ­” Url : ${url}\nâ­” Ext : MP3\nâ­” Resolusi : ${args[1] || '128kbps'}`, m)
+                kon.sendImage(m.chat, thumbnail, `🐣 Title : ${title}\n🗂 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\nâ­” Ext : MP3\n📷 Resolusi : ${args[1] || '128kbps'}`, m)
                 kon.sendMessage(m.chat, { audio: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3` }, { quoted: m })
             }
             break
@@ -651,7 +658,7 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
                 let quality = args[1] ? args[1] : '360p'                
                 let media = medias.filter(v => v.videoAvailable == true && v.audioAvailable == false && v.quality == quality).map(v => v)
                 if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
-                kon.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `â­” Title : ${title}\nâ­” File Size : ${media[0].formattedSize}\nâ­” Url : ${url}\nâ­” Ext : MP4\nâ­” Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+                kon.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n🎬 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n📷 Ext : MP4\n🗂 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
         case 'q': case 'quoted': {
@@ -677,24 +684,6 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
                     await kon.sendButtonText(m.chat, buttons, `Mode Group`, kon.user.name, m)
 
              }
-            }
-            break
-            case 'editinfo': {
-                if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isGroupAdmins && !isGroupOwner) throw mess.admin
-             if (args[0] === 'open'){
-                await kon.groupSettingUpdate(m.chat, 'unlocked').then((res) => m.reply(`Sukses Membuka Edit Info Group`)).catch((err) => m.reply(jsonformat(err)))
-             } else if (args[0] === 'close'){
-                await kon.groupSettingUpdate(m.chat, 'locked').then((res) => m.reply(`Sukses Menutup Edit Info Group`)).catch((err) => m.reply(jsonformat(err)))
-             } else {
-             let buttons = [
-                        { buttonId: 'editinfo open', buttonText: { displayText: 'Open' }, type: 1 },
-                        { buttonId: 'editinfo close', buttonText: { displayText: 'Close' }, type: 1 }
-                    ]
-                    await kon.sendButtonText(m.chat, buttons, `Mode Edit Info`, kon.user.name, m)
-
-            }
             }
             break
             case 'linkgroup': case 'linkgc': {
