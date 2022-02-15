@@ -573,6 +573,24 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 kon.sendMessage(m.chat, { contacts: { displayName: 'OwnerBotz.', contacts: [{ vcard: vcard1 }, { vcard: vcard2 }] } }, { quoted: m })
             }
             break
+            case 'joox':{
+if(!text)return reply(`Judul lagu nya mana?`)
+reply(mess.wait)
+jx = await fetchJson(`https://api.vhtear.com/music?query=${text}&apikey=NOT-PREMIUM`)
+thumb = await getBuffer(jx.result.linkImg)
+jxx = `🌹 *JOOX DOWNLOADER*
+
+🔖 *Size* : ${jx.result.filesize}
+🔖 *Judul* : ${jx.result.judul}
+🔖 *Url* : ${jx.result.linkMp3}
+🔖 *Album* : ${jx.result.album}
+
+_Tunggu Sebentar Bot Sedang Mengirimkan Audio_
+`
+kon.sendImage(m.chat, thumb, jxx)
+kon.sendMessage(m.chat, { audio: { url: jx.result.linkMp3 }, mimetype: 'audio/mp4', fileName: `${jx.result.judul}.mp3` }, { quoted: m })
+}
+break          
             case 'play': case 'ytplay': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 m.reply(mess.wait)
