@@ -551,21 +551,7 @@ nat = `
 ┃𝐔𝐧𝐭𝐮𝐤 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐁𝐨𝐭 𝐓𝐞𝐫𝐝𝐚𝐩𝐚𝐭 𝐝𝐢 𝐌𝐞𝐧𝐮, 𝐔𝐧𝐭𝐮𝐤 
 ┃𝐏𝐫𝐞𝐟𝐢𝐱 𝐁𝐨𝐭 𝐚𝐝𝐚𝐥𝐚𝐡 𝐌𝐮𝐥𝐭𝐢𝐩𝐫𝐞𝐟𝐢𝐱.
 ┃
-┃❒*RULES BOT :*
-┃[𝙸𝚗𝚏𝚘 & 𝚁𝚞𝚕𝚎𝚜 𝙱𝚘𝚝] 
-┃1. 𝙱𝚘𝚝 𝚝𝚒𝚍𝚊𝚔 𝚙𝚎𝚛𝚗𝚊𝚑 𝚖𝚎𝚗𝚢𝚒𝚖𝚙𝚊𝚗 𝚍𝚊𝚝𝚊 
-┃     𝚙𝚎𝚗𝚐𝚐𝚞𝚗𝚊 
-┃2. 𝙱𝚘𝚝 𝚝𝚒𝚍𝚊𝚔 𝚊𝚔𝚊𝚗 𝚖𝚎𝚛𝚎𝚜𝚙𝚘𝚗 𝚓𝚒𝚔𝚊 𝚜𝚊𝚕𝚊𝚑 
-┃     𝚙𝚎𝚗𝚐𝚎𝚝𝚒𝚔𝚊𝚗 𝚌𝚘𝚖𝚖𝚊𝚗𝚍 
-┃3. 𝙲𝚊𝚕𝚕 & 𝚅𝚌 𝙱𝚘𝚝 = 𝙱𝚕𝚘𝚌𝚔 
-┃4. 𝚂𝚙𝚊𝚖 = 𝙱𝚕𝚘𝚌𝚔 & 𝙾𝚞𝚝 𝙶𝚌 
-┃5. 𝙹𝚒𝚔𝚊 𝚃𝚒𝚍𝚊𝚔 𝙼𝚎𝚛𝚎𝚜𝚙𝚘𝚗 𝙼𝚞𝚗𝚐𝚔𝚒𝚗 𝙱𝚘𝚝 𝙾𝚏𝚏
-┃6. 𝚂𝚎𝚗𝚍 𝚟𝚒𝚛𝚝𝚎𝚡/𝚋𝚞𝚐 = 𝙱𝚕𝚘𝚌𝚔 
-┃7. 𝙳𝚒𝚕𝚊𝚛𝚊𝚗𝚐 𝙼𝚎𝚗𝚌𝚞𝚕𝚒𝚔 𝙱𝚘𝚝 
-┃8. 𝙶𝚞𝚗𝚊𝚔𝚊𝚗 𝙵𝚒𝚝𝚞𝚛 𝙼𝚒𝚗𝚒𝚖𝚊𝚕 40 𝙳𝚎𝚝𝚒𝚔 
-┃     𝚂𝚎𝚔𝚊𝚕𝚒 
-┃9. 𝚃𝚞𝚝𝚘𝚛 𝙹𝚊𝚍𝚒 𝙱𝚘𝚝 𝚍𝚒 𝚈𝚘𝚞𝚝𝚞𝚋𝚎 
-┃10. 𝙹𝚊𝚗𝚐𝚊𝚗 𝚂𝚙𝚊𝚖 𝙵𝚒𝚝𝚞𝚛 𝙼𝚎𝚗𝚞!!
+┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
@@ -587,6 +573,134 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
                     }
                 }), { userJid: m.chat, quoted: m })
                 kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
+            }
+            break
+        case 'yts': case 'ytsearch': {
+                if (!text) throw `Example : ${prefix + command} story wa anime`
+                let yts = require("yt-search")
+                let search = await yts(text)
+                let teks = 'YouTube Search\n\n Result From '+text+'\n\n'
+                let no = 1
+                for (let i of search.all) {
+                    teks += `🎬 No : ${no++}\n📃 Type : ${i.type}\n📷 Video ID : ${i.videoId}\n🗂 Title : ${i.title}\n🚹 Views : ${i.views}\n⏳ Duration : ${i.timestamp}\n🗓 Upload At : ${i.ago}\n🗿 Author : ${i.author.name}\n🖇 Url : ${i.url}\n\n`
+                }
+                kon.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
+            }
+            break
+        case 'google': {
+                if (!text) throw `Example : ${prefix + command} fatih arridho`
+                let google = require('google-it')
+                google({'query': text}).then(res => {
+                let teks = `Google Search From : ${text}\n\n`
+                for (let g of res) {
+                teks += `🐣 *Title* : ${g.title}\n`
+                teks += `🐣 *Description* : ${g.snippet}\n`
+                teks += `🐣 *Link* : ${g.link}\n\n`
+                } 
+                m.reply(teks)
+                })
+                }
+                break
+        case 'gimage': {
+        if (!text) throw `Example : ${prefix + command} kaori cicak`
+        let gis = require('g-i-s')
+        gis(text, async (error, result) => {
+        n = result
+        images = n[Math.floor(Math.random() * n.length)].url
+        let buttons = [
+                    {buttonId: `gimage ${text}`, buttonText: {displayText: 'Next Image'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: { url: images },
+                    caption: `*-------🐣 GIMAGE SEARCH 🐣-------*
+🐣  *Query* : ${text}
+🗂 *Media Url* : ${images}`,
+                    footer: kon.user.name,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                kon.sendMessage(m.chat, buttonMessage, { quoted: m })
+        })
+        }
+        break
+        case 'getmusic': {
+                if (!text) throw `Example : ${prefix + command} 1`
+                if (!m.quoted) return m.reply('Reply Pesan')
+                if (!m.quoted.isBaileys) throw `Hanya Bisa Membalas Pesan Dari Bot`
+                let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
+                if (!urls) throw `Mungkin pesan yang anda reply tidak mengandung result ytsearch`
+		let { aiovideodl } = require('./lib/scraper')
+                let result = await aiovideodl(urls[text - 1])
+                let { url, title, thumbnail, duration, medias } = result
+                let quality = args[1] ? args[1] : '128kbps'                
+                let media = medias.filter(v => v.videoAvailable == false && v.audioAvailable == true && v.quality == quality).map(v => v)
+                if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
+                kon.sendImage(m.chat, thumbnail, `â­” Title : ${title}\nâ­” File Size : ${media[0].formattedSize}\nâ­” Url : ${url}\nâ­” Ext : MP3\nâ­” Resolusi : ${args[1] || '128kbps'}`, m)
+                kon.sendMessage(m.chat, { audio: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3` }, { quoted: m })
+            }
+            break
+            case 'getvideo': {
+                if (!text) throw `Example : ${prefix + command} 1`
+                if (!m.quoted) return m.reply('Reply Pesan')
+                if (!m.quoted.isBaileys) throw `Hanya Bisa Membalas Pesan Dari Bot`
+                let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
+                if (!urls) throw `Mungkin pesan yang anda reply tidak mengandung result ytsearch`
+		let { aiovideodl } = require('./lib/scraper')
+                let result = await aiovideodl(urls[text - 1])
+                let { url, title, thumbnail, duration, medias } = result
+                let quality = args[1] ? args[1] : '360p'                
+                let media = medias.filter(v => v.videoAvailable == true && v.audioAvailable == false && v.quality == quality).map(v => v)
+                if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
+                kon.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `â­” Title : ${title}\nâ­” File Size : ${media[0].formattedSize}\nâ­” Url : ${url}\nâ­” Ext : MP4\nâ­” Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+            }
+            break
+        case 'q': case 'quoted': {
+		if (!m.quoted) return m.reply('Reply Pesannya!!')
+		let wokwol = await kon.serializeM(await m.getQuotedObj())
+		if (!wokwol.quoted) return m.reply('Pesan Yang anda reply tidak mengandung reply')
+		await wokwol.quoted.copyNForward(m.chat, true)
+            }
+	    break
+	    case 'group': case 'grup': {
+                if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isGroupAdmins && !isGroupOwner) throw mess.admin
+                if (args[0] === 'close'){
+                    await kon.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(`Sukses Menutup Group`)).catch((err) => m.reply(jsonformat(err)))
+                } else if (args[0] === 'open'){
+                    await kon.groupSettingUpdate(m.chat, 'not_announcement').then((res) => m.reply(`Sukses Membuka Group`)).catch((err) => m.reply(jsonformat(err)))
+                } else {
+                let buttons = [
+                        { buttonId: 'group open', buttonText: { displayText: 'Open' }, type: 1 },
+                        { buttonId: 'group close', buttonText: { displayText: 'Close' }, type: 1 }
+                    ]
+                    await kon.sendButtonText(m.chat, buttons, `Mode Group`, kon.user.name, m)
+
+             }
+            }
+            break
+            case 'editinfo': {
+                if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isGroupAdmins && !isGroupOwner) throw mess.admin
+             if (args[0] === 'open'){
+                await kon.groupSettingUpdate(m.chat, 'unlocked').then((res) => m.reply(`Sukses Membuka Edit Info Group`)).catch((err) => m.reply(jsonformat(err)))
+             } else if (args[0] === 'close'){
+                await kon.groupSettingUpdate(m.chat, 'locked').then((res) => m.reply(`Sukses Menutup Edit Info Group`)).catch((err) => m.reply(jsonformat(err)))
+             } else {
+             let buttons = [
+                        { buttonId: 'editinfo open', buttonText: { displayText: 'Open' }, type: 1 },
+                        { buttonId: 'editinfo close', buttonText: { displayText: 'Close' }, type: 1 }
+                    ]
+                    await kon.sendButtonText(m.chat, buttons, `Mode Edit Info`, kon.user.name, m)
+
+            }
+            }
+            break
+            case 'linkgroup': case 'linkgc': {
+                if (!m.isGroup) throw mess.group
+                let response = await kon.groupInviteCode(m.chat)
+                kon.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink Group : ${groupMetadata.subject}`, m, { detectLink: true })
             }
             break
         case 'play': case 'ytplay': {
@@ -720,15 +834,20 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}ping*
 ┃┃✯ ❒き⃟🐣 *${prefix}owner*
 ┃┃✯ ❒き⃟🐣 *${prefix}del (reply pesan bot)*
+┃┃✯ ❒き⃟🐣 *${prefix}q* 
 ┃┃
 ┃┏━「 *Menu Download*」
 ┃┃✯ ❒き⃟🐣 *${prefix}play (judul lagu)* 
 ┃┃✯ ❒き⃟🐣 *${prefix}ytmp3 (link youtube)* 
 ┃┃✯ ❒き⃟🐣 *${prefix}ytmp4 (link youtube)*
+┃┃✯ ❒き⃟🐣 *${prefix}ytmp32* 
+┃┃✯ ❒き⃟🐣 *${prefix}ytmp42* 
 ┃┃✯ ❒き⃟🐣 *${prefix}tiktoknowm (link tiktok)*
 ┃┃✯ ❒き⃟🐣 *${prefix}tiktokwm (link tiktok)*
 ┃┃✯ ❒き⃟🐣 *${prefix}twitter (link twitter)*
 ┃┃✯ ❒き⃟🐣 *${prefix}instagram (link instagram)*
+┃┃✯ ❒き⃟🐣 *${prefix}getmusic* 
+┃┃✯ ❒き⃟🐣 *${prefix}getvideo* 
 ┃┃
 ┃┏━「 *Menu Owner*」
 ┃┃✯ ❒き⃟🐣 *${prefix}bcgc* 
@@ -736,10 +855,16 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃
 ┃┏━「 *Menu Group*」
 ┃┃✯ ❒き⃟🐣 *${prefix}tagall* 
-┃┃✯ ❒き⃟🐣 *${prefix}hidetag* 
+┃┃✯ ❒き⃟🐣 *${prefix}hidetag*
+┃┃✯ ❒き⃟🐣 *${prefix}grup*  
+┃┃✯ ❒き⃟🐣 *${prefixeditinfo* 
+┃┃✯ ❒き⃟🐣 *${prefix}linkgc.* 
 ┃┃
 ┃┏━「 *Menu Search*」
 ┃┃✯ ❒き⃟🐣 *${prefix}wikipedia* 
+┃┃✯ ❒き⃟🐣 *${prefix}ytsearch (judul lagu)*
+┃┃✯ ❒き⃟🐣 *${prefix}google* 
+┃┃✯ ❒き⃟🐣 *${prefix}gimage* 
 ┃┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
