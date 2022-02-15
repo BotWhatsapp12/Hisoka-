@@ -575,7 +575,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             case 'joox':{
 if(!text)return reply(`Judul lagu nya mana?`)
-reply(mess.wait)
+m.reply(mess.wait)
 jx = await fetchJson(`https://api.vhtear.com/music?query=${text}&apikey=NOT-PREMIUM`)
 thumb = await getBuffer(jx.result.linkImg)
 jxx = `🌹 *JOOX DOWNLOADER*
