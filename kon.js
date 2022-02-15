@@ -589,6 +589,61 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
                 kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
+        case 'play': case 'ytplay': {
+                if (!text) throw `Example : ${prefix + command} story wa anime`
+                let yts = require("yt-search")
+                let search = await yts(text)
+                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+                    caption = `
+🐣 Title : ${anu.title}
+🗂 Ext : Search
+🎬 ID : ${anu.videoId}
+⏳ Duration : ${anu.timestamp}
+📷 Viewers : ${anu.views}
+🗓 Upload At : ${anu.ago}
+🚹 Author : ${anu.author.name}
+📃 Channel : ${anu.author.url}
+👍 Description : ${anu.description}
+🖇 Url : ${anu.url}`
+     let message = await prepareWAMessageMedia({ image:  { url: anu.thumbnail } }, { upload: kon.waUploadToServer })
+                const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+                    templateMessage: {
+                        hydratedTemplate: {
+                            imageMessage: message.imageMessage,
+                            hydratedContentText: caption,
+                            hydratedFooterText: `GuraBotz by ArulGanz`,
+                            hydratedButtons: [{
+                                urlButton: {
+                                    displayText: 'Instagram',
+                                    url: 'https://instagram.com/_daaa_1'
+                                }
+                            }, {
+                                urlButton: {
+                                    displayText: 'Github Owner',
+                                    url: 'https://github.com/BotWhatsapp12'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Music',
+                                    id: `ytmp3 ${anu.url}`
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Video',
+                                    id: `ytmp4 ${anu.url}`
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Back to Menu',
+                                    id: 'menu'
+                                }
+                            }]
+                        }
+                    }
+                }), { userJid: m.chat, quoted: m })
+                kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
+            }
+            break
 	    case 'ytmp3': case 'ytaudio': {
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
                 m.reply(mess.wait)
