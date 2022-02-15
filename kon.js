@@ -590,7 +590,7 @@ _Tunggu Sebentar Bot Sedang Mengirimkan Audio_
 🔖 *Lirik* : ${jx.result.lirik.result}
 `
 kon.sendImage(m.chat, thumb, jxx)
-kon.sendMessage(m.chat, { audio: { url: jx.result.mp3Link }, mimetype: 'audio/mp4', fileName: `${jx.result.lagu}.mp3` }, { quoted: m })
+kon.sendMessage(m.chat, { audio: { url: jx.result.mp3Link }, mimetype: 'audio/mp3', fileName: `${jx.result.lagu}.mp3` }, { quoted: m })
 }
 break          
             case 'play': case 'ytplay': {
