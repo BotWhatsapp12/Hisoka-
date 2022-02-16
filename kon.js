@@ -491,9 +491,11 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'glitch':{
-  if (args.length < 2) return reply(`Kirim perintah ${command} <Text1> <Text2>`)
+  if (args.length < 2) return mreply(`Kirim perintah ${command} <Text1> <Text2>`)
   m.reply("Tunggu Sebentar Sedang Membuat Makernya Sekitar 1 Menit Kurang")
-kon.sendMessage(m.chat, {caption: "©Gura-Md", image: { url: `https://hadi-api.herokuapp.com/api/photoxy/tiktok-effect?text=${args[1]}&text2=${args[2]}`}}, {quoted: m})
+  top = args.split('|')[0]
+bottom = args.split('|')[1]
+kon.sendMessage(m.chat, {caption: "©Gura-Md", image: { url: `https://hadi-api.herokuapp.com/api/photoxy/tiktok-effect?text=${top}&text2=${bottom}`}}, {quoted: m})
 }
 break
             case 'wikipedia': {
