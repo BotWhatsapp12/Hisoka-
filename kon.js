@@ -597,7 +597,7 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
   m.reply(mess.wait)
   var data = await fetchJson(`https://docs-jojoapi.herokuapp.com/api/nsfw/ass?apikey=Syaa`)
 var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, type: 1 }]
-					kon.sendMessage(from, { caption: mess.success, image: { url: data.result }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
+					kon.sendMessage(m.chat, { caption: mess.success, image: { url: data.result }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
 					}
 					break
         case 'yts': case 'ytsearch': {
