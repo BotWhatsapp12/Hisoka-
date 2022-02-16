@@ -490,14 +490,30 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 		m.reply('Sukses Broadcast')
             }
             break
-            case 'glitch':{
-  if (args.length < 2) return m.reply(`Kirim perintah ${command} Text1|Text2`)
-  m.reply("Tunggu Sebentar Sedang Membuat Makernya Sekitar 1 Menit Kurang")
-  top = args.split('|')[0]
-bottom = args.split('|')[1]
-kon.sendMessage(m.chat, {caption: "©Gura-Md", image: { url: `https://hadi-api.herokuapp.com/api/photoxy/tiktok-effect?text=${top}&text2=${bottom}`}}, {quoted: m})
-}
-break
+            case 'ssweb':{
+  if (!text) throw 'Masukkan Query link'
+  var seweb = chats.slice(7)
+  if (args.length < 2) return m.reply(`Kirim Perintah ${command} link Mu\nContoh ${command} https://github.com/BotWhatsapp12`)
+  m.reply(mess.wait)
+  kon.sendMessage(from, { image: { url: `https://hardianto.xyz/api/tools/ssweb?url=${text}&apikey=hardianto`}})
+  }
+  break
+  case 'sshpfull':{
+  if (!text) throw 'Masukkan Query link'
+  var seweb = chats.slice(7)
+  if (args.length < 2) return m.reply(`Kirim Perintah ${command} link Mu\nContoh ${command} https://github.com/BotWhatsapp12`)
+  m.reply(mess.wait)
+  kon.sendMessage(from, { image: { url: `https://hadi-api.herokuapp.com/api/ssweb?url=${text}&device=phone&full=on`}})
+  }
+  break
+case 'ssdesktop':{
+if (!text) throw 'Masukkan Query link'
+  var seweb = chats.slice(7)
+  if (args.length < 2) return m.reply(`Kirim Perintah ${command} link Mu\nContoh ${command} https://github.com/BotWhatsapp12`)
+  m.reply(mess.wait)
+  kon.sendMessage(from, { image: { url: `https://hadi-api.herokuapp.com/api/ssweb?url=${text}&device=desktop&full=on`}})
+  }
+  break
             case 'wikipedia': {
                 if (!text) throw 'Masukkan Query Title'
 		let { wikimedia } = require('./lib/scraper')
@@ -832,6 +848,9 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}owner*
 ┃┃✯ ❒き⃟🐣 *${prefix}del (reply pesan bot)*
 ┃┃✯ ❒き⃟🐣 *${prefix}q* 
+┃┃✯ ❒き⃟🐣 *${prefix}ssweb* 
+┃┃✯ ❒き⃟🐣 *${prefix}sshpfull* 
+┃┃✯ ❒き⃟🐣 *${prefix}ssdekstop* 
 ┃┃
 ┃┏━「 *Menu Download*」
 ┃┃✯ ❒き⃟🐣 *${prefix}play (judul lagu)* 
