@@ -491,7 +491,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'glitch':{
-  if (args.length < 2) return mreply(`Kirim perintah ${command} <Text1> <Text2>`)
+  if (args.length < 2) return m.reply(`Kirim perintah ${command} Text1|Text2`)
   m.reply("Tunggu Sebentar Sedang Membuat Makernya Sekitar 1 Menit Kurang")
   top = args.split('|')[0]
 bottom = args.split('|')[1]
