@@ -575,7 +575,7 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
                 kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
-  case 'glasses': case 'gangbang': case 'foot': case 'femdom': case 'ero': case 'cum': case 'cuckkold': case 'blowjob': case 'bdsm': case 'ahegao': case 'ass':{
+  case 'yuri': case 'pussy': case 'panties': case 'orgy': case 'neko': case 'masturbation': case 'jahy': case 'glasses': case 'gangbang': case 'foot': case 'femdom': case 'ero': case 'cum': case 'cuckkold': case 'blowjob': case 'bdsm': case 'ahegao': case 'ass':{
   m.reply(mess.wait)
   var data = await fetchJson(`https://docs-jojoapi.herokuapp.com/api/nsfw/ass?apikey=Syaa`)
 var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, type: 1 }]
@@ -728,12 +728,12 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Music',
-                                    id: `ytmp3 ${anu.url}`
+                                    id: `ytmp32 ${anu.url}`
                                 }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Video',
-                                    id: `ytmp4 ${anu.url}`
+                                    id: `ytmp42 ${anu.url}`
                                 }  
                             }, {
                                 quickReplyButton: {
@@ -854,6 +854,26 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}ytsearch (judul lagu)*
 ┃┃✯ ❒き⃟🐣 *${prefix}google* 
 ┃┃✯ ❒き⃟🐣 *${prefix}gimage* 
+┃┃
+┃┏━「 *Menu Haram NSFW*」
+┃┃✯ ❒き⃟🐣 *${prefix}yuri* 
+┃┃✯ ❒き⃟🐣 *${prefix}pussy* 
+┃┃✯ ❒き⃟🐣 *${prefix}panties* 
+┃┃✯ ❒き⃟🐣 *${prefix}orgy* 
+┃┃✯ ❒き⃟🐣 *${prefix}neko* 
+┃┃✯ ❒き⃟🐣 *${prefix}masturbation* 
+┃┃✯ ❒き⃟🐣 *${prefix}jahy* 
+┃┃✯ ❒き⃟🐣 *${prefix}glasses* 
+┃┃✯ ❒き⃟🐣 *${prefix}gangbang* 
+┃┃✯ ❒き⃟🐣 *${prefix}foot* 
+┃┃✯ ❒き⃟🐣 *${prefix}femdom* 
+┃┃✯ ❒き⃟🐣 *${prefix}ero* 
+┃┃✯ ❒き⃟🐣 *${prefix}cum* 
+┃┃✯ ❒き⃟🐣 *${prefix}cuckkold* 
+┃┃✯ ❒き⃟🐣 *${prefix}blowjob* 
+┃┃✯ ❒き⃟🐣 *${prefix}bdsm* 
+┃┃✯ ❒き⃟🐣 *${prefix}ahegao* 
+┃┃✯ ❒き⃟🐣 *${prefix}ass*
 ┃┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
