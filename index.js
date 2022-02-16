@@ -79,7 +79,7 @@ Umur :
 Status :
 Jumlah Mantan :
 Alamat :
-Semoga Betah Yah,
+Semoga Betah Yah`,
                     footer: `Welcome Message by GuraBotz`,
                     buttons: buttons,
                     headerType: 4
