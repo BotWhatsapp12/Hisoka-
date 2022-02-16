@@ -84,7 +84,7 @@ Semoga Betah Yah`,
                     buttons: buttons,
                     headerType: 4
                 }
-                kon.sendMessage(anu.id, buttonMessage, contextInfo: { mentionedJid: [num] })
+                kon.sendMessage(anu.id, buttonMessage, {quoted: m})
                 } else if (anu.action == 'remove') {
                     kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
