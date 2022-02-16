@@ -65,9 +65,26 @@ async function startkon() {
                 } catch {
                     ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
                 }
-
+               
                 if (anu.action == 'add') {
-                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Welcome To ${metadata.subject} @${num.split("@")[0]}` })
+                	let buttons = [
+                    {buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: { url: ppuser },
+                    caption: `*-------🐣 *Welcome to ${metadata.subject}*🐣-------*
+🐣  *Hai Kak @${num.split("@")[0]} Kenalan Yuk*
+Nama :
+Umur :
+Status :
+Jumlah Mantan :
+Alamat :
+Semoga Betah Yah,
+                    footer: `Welcome Message by GuraBotz`,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                kon.sendMessage(anu.id, buttonMessage, contextInfo: { mentionedJid: [num] })
                 } else if (anu.action == 'remove') {
                     kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
@@ -77,6 +94,7 @@ async function startkon() {
         }
     })
 	
+
     // Setting
     kon.decodeJid = (jid) => {
         if (!jid) return jid
