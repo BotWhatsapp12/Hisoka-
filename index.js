@@ -110,13 +110,12 @@ async function startkon() {
                                     id: 'menu'
                                 }
                             }]
-                      gans = image{url: ppuser}
                       let txt = `*-------🐣 *Welcome to ${metadata.subject}*🐣-------*
 🐣  *Hai Kak @${num.split("@")[0]} Kenalan Yuk*
 Nama :
 Umur :
 Semoga Betah Yah`
-                      kon.send5ButImg(anu.id, txt, `Welcome Message by GuraBotz`, gans, btn)
+                      kon.send5ButImg(anu.id, txt, `Welcome Message by GuraBotz`, ppuser, btn)
                 } else if (anu.action == 'remove') {
                     kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
