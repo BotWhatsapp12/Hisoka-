@@ -30,6 +30,23 @@ async function startkon() {
 
     store.bind(kon.ev)
 
+    const ftrol = {
+	key : {
+                          participant : '0@s.whatsapp.net'
+                        },
+       message: {
+                    orderMessage: {
+                            itemCount : 9,
+                            status: 1,
+                            surface : 1,
+                            message: `GuraBotz by ArulGanz`, //Kasih namalu
+                            orderTitle: `Hallo Kak`,
+                            thumbnail: fs.readFileSync('./lib/hisoka.jpg'),
+                            sellerJid: '0@s.whatsapp.net' 
+                          }
+                        }
+                      }
+
     kon.ev.on('messages.upsert', async chatUpdate => {
         //console.log(JSON.stringify(chatUpdate, undefined, 2))
         try {
@@ -84,7 +101,7 @@ Semoga Betah Yah`,
                     buttons: buttons,
                     headerType: 4
                 }
-                kon.sendMessage(anu.id, buttonMessage, {quoted: m})
+                kon.sendMessage(anu.id, buttonMessage, {quoted: ftrol})
                 } else if (anu.action == 'remove') {
                     kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
