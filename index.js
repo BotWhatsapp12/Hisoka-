@@ -84,24 +84,39 @@ async function startkon() {
                 }
                
                 if (anu.action == 'add') {
-                	let buttons = [
-                    {buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1}
-                ]
-                let buttonMessage = {
-                    image: { url: ppuser },
-                    caption: `*-------🐣 *Welcome to ${metadata.subject}*🐣-------*
+                let btn = [{
+                                urlButton: {
+                                    displayText: 'Github Owner',
+                                    url: 'https://github.com/BotWhatsapp12'
+                                }
+                            }, {
+                                urlButton: {
+                                    displayText: 'Instagram Owner',
+                                    url: 'https://instagram.com/_daaa_1'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Status Bot',
+                                    id: 'ping'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Contact Owner',
+                                    id: 'owner'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Menu Bot',
+                                    id: 'menu'
+                                }
+                            }]
+                      gans = image{url: ppuser}
+                      let txt = `*-------🐣 *Welcome to ${metadata.subject}*🐣-------*
 🐣  *Hai Kak @${num.split("@")[0]} Kenalan Yuk*
 Nama :
 Umur :
-Status :
-Jumlah Mantan :
-Alamat :
-Semoga Betah Yah`,
-                    footer: `Welcome Message by GuraBotz`,
-                    buttons: buttons,
-                    headerType: 4
-                }
-                kon.sendMessage(anu.id, buttonMessage, {quoted: ftrol})
+Semoga Betah Yah`
+                      kon.send5ButImg(anu.id, txt, `Welcome Message by GuraBotz`, gans, btn)
                 } else if (anu.action == 'remove') {
                     kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 }
