@@ -324,20 +324,6 @@ console.log(res)
                 kon.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
-    case 'tomp3':{
-					m.reply(mess.wait)
-					encmediad = JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
-					mediad = await kon.downloadAndSaveMediaMessage(encmediad)
-					ran = getRandom('.mp4')
-					exec(`ffmpeg -i ${mediad} ${ran}`, (err) => {
-						fs.unlinkSync(mediad)
-						if (err) return m.reply('eror')
-						mhee = fs.readFileSync(ran)
-						kon.sendMessage(m.chat, mhee, audio, { mimetype: 'audio/mp4', duration: 359996400, quoted: m  })
-						fs.unlinkSync(ran)
-					})
-					}
-					break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw`Balas Video/Image Dengan Caption ${prefix + command}`
             m.reply(mess.wait)
@@ -825,6 +811,10 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let { chat, fromMe, id, isBaileys } = m.quoted
                 if (!isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'
                 kon.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
+            }
+            break
+            case 'owner': case 'creator': {
+                hisoka.sendContact(m.chat, global.owner, m)
             }
             break
             case 'tagall': {

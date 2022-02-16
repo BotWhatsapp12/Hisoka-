@@ -101,7 +101,18 @@ async function startkon() {
                 }
                 kon.sendMessage(anu.id, buttonMessage, {quoted: ftrol})
                 } else if (anu.action == 'remove') {
-                    kon.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
+                    let buttons = [
+                    {buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},{buttonId: `owner`, buttonText: {displayText: 'Owner Bot'}, type: 1},
+                    {buttonId: `info`, buttonText: {displayText: 'Info Bot'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: { url: ppuser },
+                    caption: `@${num.split("@")[0]} *Keluar dari* ${metadata.subject} *Karena dia Wibu*`,
+                    footer: `Leave Message by GuraBotz`,
+                    buttons: buttons,
+                    headerType: 6
+                }
+                kon.sendMessage(anu.id, buttonMessage, {quoted: ftrol})
                 }
             }
         } catch (err) {
