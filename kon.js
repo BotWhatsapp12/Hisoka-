@@ -814,7 +814,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
             case 'owner': case 'creator': {
-                hisoka.sendContact(m.chat, global.owner, m)
+                kon.sendContact(m.chat, global.owner, m)
             }
             break
             case 'tagall': {
