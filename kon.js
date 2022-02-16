@@ -492,7 +492,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             case 'ssweb':{
   if (!text) throw 'Masukkan Query link'
-  var seweb = chats.slice(7)
   if (args.length < 2) return m.reply(`Kirim Perintah ${command} link Mu\nContoh ${command} https://github.com/BotWhatsapp12`)
   m.reply(mess.wait)
   kon.sendMessage(from, { image: { url: `https://hardianto.xyz/api/tools/ssweb?url=${text}&apikey=hardianto`}})
@@ -500,7 +499,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
   break
   case 'sshpfull':{
   if (!text) throw 'Masukkan Query link'
-  var seweb = chats.slice(7)
   if (args.length < 2) return m.reply(`Kirim Perintah ${command} link Mu\nContoh ${command} https://github.com/BotWhatsapp12`)
   m.reply(mess.wait)
   kon.sendMessage(from, { image: { url: `https://hadi-api.herokuapp.com/api/ssweb?url=${text}&device=phone&full=on`}})
@@ -508,7 +506,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
   break
 case 'ssdesktop':{
 if (!text) throw 'Masukkan Query link'
-  var seweb = chats.slice(7)
   if (args.length < 2) return m.reply(`Kirim Perintah ${command} link Mu\nContoh ${command} https://github.com/BotWhatsapp12`)
   m.reply(mess.wait)
   kon.sendMessage(from, { image: { url: `https://hadi-api.herokuapp.com/api/ssweb?url=${text}&device=desktop&full=on`}})
