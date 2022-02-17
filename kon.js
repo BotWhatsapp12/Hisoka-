@@ -199,6 +199,10 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
            kon.sendMessage(m.chat, buttonMessage, { quoted: m })
                 }
                 break
+        case 'owner': case 'creator': {
+                kon.sendContact(m.chat, global.owner, m)
+            }
+            break
          case 'ig1':{
 			    m.reply(mess.wait)
 			    xfar.Instagram(args[1]).then( data => {
@@ -811,10 +815,6 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let { chat, fromMe, id, isBaileys } = m.quoted
                 if (!isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'
                 kon.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
-            }
-            break
-            case 'owner': case 'creator': {
-                kon.sendContact(m.chat, global.owner, m)
             }
             break
             case 'tagall': {

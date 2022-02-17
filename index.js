@@ -85,7 +85,7 @@ async function startkon() {
                
                 if (anu.action == 'add') {
                 	let buttons = [
-                    {buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},{buttonId: `owner`, buttonText: {displayText: 'Owner Bot'}, type: 1},
+                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Tinggal'}, type: 1},{buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},
                     {buttonId: `info`, buttonText: {displayText: 'Info Bot'}, type: 1}
                 ]
                 let buttonMessage = {
@@ -95,20 +95,20 @@ async function startkon() {
 *Nama :*
 *Umur :*
 *Semoga Betah Yah*`,
-                    footer: `Welcome Message by GuraBotz`,
+                    footer: `Pencet Button Selamat Datang Untuk Membuka Button Menu Bot & Info Bot`,
                     buttons: buttons,
                     headerType: 6
                 }
                 kon.sendMessage(anu.id, buttonMessage, {quoted: ftrol})
                 } else if (anu.action == 'remove') {
                     let buttons = [
-                    {buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},{buttonId: `owner`, buttonText: {displayText: 'Owner Bot'}, type: 1},
+                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Tinggal'}, type: 1},{buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},
                     {buttonId: `info`, buttonText: {displayText: 'Info Bot'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: ppuser },
                     caption: `@${num.split("@")[0]} *Keluar dari* ${metadata.subject} *Karena dia Wibu*`,
-                    footer: `Leave Message by GuraBotz`,
+                    footer: `Pencet Button Selamat Tinggal Untuk Membuka Button Menu Bot & Info Bot`,
                     buttons: buttons,
                     headerType: 6
                 }
@@ -160,7 +160,18 @@ async function startkon() {
 	for (let i of kon) {
 	    list.push({
 	    	displayName: await kon.getName(i + '@s.whatsapp.net'),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await kon.getName(i + '@s.whatsapp.net')}\nFN:${await kon.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:okeae2410@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/cak_haho\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
+	    	vcard: `BEGIN:VCARD\n
+VERSION:3.0\n
+N:'Owner GuraBotz'\n
+FN:'ArulGanz'\n
+item1.TEL;waid=6281229859085:6281229859085\n
+item1.X-ABLabel:Ponsel\n
+item2.EMAIL;type=INTERNET:syahrulrahmadan819@gmail.com\n
+item2.X-ABLabel:Email\nitem3.URL:https://instagram.com/_daaa_1\n
+item3.X-ABLabel:Instagram\n
+item4.ADR:;;Indonesia;;;;\n
+item4.X-ABLabel:Region\n
+END:VCARD`
 	    })
 	}
 	kon.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })
