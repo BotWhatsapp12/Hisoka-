@@ -201,19 +201,16 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
                 break
         case 'owner':
 case 'admin':{
-let ini_list = []
-ownerContact = ['6281229859085']
-for (let i of ownerContact.map(v => v + '@s.whatsapp.net')) {
-const vname = kon.contacts[i] != undefined ? kon.contacts[i].vname || kon.contacts[i].notify : undefined
-ini_list.push({
-"displayName": "Owner GuraBotz",
-"vcard": "BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:GuraBotz\nitem1.TEL;waid=6281229859085:6281229859085\nitem1.X-ABLabel:ArulGanz\nitem2.TEL;waid=62815788590761:62815788590761\nitem2.X-ABLabel:GuraBotz\nitem3.EMAIL;type=INTERNET:arulganz119@gmail.com\nitem3.X-ABLabel:Email\nitem4.URL:https://instagram.com/_daaa_1\nitem4.X-ABLabel:instagram\nitem5.ADR:;;Singapura🇸🇬;;;;\nitem5.X-ABADR:ac\nitem5.X-ABLabel:🌍 Region\nitem6.X-ABLabel:Developer GuraBotz\nEND:VCARD"
-})
-}
-hehe = await kon.sendMessage(m.chat, {
-"displayName": `${ini_list.length} kontak`,
-"contacts": ini_list 
-}, 'contactsArrayMessage', { quoted: m })
+tek = `-----Info Owner-----
+~ *No : 6281229859085*
+~ *Api Wa : wa.me/6281229859085*
+~ *Instagram : @_daaa_1*
+~ *Api Instagram : https://instagram.com/_daaa_1*`
+                let buttons = [
+                        { buttonId: 'menu', buttonText: { displayText: 'Menu Bot' }, type: 1 },
+                        { buttonId: 'info', buttonText: { displayText: 'Info Bot' }, type: 1 }
+                    ]
+                    await kon.sendButtonText(m.chat, buttons, tek, kon.user.name, m)
 }
 break
          case 'ig1':{
@@ -507,24 +504,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 		m.reply('Sukses Broadcast')
             }
             break
-            case 'ssweb':{
-  if (!text) throw 'Masukkan Query link'
-  m.reply(mess.wait)
-  kon.sendMessage(from, { image: { url: `https://hardianto.xyz/api/tools/ssweb?url=${text}&apikey=hardianto`}})
-  }
-  break
-  case 'sshpfull':{
-  if (!text) throw 'Masukkan Query link'
-  m.reply(mess.wait)
-  kon.sendMessage(from, { image: { url: `https://hadi-api.herokuapp.com/api/ssweb?url=${text}&device=phone&full=on`}})
-  }
-  break
-case 'ssdesktop':{
-if (!text) throw 'Masukkan Query link'
-  m.reply(mess.wait)
-  kon.sendMessage(from, { image: { url: `https://hadi-api.herokuapp.com/api/ssweb?url=${text}&device=desktop&full=on`}})
-  }
-  break
             case 'wikipedia': {
                 if (!text) throw 'Masukkan Query Title'
 		let { wikimedia } = require('./lib/scraper')
@@ -581,10 +560,10 @@ nat = `
 ┃❒ *Runtime Bot* ${runtime(process.uptime())}
 ┃
 ┃
-┃𝐆𝐮𝐫𝐚𝐁𝐨𝐭𝐳 𝐀𝐝𝐚𝐥𝐚𝐡 𝐁𝐨𝐭 𝐁𝐞𝐭𝐚 𝐌𝐮𝐥𝐭𝐢-𝐃𝐞𝐯𝐢𝐜𝐞 𝐉𝐢𝐤𝐚 
-┃𝐌𝐞𝐧𝐞𝐦𝐮𝐤𝐚𝐧 𝐁𝐮𝐠 𝐀𝐭𝐚𝐮 𝐄𝐫𝐨𝐫𝐫 𝐌𝐨𝐡𝐨𝐧 𝐝𝐢 𝐌𝐚𝐤𝐥𝐮𝐦𝐢. 
-┃𝐔𝐧𝐭𝐮𝐤 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐁𝐨𝐭 𝐓𝐞𝐫𝐝𝐚𝐩𝐚𝐭 𝐝𝐢 𝐌𝐞𝐧𝐮, 𝐔𝐧𝐭𝐮𝐤 
-┃𝐏𝐫𝐞𝐟𝐢𝐱 𝐁𝐨𝐭 𝐚𝐝𝐚𝐥𝐚𝐡 𝐌𝐮𝐥𝐭𝐢𝐩𝐫𝐞𝐟𝐢𝐱.
+┃𝐆𝐮𝐫𝐚𝐁𝐨𝐭𝐳 𝐀𝐝𝐚𝐥𝐚𝐡 𝐁𝐨𝐭 𝐁𝐞𝐭𝐚 𝐌𝐮𝐥𝐭𝐢-𝐃𝐞𝐯𝐢𝐜𝐞 
+┃𝐉𝐢𝐤𝐚 𝐌𝐞𝐧𝐞𝐦𝐮𝐤𝐚𝐧 𝐁𝐮𝐠 𝐀𝐭𝐚𝐮 𝐄𝐫𝐨𝐫𝐫 𝐌𝐨𝐡𝐨𝐧 𝐝𝐢 
+┃𝐌𝐚𝐤𝐥𝐮𝐦𝐢. 𝐔𝐧𝐭𝐮𝐤 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐁𝐨𝐭 𝐓𝐞𝐫𝐝𝐚𝐩𝐚𝐭 𝐝𝐢 
+┃𝐌𝐞𝐧𝐮, 𝐔𝐧𝐭𝐮𝐤 𝐏𝐫𝐞𝐟𝐢𝐱 𝐁𝐨𝐭 𝐚𝐝𝐚𝐥𝐚𝐡 𝐌𝐮𝐥𝐭𝐢𝐩𝐫𝐞𝐟𝐢𝐱.
 ┃
 ┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
@@ -619,6 +598,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
 					break
         case 'yts': case 'ytsearch': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
+                m.reply(mess.wait)
                 let yts = require("yt-search")
                 let search = await yts(text)
                 let teks = 'YouTube Search\n\n Result From '+text+'\n\n'
@@ -630,7 +610,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
         case 'google': {
-                if (!text) throw `Example : ${prefix + command} fatih arridho`
+                if (!text) throw `Example : ${prefix + command} Gawr Gura`
+                m.reply(mess.wait)
                 let google = require('google-it')
                 google({'query': text}).then(res => {
                 let teks = `Google Search From : ${text}\n\n`
@@ -645,6 +626,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 break
         case 'gimage': {
         if (!text) throw `Example : ${prefix + command} kaori cicak`
+        m.reply(mess.wait)
         let gis = require('g-i-s')
         gis(text, async (error, result) => {
         n = result
@@ -724,7 +706,12 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             case 'linkgroup': case 'linkgc': {
                 if (!m.isGroup) throw mess.group
                 let response = await kon.groupInviteCode(m.chat)
-                kon.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink Group : ${groupMetadata.subject}`, m, { detectLink: true })
+                tek = `https://chat.whatsapp.com/${response}\n\nLink Group : ${groupMetadata.subject}`
+                let buttons = [
+                        { buttonId: 'menu', buttonText: { displayText: 'Menu Bot' }, type: 1 },
+                        { buttonId: 'info', buttonText: { displayText: 'Info Bot' }, type: 1 }
+                    ]
+                    await kon.sendButtonText(m.chat, buttons, tek, kon.user.name, m, { detectLink: true })
             }
             break
         case 'play': case 'ytplay': {
@@ -859,9 +846,6 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}owner*
 ┃┃✯ ❒き⃟🐣 *${prefix}del (reply pesan bot)*
 ┃┃✯ ❒き⃟🐣 *${prefix}q* 
-┃┃✯ ❒き⃟🐣 *${prefix}ssweb* 
-┃┃✯ ❒き⃟🐣 *${prefix}sshpfull* 
-┃┃✯ ❒き⃟🐣 *${prefix}ssdekstop* 
 ┃┃
 ┃┏━「 *Menu Download*」
 ┃┃✯ ❒き⃟🐣 *${prefix}play (judul lagu)* 
