@@ -210,7 +210,7 @@ ini_list.push({
 "vcard": "BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:GuraBotz\nitem1.TEL;waid=6281229859085:6281229859085\nitem1.X-ABLabel:ArulGanz\nitem2.TEL;waid=62815788590761:62815788590761\nitem2.X-ABLabel:GuraBotz\nitem3.EMAIL;type=INTERNET:arulganz119@gmail.com\nitem3.X-ABLabel:Email\nitem4.URL:https://instagram.com/_daaa_1\nitem4.X-ABLabel:instagram\nitem5.ADR:;;Singapura🇸🇬;;;;\nitem5.X-ABADR:ac\nitem5.X-ABLabel:🌍 Region\nitem6.X-ABLabel:Developer GuraBotz\nEND:VCARD"
 })
 }
-hehe = await gura.sendMessage(m.chat, {
+hehe = await kon.sendMessage(m.chat, {
 "displayName": `${ini_list.length} kontak`,
 "contacts": ini_list 
 }, 'contactsArrayMessage', { quoted: m })
