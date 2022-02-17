@@ -159,7 +159,7 @@ async function startkon() {
 	let list = []
 	for (let i of kon) {
 	    list.push({
-	    	displayName: await kon.getName(i + '@s.whatsapp.net'),
+	    	displayName: 'Owner GuraBotz',
 	    	vcard: `BEGIN:VCARD\n
 VERSION:3.0\n
 N:'Owner GuraBotz'\n
