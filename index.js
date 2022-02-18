@@ -85,13 +85,13 @@ async function startkon() {
                
                 if (anu.action == 'add') {
                 	let buttons = [
-                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Tinggal'}, type: 1},{buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},
+                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Datang'}, type: 1},{buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},
                     {buttonId: `info`, buttonText: {displayText: 'Info Bot'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: ppuser },
-                    caption: `*-------🐣 *Welcome to ${metadata.subject}*🐣-------*
-🐣  *Hai Kak* @${num.split("@")[0]} *Kenalan Yuk*
+                    caption: `*🐣 *Welcome to ${metadata.subject}*🐣*
+*Hai Kak* @${num.split("@")[0]} *Kenalan Yuk*
 *Nama :*
 *Umur :*
 *Semoga Betah Yah*`,
