@@ -185,6 +185,37 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+        	case 'gura':{
+if (args.length ==0)return reply(`Textnya mana kak? Contoh\n${prefix + command} GuraBotz`)
+bo = args.join(" ")
+m.reply(mess.wait)
+bf = await getBuffer(`https://ziy.herokuapp.com/api/Gura?nama=${bo}&apikey=xZiyy`)
+var but = [{buttonId: `menu`, buttonText: { displayText: 'Back to Menu' }, type: 1 }]
+					kon.sendMessage(m.chat, { caption: mess.success, image: { url: bf }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
+}
+break
+case 'kaneki':
+case 'rem':
+case 'lolimaker':{
+if (args.length ==0)return reply(`Textnya mana kak? Contoh\n${prefix + command} Lexxy`)
+bo = args.join(" ")
+m.reply(mess.wait)
+bf = await getBuffer(`https://ziy.herokuapp.com/api/${command}?nama=${bo}&apikey=xZiyy`)
+var but = [{buttonId: `menu`, buttonText: { displayText: 'Back to Menu' }, type: 1 }]
+					kon.sendMessage(m.chat, { caption: mess.success, image: { url: bf }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
+}
+break
+case 'girlneko':
+case 'sadboy':{
+if (args.length ==0)return reply(`Textnya mana kak? Contoh\n${prefix + command} Gura Botz`)
+txt1 = args[0]
+txt2 = args[1]
+m.reply(mess.wait)
+bf = await getBuffer(`https://ziy.herokuapp.com/api/${command}?text1=${txt1}&text2=${txt2}&apikey=xZiyy`)
+var but = [{buttonId: `menu`, buttonText: { displayText: 'Back to Menu' }, type: 1 }]
+					kon.sendMessage(m.chat, { caption: mess.success, image: { url: bf }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
+}
+break
         	case 'igdl': case 'instagram': case 'ig':{
         	if (!text) throw 'Masukkan Query Link!'
 			let buttons = [
