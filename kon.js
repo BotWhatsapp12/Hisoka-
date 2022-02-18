@@ -185,37 +185,13 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
-        	case 'gura':{
-if (args.length ==0)return reply(`Textnya mana kak? Contoh\n${prefix + command} GuraBotz`)
-bo = args.join(" ")
-m.reply(mess.wait)
-bf = await getBuffer(`https://ziy.herokuapp.com/api/Gura?nama=${bo}&apikey=xZiyy`)
-var but = [{buttonId: `menu`, buttonText: { displayText: 'Back to Menu' }, type: 1 }]
-					kon.sendMessage(m.chat, { caption: mess.success, image: { url: bf }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
-}
-break
-case 'kaneki':
-case 'rem':
-case 'lolimaker':{
-if (args.length ==0)return reply(`Textnya mana kak? Contoh\n${prefix + command} Lexxy`)
-bo = args.join(" ")
-m.reply(mess.wait)
-bf = await getBuffer(`https://ziy.herokuapp.com/api/${command}?nama=${bo}&apikey=xZiyy`)
-var but = [{buttonId: `menu`, buttonText: { displayText: 'Back to Menu' }, type: 1 }]
-					kon.sendMessage(m.chat, { caption: mess.success, image: { url: bf }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
-}
-break
-case 'girlneko':
-case 'sadboy':{
-if (args.length ==0)return reply(`Textnya mana kak? Contoh\n${prefix + command} Gura Botz`)
-txt1 = args[0]
-txt2 = args[1]
-m.reply(mess.wait)
-bf = await getBuffer(`https://ziy.herokuapp.com/api/${command}?text1=${txt1}&text2=${txt2}&apikey=xZiyy`)
-var but = [{buttonId: `menu`, buttonText: { displayText: 'Back to Menu' }, type: 1 }]
-					kon.sendMessage(m.chat, { caption: mess.success, image: { url: bf }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
-}
-break
+        	case '3dchristmas': case '3ddeepsea': case 'americanflag': case '3dscifi': case '3drainbow': case '3dwaterpipe': case 'halloweenskeleton': case 'sketch': case 'bluecircuit': case 'space': case 'metallic': case 'fiction': case 'greenhorror': case 'transformer': case 'berry': case 'thunder': case 'magma': case '3dcrackedstone': case '3dneonlight': case 'impressiveglitch': case 'naturalleaves': case 'fireworksparkle': case 'matrix': case 'dropwater':  case 'harrypotter': case 'foggywindow': case 'neondevils': case 'christmasholiday': case '3dgradient': case 'blackpink': case 'gluetext': {
+                if (!text) throw `Example : ${prefix + command} text`
+                m.reply(mess.wait)
+                let anu = await getBuffer('https://zenzapi.xyz/textpro/${command}?text=${text}&apikey=87d718524e2a')
+                kon.sendMessage(m.chat, { image: anu, caption: mess.success}, { quoted: m})
+	    }
+            break
         	case 'igdl': case 'instagram': case 'ig':{
         	if (!text) throw 'Masukkan Query Link!'
 			let buttons = [
