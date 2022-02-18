@@ -185,13 +185,6 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
-        	case '3dchristmas': case '3ddeepsea': case 'americanflag': case '3dscifi': case '3drainbow': case '3dwaterpipe': case 'halloweenskeleton': case 'sketch': case 'bluecircuit': case 'space': case 'metallic': case 'fiction': case 'greenhorror': case 'transformer': case 'berry': case 'thunder': case 'magma': case '3dcrackedstone': case '3dneonlight': case 'impressiveglitch': case 'naturalleaves': case 'fireworksparkle': case 'matrix': case 'dropwater':  case 'harrypotter': case 'foggywindow': case 'neondevils': case 'christmasholiday': case '3dgradient': case 'blackpink': case 'gluetext': {
-                if (!text) throw `Example : ${prefix + command} text`
-                m.reply(mess.wait)
-                let anu = await getBuffer('https://zenzapi.xyz/textpro/${command}?text=${text}&apikey=87d718524e2a')
-                kon.sendMessage(m.chat, { image: anu, caption: mess.success}, { quoted: m})
-	    }
-            break
         	case 'igdl': case 'instagram': case 'ig':{
         	if (!text) throw 'Masukkan Query Link!'
 			let buttons = [
