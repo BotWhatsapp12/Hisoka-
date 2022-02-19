@@ -185,6 +185,13 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+        	case 'wolfmetal': case 'coffecup2': case 'coffecup': case 'doubleheart': case 'undergrass': case 'lovemessage': case 'burnpaper': case 'smoke': case 'romantic': case 'shadow':{
+if (!text) throw `Example : ${prefix + command} text`
+                m.reply(mess.wait)
+                let anu = await getBuffer('https://api.dapuhy.xyz/api/photooxy/${command}?text=${text}&apikey=wC7ZLKWUPR')
+                kon.sendMessage(m.chat, { image: anu, caption: mess.success}, { quoted: m})
+	    }
+            break
         	case 'igdl': case 'instagram': case 'ig':{
         	if (!text) throw 'Masukkan Query Link!'
 			let buttons = [
