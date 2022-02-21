@@ -23,6 +23,7 @@ const content = JSON.stringify(m.message)
 const from = m.key.remoteJid
 const type = Object.keys(m.message)[0]
 const ofrply = fs.readFileSync('./lib/hisoka.jpg')
+const { mediafiredl } = require('./lib/mediafiredl')
 let cmdmedia = JSON.parse(fs.readFileSync('./src/cmdmedia.json'))
 
 module.exports = kon = async (kon, m, chatUpdate, store) => {
@@ -206,6 +207,20 @@ if (!text) throw `Example : ${prefix + command} text`
            kon.sendMessage(m.chat, buttonMessage, { quoted: m })
                 }
                 break
+        case 'mediafire':{
+if (!text) throw 'Linknya?'
+m.reply(mess.wait)
+teks = args.join(' ')
+rescun = await mediafiredl(teks)
+result = `
+❒「MediaFire Download」
+├ Nama : ${rescun[0].nama}
+├ Ukuran : ${rescun[0].size}
+└ Link : ${rescun[0].link}`
+m.reply(result)
+kon.sendMessage(m.chat, {url: `${rescun[0].link}` }, document, { mimetype: `${rescun[0].mime}`, filename:`${rescun[0].nama}`})
+}
+break
         case 'owner':
 case 'admin':{
 tek = `-----Info Owner-----
