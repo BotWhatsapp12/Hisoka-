@@ -207,20 +207,6 @@ if (!text) throw `Example : ${prefix + command} text`
            kon.sendMessage(m.chat, buttonMessage, { quoted: m })
                 }
                 break
-        case 'mediafire':{
-if (!text) throw 'Linknya?'
-m.reply(mess.wait)
-teks = args.join(' ')
-rescun = await mediafiredl(teks)
-result = `
-❒「MediaFire Download」
-├ Nama : ${rescun[0].nama}
-├ Ukuran : ${rescun[0].size}
-└ Link : ${rescun[0].link}`
-m.reply(result)
-kon.sendMessage(m.chat, { document: await getBuffer (${rescun[0].link}) }, { mimetype: `${rescun[0].mime}`, filename:`${rescun[0].nama}`})
-}
-break
         case 'owner':
 case 'admin':{
 tek = `-----Info Owner-----
