@@ -441,7 +441,7 @@ result = `
 └ Link : ${rescun[0].link}`
 m.reply(result)
 linkk = `${rescun[0].link}`
-kon.sendMessage(m.chat, {document: linkk, mimetype: `${rescun[0].mime}`, fileName: `${rescun[0].nama}`}, { quoted : m })
+kon.sendMessage(m.chat, {document: {url: `${rescun[0].link}`}, mimetype: `${rescun[0].mime}`, fileName: `${rescun[0].nama}`}, { quoted : m })
 }
 break
             case 'tomp3': {
