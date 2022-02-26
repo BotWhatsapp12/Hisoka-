@@ -429,6 +429,21 @@ console.log(res)
             kon.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
             }
             break
+              case 'mediafire':{
+            if (/document/.test(mime)) throw `Linknya?`
+            if (!text) throw `Example : ${prefix + command} https://mediafire.com/snekjdakkk`
+m.reply(mess.wait)
+rescun = await mediafiredl(text)
+result = `
+❒「MediaFire Download」
+├ Nama : ${rescun[0].nama}
+├ Ukuran : ${rescun[0].size}
+└ Link : ${rescun[0].link}`
+m.reply(result)
+linkk = `${rescun[0].link}`
+kon.sendMessage(m.chat, {document: linkk, mimetype: `${rescun[0].mime}`, fileName: `${rescun[0].nama}`}, { quoted : m })
+}
+break
             case 'tomp3': {
             if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
@@ -637,7 +652,7 @@ nat = `
 ┃
 ┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
-┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
+┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂?? 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
 ┗━━━━━━━ `
 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: kon.waUploadToServer })
