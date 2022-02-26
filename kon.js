@@ -388,6 +388,68 @@ console.log(res)
 		}
 	    }
 	    break
+	case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat': case 'nightcore': case 'reverse': case 'robot': case 'slow': case 'smooth': case 'tupai':
+                try {
+                let set
+                if (/bass/.test(command)) set = '-af equalizer=f=54:width_type=o:width=2:g=20'
+                if (/blown/.test(command)) set = '-af acrusher=.1:1:64:0:log'
+                if (/deep/.test(command)) set = '-af atempo=4/4,asetrate=44500*2/3'
+                if (/earrape/.test(command)) set = '-af volume=12'
+                if (/fast/.test(command)) set = '-filter:a "atempo=1.63,asetrate=44100"'
+                if (/fat/.test(command)) set = '-filter:a "atempo=1.6,asetrate=22100"'
+                if (/nightcore/.test(command)) set = '-filter:a atempo=1.06,asetrate=44100*1.25'
+                if (/reverse/.test(command)) set = '-filter_complex "areverse"'
+                if (/robot/.test(command)) set = '-filter_complex "afftfilt=real=\'hypot(re,im)*sin(0)\':imag=\'hypot(re,im)*cos(0)\':win_size=512:overlap=0.75"'
+                if (/slow/.test(command)) set = '-filter:a "atempo=0.7,asetrate=44100"'
+                if (/smooth/.test(command)) set = '-filter:v "minterpolate=\'mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=120\'"'
+                if (/tupai/.test(command)) set = '-filter:a "atempo=0.5,asetrate=65100"'
+                if (/audio/.test(mime)) {
+                m.reply(mess.wait)
+                let media = await kon.downloadAndSaveMediaMessage(quoted)
+                let ran = getRandom('.mp3')
+                exec(`ffmpeg -i ${media} ${set} ${ran}`, (err, stderr, stdout) => {
+                fs.unlinkSync(media)
+                if (err) return m.reply(err)
+                let buff = fs.readFileSync(ran)
+                kon.sendMessage(m.chat, { audio: buff, mimetype: 'audio/mpeg' }, { quoted : m })
+                fs.unlinkSync(ran)
+                })
+                } else m.reply(`Balas audio yang ingin diubah dengan caption *${prefix + command}*`)
+                } catch (e) {
+                m.reply(e)
+                }
+                break
+	case 'toaud': case 'toaudio': {
+            if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
+            if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
+            m.reply(mess.wait)
+            let media = await quoted.download()
+            let { toAudio } = require('./lib/converter')
+            let audio = await toAudio(media, 'mp4')
+            kon.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
+            }
+            break
+            case 'tomp3': {
+            if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+            if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+            if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+            m.reply(mess.wait)
+            let media = await quoted.download()
+            let { toAudio } = require('./lib/converter')
+            let audio = await toAudio(media, 'mp4')
+            kon.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert By ${kon.user.name}.mp3`}, { quoted : m })
+            }
+            break
+            case 'tovn': case 'toptt': {
+            if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
+            if (!quoted) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
+            m.reply(mess.wait)
+            let media = await quoted.download()
+            let { toPTT } = require('./lib/converter')
+            let audio = await toPTT(media, 'mp4')
+            kon.sendMessage(m.chat, {audio: audio, mimetype:'audio/mpeg', ptt:true }, {quoted:m})
+            }
+            break
 	        case 'tomp4': case 'tovideo': {
                 if (!quoted) m.reply('Reply Sticker Gif')
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
@@ -848,6 +910,8 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}tomp4 (reply sticker gif)*
 ┃┃✯ ❒き⃟🐣 *${prefix}togif (reply sticker gif)*
 ┃┃✯ ❒き⃟🐣 *${prefix}toimg (reply sticker)*
+┃┃✯ ❒き⃟🐣 *${prefix}toaudio (reply video)*
+┃┃✯ ❒き⃟🐣 *${prefix}tomp3 (reply video)*
 ┃┃✯ ❒き⃟🐣 *${prefix}sticker (reply gambar)*
 ┃┃✯ ❒き⃟🐣 *${prefix}emojimix (masukan emoji)*
 ┃┃✯ ❒き⃟🐣 *${prefix}ping*
@@ -884,6 +948,19 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}ytsearch (judul lagu)*
 ┃┃✯ ❒き⃟🐣 *${prefix}google* 
 ┃┃✯ ❒き⃟🐣 *${prefix}gimage* 
+┃┃
+┃┏━「 *Menu Voice Changer*」
+┃┃✯ ❒き⃟🐣 *${prefix}bass
+┃┃✯ ❒き⃟🐣 *${prefix}blown
+┃┃✯ ❒き⃟🐣 *${prefix}deep
+┃┃✯ ❒き⃟🐣 *${prefix}earrape
+┃┃✯ ❒き⃟🐣 *${prefix}fast
+┃┃✯ ❒き⃟🐣 *${prefix}fat
+┃┃✯ ❒き⃟🐣 *${prefix}nightcore
+┃┃✯ ❒き⃟🐣 *${prefix}reverse
+┃┃✯ ❒き⃟🐣 *${prefix}robot
+┃┃✯ ❒き⃟🐣 *${prefix}slow
+┃┃✯ ❒き⃟🐣 *${prefix}tupai
 ┃┃
 ┃┏━「 *Menu Haram NSFW*」
 ┃┃✯ ❒き⃟🐣 *${prefix}yuri* 
