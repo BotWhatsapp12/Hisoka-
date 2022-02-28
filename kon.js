@@ -89,7 +89,7 @@ const isUrl = (uri) => {
 
         // Public & Self
         if (!kon.public) {
-            if (!m.key.fromMe) return
+            if (!m.key.fromMe && !isCreator) return
         }
 
         // Push Message To Console && Auto Read
@@ -186,11 +186,23 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+        	case 'public': {
+                if (!m.key.fromMe && !isCreator) throw mess.owner
+                kon.public = true
+                m.reply('Sukses Ganti Ke Mode Public')
+            }
+            break
+            case 'self': {
+                if (!m.key.fromMe && !isCreator) throw mess.owner
+                kon.public = false
+                m.reply('Sukses Ganti Ke Mode Self')
+            }
+            break
         	case 'wolfmetal': case 'coffecup2': case 'coffecup': case 'doubleheart': case 'undergrass': case 'lovemessage': case 'burnpaper': case 'smoke': case 'romantic': case 'shadow':{
 if (!text) throw `Example : ${prefix + command} text`
                 m.reply(mess.wait)
                 let anu = await getBuffer('https://api.dapuhy.xyz/api/photooxy/${command}?text=${text}&apikey=wC7ZLKWUPR')
-                kon.sendMessage(m.chat, { image: anu, caption: mess.success}, { quoted: m})
+                kon.sendMessage(m.chat, { image: { url: anu }, caption: mess.success}, { quoted: m})
 	    }
             break
         	case 'igdl': case 'instagram': case 'ig':{
@@ -430,6 +442,7 @@ console.log(res)
             }
             break
               case 'mediafire':{
+            if (!isCreator) throw mess.owner
             if (/document/.test(mime)) throw `Linknya?`
             if (!text) throw `Example : ${prefix + command} https://mediafire.com/snekjdakkk`
 m.reply(mess.wait)
@@ -854,6 +867,17 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
+        case 'clearall':{
+									if (!isCreator) throw mess.owner
+									let chiit = await kon.chats.all()
+									for (let i of chiit){
+										kon.modifyChat(i.jid, 'clear', {
+											includeStarred: false
+											})
+											}
+											m.reply(`*Succes*`)
+											}
+									break
 	    case 'ytmp3': case 'ytaudio': {
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
                 m.reply(mess.wait)
@@ -923,6 +947,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┏━➤ 「 *Menu GuraBotz*」
 ┃┃✯ ❒き⃟🐣 *${prefix}removebg (reply gambar)*
 ┃┃✯ ❒き⃟🐣 *${prefix}tomp4 (reply sticker gif)*
+┃┃✯ ❒き⃟🐣 *${prefix}toaudio (reply audio)*
 ┃┃✯ ❒き⃟🐣 *${prefix}togif (reply sticker gif)*
 ┃┃✯ ❒き⃟🐣 *${prefix}toimg (reply sticker)*
 ┃┃✯ ❒き⃟🐣 *${prefix}toaudio (reply video)*
@@ -946,6 +971,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}instagram (link instagram)*
 ┃┃✯ ❒き⃟🐣 *${prefix}getmusic* 
 ┃┃✯ ❒き⃟🐣 *${prefix}getvideo* 
+┃┃✯ ❒き⃟🐣 *${prefix}mediafire (khusus owner)* 
 ┃┃
 ┃┏━「 *Menu Owner*」
 ┃┃✯ ❒き⃟🐣 *${prefix}bcgc* 
@@ -965,17 +991,17 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┃✯ ❒き⃟🐣 *${prefix}gimage* 
 ┃┃
 ┃┏━「 *Menu Voice Changer*」
-┃┃✯ ❒き⃟🐣 *${prefix}bass
-┃┃✯ ❒き⃟🐣 *${prefix}blown
-┃┃✯ ❒き⃟🐣 *${prefix}deep
-┃┃✯ ❒き⃟🐣 *${prefix}earrape
-┃┃✯ ❒き⃟🐣 *${prefix}fast
-┃┃✯ ❒き⃟🐣 *${prefix}fat
-┃┃✯ ❒き⃟🐣 *${prefix}nightcore
-┃┃✯ ❒き⃟🐣 *${prefix}reverse
-┃┃✯ ❒き⃟🐣 *${prefix}robot
-┃┃✯ ❒き⃟🐣 *${prefix}slow
-┃┃✯ ❒き⃟🐣 *${prefix}tupai
+┃┃✯ ❒き⃟🐣 *${prefix}bass*
+┃┃✯ ❒き⃟🐣 *${prefix}blown*
+┃┃✯ ❒き⃟🐣 *${prefix}deep*
+┃┃✯ ❒き⃟🐣 *${prefix}earrape*
+┃┃✯ ❒き⃟🐣 *${prefix}fast*
+┃┃✯ ❒き⃟🐣 *${prefix}fat*
+┃┃✯ ❒き⃟🐣 *${prefix}nightcore*
+┃┃✯ ❒き⃟🐣 *${prefix}reverse*
+┃┃✯ ❒き⃟🐣 *${prefix}robot*
+┃┃✯ ❒き⃟🐣 *${prefix}slow*
+┃┃✯ ❒き⃟🐣 *${prefix}tupai*
 ┃┃
 ┃┏━「 *Menu Haram NSFW*」
 ┃┃✯ ❒き⃟🐣 *${prefix}yuri* 
