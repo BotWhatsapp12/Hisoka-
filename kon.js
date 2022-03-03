@@ -59,7 +59,7 @@ const isUrl = (uri) => {
     	const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
     	const isGroupOwner = m.isGroup ? groupOwner.includes(m.sender) : false
         const isGroupAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
-
+        const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
         // Bot Status
         const used = process.memoryUsage()
         const cpus = os.cpus().map(cpu => {
