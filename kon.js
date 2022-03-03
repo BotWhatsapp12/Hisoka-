@@ -186,18 +186,89 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
-        	case 'public': {
-                if (!m.key.fromMe && !isCreator) throw mess.owner
-                kon.public = true
-                m.reply('Sukses Ganti Ke Mode Public')
+        	case 'setname': case 'setsubject': {
+                if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+                if (!text) throw 'Text ?'
+                await kon.groupUpdateSubject(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
             }
             break
-            case 'self': {
-                if (!m.key.fromMe && !isCreator) throw mess.owner
-                kon.public = false
-                m.reply('Sukses Ganti Ke Mode Self')
+          case 'setdesc': case 'setdesk': {
+                if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+                if (!text) throw 'Text ?'
+                await kon.groupUpdateDescription(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
             }
             break
+          case 'setppbot': {
+                if (!isCreator) throw mess.owner
+                if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                let media = await kon.downloadAndSaveMediaMessage(quoted)
+                await kon.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
+                m.reply(mess.success)
+                }
+                break
+           case 'setppgroup': case 'setppgrup': case 'setppgc': {
+                if (!m.isGroup) throw mess.group
+                if (!isAdmins) throw mess.admin
+                if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                let media = await kon.downloadAndSaveMediaMessage(quoted)
+                await kon.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
+                m.reply(mess.success)
+                }
+                break
+        	case 'join': {
+                if (!isCreator) throw mess.owner
+                if (!text) throw 'Masukkan Link Group!'
+                if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
+                m.reply(mess.wait)
+                let result = args[0].split('https://chat.whatsapp.com/')[1]
+                await kon.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+            }
+            break
+            case 'leave': {
+                if (!isCreator) throw mess.owner
+                await kon.groupLeave(m.chat).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+            }
+            break
+	case 'kick': {
+		if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		await kon.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	}
+	break
+	case 'add': {
+		if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+		let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		await kon.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	}
+	break
+	case 'promote': {
+		if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		await kon.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	}
+	break
+	case 'demote': {
+		if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		await kon.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	}
+	break
         	case 'wolfmetal': case 'coffecup2': case 'coffecup': case 'doubleheart': case 'undergrass': case 'lovemessage': case 'burnpaper': case 'smoke': case 'romantic': case 'shadow':{
 if (!text) throw `Example : ${prefix + command} text`
                 m.reply(mess.wait)
@@ -661,7 +732,7 @@ nat = `
 ┃𝐆𝐮𝐫𝐚𝐁𝐨𝐭𝐳 𝐀𝐝𝐚𝐥𝐚𝐡 𝐁𝐨𝐭 𝐁𝐞𝐭𝐚 𝐌𝐮𝐥𝐭𝐢-𝐃𝐞𝐯𝐢𝐜𝐞 
 ┃𝐉𝐢𝐤𝐚 𝐌𝐞𝐧𝐞𝐦𝐮𝐤𝐚𝐧 𝐁𝐮𝐠 𝐀𝐭𝐚𝐮 𝐄𝐫𝐨𝐫𝐫 𝐌𝐨𝐡𝐨𝐧 𝐝𝐢 
 ┃𝐌𝐚𝐤𝐥𝐮𝐦𝐢. 𝐔𝐧𝐭𝐮𝐤 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐁𝐨𝐭 𝐓𝐞𝐫𝐝𝐚𝐩𝐚𝐭 𝐝𝐢 
-┃𝐌𝐞𝐧𝐮, 𝐔𝐧𝐭𝐮𝐤 𝐏𝐫𝐞𝐟𝐢𝐱 𝐁𝐨𝐭 𝐚𝐝𝐚𝐥𝐚𝐡 𝐌𝐮𝐥𝐭𝐢𝐩𝐫𝐞𝐟𝐢𝐱.
+┃𝐌𝐞𝐧𝐮, 𝐔𝐧𝐭𝐮𝐤 𝐏𝐫𝐞𝐟𝐢𝐱 𝐁𝐨𝐭 𝐚𝐝𝐚𝐥𝐚𝐡 𝐌𝐮𝐥??𝐢𝐩𝐫𝐞𝐟𝐢𝐱.
 ┃
 ┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
@@ -976,13 +1047,21 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃┏━「 *Menu Owner*」
 ┃┃✯ ❒き⃟🐣 *${prefix}bcgc* 
 ┃┃✯ ❒き⃟🐣 *${prefix}bcall* 
+┃┃✯ ❒き⃟🐣 *${prefix}setppbot* 
 ┃┃
 ┃┏━「 *Menu Group*」
 ┃┃✯ ❒き⃟🐣 *${prefix}tagall* 
 ┃┃✯ ❒き⃟🐣 *${prefix}hidetag*
 ┃┃✯ ❒き⃟🐣 *${prefix}grup*  
 ┃┃✯ ❒き⃟🐣 *${prefix}editinfo* 
-┃┃✯ ❒き⃟🐣 *${prefix}linkgc* 
+┃┃✯ ❒き⃟🐣 *${prefix}linkgc*
+┃┃✯ ❒き⃟🐣 *${prefix}setppgc [image]*
+┃┃✯ ❒き⃟🐣 *${prefix}setname [text]*
+┃┃✯ ❒き⃟🐣 *${prefix}setdesc [text]*
+┃┃✯ ❒き⃟🐣 *${prefix}add @user*
+┃┃✯ ❒き⃟🐣 *${prefix}kick @user*
+┃┃✯ ❒き⃟🐣 *${prefix}promote @user*
+┃┃✯ ❒き⃟🐣 *${prefix}demote @user*
 ┃┃
 ┃┏━「 *Menu Search*」
 ┃┃✯ ❒き⃟🐣 *${prefix}wikipedia* 
