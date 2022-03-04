@@ -24,6 +24,7 @@ const from = m.key.remoteJid
 const type = Object.keys(m.message)[0]
 const ofrply = fs.readFileSync('./lib/hisoka.jpg')
 const { mediafiredl } = require('./lib/mediafiredl')
+const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot.js')
 let cmdmedia = JSON.parse(fs.readFileSync('./src/cmdmedia.json'))
 
 module.exports = kon = async (kon, m, chatUpdate, store) => {
@@ -269,13 +270,26 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 		await kon.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
-        	case 'wolfmetal': case 'coffecup2': case 'coffecup': case 'doubleheart': case 'undergrass': case 'lovemessage': case 'burnpaper': case 'smoke': case 'romantic': case 'shadow':{
-if (!text) throw `Example : ${prefix + command} text`
-                m.reply(mess.wait)
-                let anu = await getBuffer('https://api.dapuhy.xyz/api/photooxy/${command}?text=${text}&apikey=wC7ZLKWUPR')
-                kon.sendMessage(m.chat, { image: { url: anu }, caption: mess.success}, { quoted: m})
-	    }
-            break
+        	case 'jadibot':{
+    if (!isCreator) throw mess.owner
+    jadibot(reply,gura,from)
+    }
+    break
+    case 'stopjadibot':{
+    stopjadibot(reply)
+    }
+    break
+    case 'listbot':{
+    let tekss = '「 *LIST JADIBOT* 」\n'
+    for(let i of listjadibot) {
+    tekss += `*Nomor* : ${i.jid.split('@')[0]}
+*Nama* : ${i.name}
+*Device* : ${i.phone.device_manufacturer}
+*Model* : ${i.phone.device_model}\n\n`
+    }
+    m.reply(tekss)
+    }
+    break
         	case 'igdl': case 'instagram': case 'ig':{
         	if (!text) throw 'Masukkan Query Link!'
 			let buttons = [
@@ -290,19 +304,17 @@ if (!text) throw `Example : ${prefix + command} text`
            kon.sendMessage(m.chat, buttonMessage, { quoted: m })
                 }
                 break
-        case 'owner':
-case 'admin':{
-tek = `-----Info Owner-----
-~ *No : 6281229859085*
-~ *Api Wa : wa.me/6281229859085*
-~ *Instagram : @_daaa_1*
-~ *Api Instagram : https://instagram.com/_daaa_1*`
-                let buttons = [
-                        { buttonId: 'menu', buttonText: { displayText: 'Menu Bot' }, type: 1 },
-                        { buttonId: 'info', buttonText: { displayText: 'Info Bot' }, type: 1 }
-                    ]
-                    await kon.sendButtonText(m.chat, buttons, tek, kon.user.name, m)
-}
+     case 'owner': case 'creator': {
+                let vcard = 'BEGIN:VCARD\n' // metadata of the contact card
+                    + `VERSION:3.0\n`
+                    + `N:;ArulGanz.;;;`
+                    + `FN:ArulGanz.\n` // full name
+                    + `ORG:Owner GuraBotz;\n` // the organization of the contact
+                    + `TEL;type=CELL;type=VOICE;waid=6281229859085:6281229859085\n`
+                    + 'END:VCARD'
+                kon.sendMessage(m.chat, { contacts: { displayName: 'ArulGanz.', contacts: [{ vcard }] } }, { quoted: m })
+            }
+            break
 break
          case 'ig1':{
 			    m.reply(mess.wait)
