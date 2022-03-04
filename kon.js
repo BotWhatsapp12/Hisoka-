@@ -24,7 +24,6 @@ const from = m.key.remoteJid
 const type = Object.keys(m.message)[0]
 const ofrply = fs.readFileSync('./lib/hisoka.jpg')
 const { mediafiredl } = require('./lib/mediafiredl')
-const { jadibot, stopjadibot, listjadibot } = require('./lib/jadibot.js')
 let cmdmedia = JSON.parse(fs.readFileSync('./src/cmdmedia.json'))
 
 module.exports = kon = async (kon, m, chatUpdate, store) => {
@@ -270,26 +269,6 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 		await kon.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
-        	case 'jadibot':{
-    if (!isCreator) throw mess.owner
-    jadibot(reply,gura,from)
-    }
-    break
-    case 'stopjadibot':{
-    stopjadibot(reply)
-    }
-    break
-    case 'listbot':{
-    let tekss = '「 *LIST JADIBOT* 」\n'
-    for(let i of listjadibot) {
-    tekss += `*Nomor* : ${i.jid.split('@')[0]}
-*Nama* : ${i.name}
-*Device* : ${i.phone.device_manufacturer}
-*Model* : ${i.phone.device_model}\n\n`
-    }
-    m.reply(tekss)
-    }
-    break
         	case 'igdl': case 'instagram': case 'ig':{
         	if (!text) throw 'Masukkan Query Link!'
 			let buttons = [
