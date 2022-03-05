@@ -315,7 +315,7 @@ break
 	    if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 	    if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 	    let remobg = require('remove.bg')
-	    let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
+	    let apirnobg = ['kdkHbCAaqTkzhAVSDXaSv6jm','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
 	    let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
 	    hmm = await './src/remobg-'+getRandom('')
 	    localFile = await kon.downloadAndSaveMediaMessage(quoted, hmm)
@@ -1006,93 +1006,98 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
             break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
-┏━➤ 「 *Menu GuraBotz*」
-┃┃✯ ❒き⃟🐣 *${prefix}removebg (reply gambar)*
-┃┃✯ ❒き⃟🐣 *${prefix}tomp4 (reply sticker gif)*
-┃┃✯ ❒き⃟🐣 *${prefix}toaudio (reply audio)*
-┃┃✯ ❒き⃟🐣 *${prefix}togif (reply sticker gif)*
-┃┃✯ ❒き⃟🐣 *${prefix}toimg (reply sticker)*
-┃┃✯ ❒き⃟🐣 *${prefix}toaudio (reply video)*
-┃┃✯ ❒き⃟🐣 *${prefix}tomp3 (reply video)*
-┃┃✯ ❒き⃟🐣 *${prefix}sticker (reply gambar)*
-┃┃✯ ❒き⃟🐣 *${prefix}emojimix (masukan emoji)*
-┃┃✯ ❒き⃟🐣 *${prefix}ping*
-┃┃✯ ❒き⃟🐣 *${prefix}owner*
-┃┃✯ ❒き⃟🐣 *${prefix}del (reply pesan bot)*
-┃┃✯ ❒き⃟🐣 *${prefix}q* 
-┃┃
-┃┏━「 *Menu Download*」
-┃┃✯ ❒き⃟🐣 *${prefix}play (judul lagu)* 
-┃┃✯ ❒き⃟🐣 *${prefix}ytmp3 (link youtube)* 
-┃┃✯ ❒き⃟🐣 *${prefix}ytmp4 (link youtube)*
-┃┃✯ ❒き⃟🐣 *${prefix}ytmp32* 
-┃┃✯ ❒き⃟🐣 *${prefix}ytmp42* 
-┃┃✯ ❒き⃟🐣 *${prefix}tiktoknowm (link tiktok)*
-┃┃✯ ❒き⃟🐣 *${prefix}tiktokwm (link tiktok)*
-┃┃✯ ❒き⃟🐣 *${prefix}twitter (link twitter)*
-┃┃✯ ❒き⃟🐣 *${prefix}instagram (link instagram)*
-┃┃✯ ❒き⃟🐣 *${prefix}getmusic* 
-┃┃✯ ❒き⃟🐣 *${prefix}getvideo* 
-┃┃✯ ❒き⃟🐣 *${prefix}mediafire (khusus owner)* 
-┃┃
-┃┏━「 *Menu Owner*」
-┃┃✯ ❒き⃟🐣 *${prefix}bcgc* 
-┃┃✯ ❒き⃟🐣 *${prefix}bcall* 
-┃┃✯ ❒き⃟🐣 *${prefix}setppbot* 
-┃┃
-┃┏━「 *Menu Group*」
-┃┃✯ ❒き⃟🐣 *${prefix}tagall* 
-┃┃✯ ❒き⃟🐣 *${prefix}hidetag*
-┃┃✯ ❒き⃟🐣 *${prefix}grup*  
-┃┃✯ ❒き⃟🐣 *${prefix}editinfo* 
-┃┃✯ ❒き⃟🐣 *${prefix}linkgc*
-┃┃✯ ❒き⃟🐣 *${prefix}setppgc [image]*
-┃┃✯ ❒き⃟🐣 *${prefix}setname [text]*
-┃┃✯ ❒き⃟🐣 *${prefix}setdesc [text]*
-┃┃✯ ❒き⃟🐣 *${prefix}add @user*
-┃┃✯ ❒き⃟🐣 *${prefix}kick @user*
-┃┃✯ ❒き⃟🐣 *${prefix}promote @user*
-┃┃✯ ❒き⃟🐣 *${prefix}demote @user*
-┃┃
-┃┏━「 *Menu Search*」
-┃┃✯ ❒き⃟🐣 *${prefix}wikipedia* 
-┃┃✯ ❒き⃟🐣 *${prefix}ytsearch (judul lagu)*
-┃┃✯ ❒き⃟🐣 *${prefix}google* 
-┃┃✯ ❒き⃟🐣 *${prefix}gimage* 
-┃┃
-┃┏━「 *Menu Voice Changer*」
-┃┃✯ ❒き⃟🐣 *${prefix}bass*
-┃┃✯ ❒き⃟🐣 *${prefix}blown*
-┃┃✯ ❒き⃟🐣 *${prefix}deep*
-┃┃✯ ❒き⃟🐣 *${prefix}earrape*
-┃┃✯ ❒き⃟🐣 *${prefix}fast*
-┃┃✯ ❒き⃟🐣 *${prefix}fat*
-┃┃✯ ❒き⃟🐣 *${prefix}nightcore*
-┃┃✯ ❒き⃟🐣 *${prefix}reverse*
-┃┃✯ ❒き⃟🐣 *${prefix}robot*
-┃┃✯ ❒き⃟🐣 *${prefix}slow*
-┃┃✯ ❒き⃟🐣 *${prefix}tupai*
-┃┃
-┃┏━「 *Menu Haram NSFW*」
-┃┃✯ ❒き⃟🐣 *${prefix}yuri* 
-┃┃✯ ❒き⃟🐣 *${prefix}pussy* 
-┃┃✯ ❒き⃟🐣 *${prefix}panties* 
-┃┃✯ ❒き⃟🐣 *${prefix}orgy* 
-┃┃✯ ❒き⃟🐣 *${prefix}neko* 
-┃┃✯ ❒き⃟🐣 *${prefix}masturbation* 
-┃┃✯ ❒き⃟🐣 *${prefix}jahy* 
-┃┃✯ ❒き⃟🐣 *${prefix}glasses* 
-┃┃✯ ❒き⃟🐣 *${prefix}gangbang* 
-┃┃✯ ❒き⃟🐣 *${prefix}foot* 
-┃┃✯ ❒き⃟🐣 *${prefix}femdom* 
-┃┃✯ ❒き⃟🐣 *${prefix}ero* 
-┃┃✯ ❒き⃟🐣 *${prefix}cum* 
-┃┃✯ ❒き⃟🐣 *${prefix}cuckkold* 
-┃┃✯ ❒き⃟🐣 *${prefix}blowjob* 
-┃┃✯ ❒き⃟🐣 *${prefix}bdsm* 
-┃┃✯ ❒き⃟🐣 *${prefix}ahegao* 
-┃┃✯ ❒き⃟🐣 *${prefix}ass*
-┃┃
+━➤ 「𝐌𝐄𝐍𝐔 𝐆𝐔𝐑𝐀𝐁𝐎𝐓𝐙」
+𝐈𝐧𝐟𝐨
+ ❒ *${prefix}menu*
+ ❒ *${prefix}ping*
+ ❒ *${prefix}owner*
+ 
+𝐂𝐨𝐧𝐯𝐞𝐫𝐭
+ ❒ *${prefix}tomp4 (reply sticker gif)*
+ ❒ *${prefix}toaudio (reply audio)*
+ ❒ *${prefix}togif (reply sticker gif)*
+ ❒ *${prefix}toimg (reply sticker)*
+ ❒ *${prefix}toaudio (reply video)*
+ ❒ *${prefix}tomp3 (reply video)*
+ ❒ *${prefix}sticker (reply gambar)*
+ 
+𝐓𝐨𝐨𝐥𝐬
+ ❒ *${prefix}removebg (reply gambar)*
+ ❒ *${prefix}emojimix (masukan emoji)*
+ ❒ *${prefix}del (reply pesan bot)*
+ ❒ *${prefix}q* 
+ 
+𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝
+ ❒ *${prefix}play (judul lagu)* 
+ ❒ *${prefix}ytmp3 (link youtube)* 
+ ❒ *${prefix}ytmp4 (link youtube)*
+ ❒ *${prefix}ytmp32* 
+ ❒ *${prefix}ytmp42* 
+ ❒ *${prefix}tiktok (link tiktok)*
+ ❒ *${prefix}twitter (link twitter)*
+ ❒ *${prefix}instagram (link instagram)*
+ ❒ *${prefix}getmusic* 
+ ❒ *${prefix}getvideo* 
+ ❒ *${prefix}mediafire (khusus owner)* 
+
+𝐎𝐰𝐧𝐞𝐫
+ ❒ *${prefix}bcgc* 
+ ❒ *${prefix}bcall* 
+ ❒ *${prefix}setppbot* 
+
+𝐆𝐫𝐨𝐮𝐩
+ ❒ *${prefix}tagall* 
+ ❒ *${prefix}hidetag*
+ ❒ *${prefix}grup*  
+ ❒ *${prefix}editinfo* 
+ ❒ *${prefix}linkgc*
+ ❒ *${prefix}setppgc [image]*
+ ❒ *${prefix}setname [text]*
+ ❒ *${prefix}setdesc [text]*
+ ❒ *${prefix}add @user*
+ ❒ *${prefix}kick @user*
+ ❒ *${prefix}promote @user*
+ ❒ *${prefix}demote @user*
+
+𝐒𝐞𝐚𝐫𝐜𝐡
+ ❒ *${prefix}wikipedia* 
+ ❒ *${prefix}ytsearch (judul lagu)*
+ ❒ *${prefix}google* 
+ ❒ *${prefix}gimage* 
+ 
+𝐕𝐨𝐢𝐜𝐞 𝐂𝐡𝐚𝐧𝐠𝐞𝐫
+ ❒ *${prefix}bass*
+ ❒ *${prefix}blown*
+ ❒ *${prefix}deep*
+ ❒ *${prefix}earrape*
+ ❒ *${prefix}fast*
+ ❒ *${prefix}fat*
+ ❒ *${prefix}nightcore*
+ ❒ *${prefix}reverse*
+ ❒ *${prefix}robot*
+ ❒ *${prefix}slow*
+ ❒ *${prefix}tupai*
+
+𝐍𝐬𝐟𝐰
+ ❒ *${prefix}yuri* 
+ ❒ *${prefix}pussy* 
+ ❒ *${prefix}panties* 
+ ❒ *${prefix}orgy* 
+ ❒ *${prefix}neko* 
+ ❒ *${prefix}masturbation* 
+ ❒ *${prefix}jahy* 
+ ❒ *${prefix}glasses* 
+ ❒ *${prefix}gangbang* 
+ ❒ *${prefix}foot* 
+ ❒ *${prefix}femdom* 
+ ❒ *${prefix}ero* 
+ ❒ *${prefix}cum* 
+ ❒ *${prefix}cuckkold* 
+ ❒ *${prefix}blowjob* 
+ ❒ *${prefix}bdsm* 
+ ❒ *${prefix}ahegao* 
+ ❒ *${prefix}ass*
+
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
