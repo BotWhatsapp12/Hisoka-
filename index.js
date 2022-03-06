@@ -85,8 +85,7 @@ async function startkon() {
                
                 if (anu.action == 'add') {
                 	let buttons = [
-                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Datang'}, type: 1},{buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},
-                    {buttonId: `info`, buttonText: {displayText: 'Info Bot'}, type: 1}
+                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Datang'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: ppuser },
@@ -95,20 +94,19 @@ async function startkon() {
 *Nama :*
 *Umur :*
 *Semoga Betah Yah*`,
-                    footer: `Pencet Button Selamat Datang Untuk Membuka Button Menu Bot & Info Bot`,
+                    footer: `Welcome Message by GuraBotz`,
                     buttons: buttons,
                     headerType: 6
                 }
                 kon.sendMessage(anu.id, buttonMessage, {quoted: ftrol})
                 } else if (anu.action == 'remove') {
                     let buttons = [
-                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Tinggal'}, type: 1},{buttonId: `menu`, buttonText: {displayText: 'Menu Bot'}, type: 1},
-                    {buttonId: `info`, buttonText: {displayText: 'Info Bot'}, type: 1}
+                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Tinggal'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: ppuser },
-                    caption: `@${num.split("@")[0]} *Keluar dari* ${metadata.subject} *Karena dia Wibu*`,
-                    footer: `Pencet Button Selamat Tinggal Untuk Membuka Button Menu Bot & Info Bot`,
+                    caption: `@${num.split("@")[0]} *Keluar dari* ${metadata.subject} *Jangan Balik Lagi Ya Ngab*`,
+                    footer: `Leave Messagr by GuraBotz`,
                     buttons: buttons,
                     headerType: 6
                 }
