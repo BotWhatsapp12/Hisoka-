@@ -40,7 +40,7 @@ async function startkon() {
                             status: 1,
                             surface : 1,
                             message: `GuraBotz by ArulGanz`, //Kasih namalu
-                            orderTitle: `Hallo Kak`,
+                            orderTitle: `Hallo`,
                             thumbnail: fs.readFileSync('./lib/hisoka.jpg'),
                             sellerJid: '0@s.whatsapp.net' 
                           }
@@ -85,15 +85,15 @@ async function startkon() {
                
                 if (anu.action == 'add') {
                 	let buttons = [
-                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Datang'}, type: 1}
+                    {buttonId: `ping`, buttonText: {displayText: 'Welcome Sis'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: ppuser },
                     caption: `*🐣 *Welcome to ${metadata.subject}*🐣*
-*Hai Kak* @${num.split("@")[0]} *Kenalan Yuk*
-*Nama :*
-*Umur :*
-*Semoga Betah Yah*`,
+*Hello Sis* @${num.split("@")[0]} *Intro*
+*Name :*
+*Age :*
+*Hope You Feel at Home, Dont Riot and Obey the Group Rules*`,
                     footer: `Welcome Message by GuraBotz`,
                     buttons: buttons,
                     headerType: 6
@@ -101,12 +101,12 @@ async function startkon() {
                 kon.sendMessage(anu.id, buttonMessage, {quoted: ftrol})
                 } else if (anu.action == 'remove') {
                     let buttons = [
-                    {buttonId: `ping`, buttonText: {displayText: 'Selamat Tinggal'}, type: 1}
+                    {buttonId: `ping`, buttonText: {displayText: 'Good Bye Sis'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: ppuser },
-                    caption: `@${num.split("@")[0]} *Keluar dari* ${metadata.subject} *Jangan Balik Lagi Ya Ngab*`,
-                    footer: `Leave Messagr by GuraBotz`,
+                    caption: `@${num.split("@")[0]} *Leave From* ${metadata.subject} *Don't Come Back!!!*`,
+                    footer: `Leave Message by GuraBotz`,
                     buttons: buttons,
                     headerType: 6
                 }

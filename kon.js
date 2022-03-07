@@ -204,9 +204,9 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
             break
           case 'setppbot': {
                 if (!isCreator) throw mess.owner
-                if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-                if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-                if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                if (!quoted) throw `Send/Reply Image With Caption ${prefix + command}`
+                if (!/image/.test(mime)) throw `Send/Reply Image With Caption ${prefix + command}`
+                if (/webp/.test(mime)) throw `Send/Reply Image With Caption ${prefix + command}`
                 let media = await kon.downloadAndSaveMediaMessage(quoted)
                 await kon.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
                 m.reply(mess.success)
@@ -215,9 +215,9 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
            case 'setppgroup': case 'setppgrup': case 'setppgc': {
                 if (!m.isGroup) throw mess.group
                 if (!isAdmins) throw mess.admin
-                if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-                if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-                if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                if (!quoted) throw `Send/Reply Image With Caption ${prefix + command}`
+                if (!/image/.test(mime)) throw `Send/Reply Image With Caption ${prefix + command}`
+                if (/webp/.test(mime)) throw `Send/Reply Image With Caption ${prefix + command}`
                 let media = await kon.downloadAndSaveMediaMessage(quoted)
                 await kon.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
                 m.reply(mess.success)
@@ -270,7 +270,7 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
 	}
 	break
         	case 'igdl': case 'instagram': case 'ig':{
-        	if (!text) throw 'Masukkan Query Link!'
+        	if (!text) throw 'enter query link!'
 			let buttons = [
                     {buttonId: `ig1 ig1 ${text}`, buttonText: {displayText: 'Hasil Pencarian'}, type: 1},
                 ]
@@ -311,9 +311,9 @@ break
 			}
 			    break
             case 'imagenobg': case 'removebg': case 'remove-bg': {
-	    if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	    if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	    if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+	    if (!quoted) throw `Send/Reply Image With Caption ${prefix + command}`
+	    if (!/image/.test(mime)) throw `Send/Reply Image With Caption ${prefix + command}`
+	    if (/webp/.test(mime)) throw `Send/Reply Image With Caption ${prefix + command}`
 	    let remobg = require('remove.bg')
 	    let apirnobg = ['kdkHbCAaqTkzhAVSDXaSv6jm','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
 	    let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
@@ -349,7 +349,7 @@ break
                 }
                 break
 	case 'tiktok': case 'tiktoknowm': {
-                if (!text) throw 'Masukkan Query Link!'
+                if (!text) throw 'enter query link!'
                 m.reply(mess.wait)
                 var { TiktokDownloader } = require('./lib/tiktokdl')
 res = await TiktokDownloader(`${text}`).catch(e => {
@@ -372,7 +372,7 @@ console.log(res)
             }
             break
             case 'tiktokwm': case 'tiktokwatermark': {
-                if (!text) throw 'Masukkan Query Link!'
+                if (!text) throw 'enter query link!'
                 m.reply(mess.wait)
                 var { TiktokDownloader } = require('./lib/tiktokdl')
 res = await TiktokDownloader(`${text}`).catch(e => {
@@ -395,7 +395,7 @@ console.log(res)
             }
             break
     case 'tiktokaudio1':{
-     if (!text) throw 'Masukkan Query Link!'
+     if (!text) throw 'enter query link!'
 			    hx.ttdownloader(args[1]).then( data => {
 			      kon.sendMessage(m.chat, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: m })
 				}).catch(() => reply('Hmm Erorr Awoakwoakwok'))
@@ -403,7 +403,7 @@ console.log(res)
 		        break
     case'twitter':{
             if (!text) throw 'Linknya?'
-            m.reply('Sedang Di Proses, Jika Video Lama, Mungkin Eror Atau User Private')
+            m.reply(mess.wait)
             var res = await hx.twitter(`${text}`)
             ren = `${res.HD}`
             let buttons = [
@@ -421,7 +421,7 @@ console.log(res)
             }
             break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
-            if (!quoted) throw`Balas Video/Image Dengan Caption ${prefix + command}`
+            if (!quoted) throw`Send Image/Video With Caption ${prefix + command}\nVideo Duration 1-9 Seconds`
             m.reply(mess.wait)
                     if (/image/.test(mime)) {
                 let media = await quoted.download()
@@ -433,7 +433,7 @@ console.log(res)
                 let encmedia = await kon.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
             } else {
-                throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
+                throw `Send Image/Video With Caption ${prefix + command}\nVideo Duration 1-9 Seconds`
                 }
             }
             break
@@ -505,7 +505,7 @@ console.log(res)
             break
               case 'mediafire':{
             if (!isCreator) throw mess.owner
-            if (/document/.test(mime)) throw `Linknya?`
+            if (/document/.test(mime)) throw `Link?`
             if (!text) throw `Example : ${prefix + command} https://mediafire.com/snekjdakkk`
 m.reply(mess.wait)
 rescun = await mediafiredl(text)

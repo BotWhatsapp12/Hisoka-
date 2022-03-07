@@ -25,14 +25,14 @@ global.sessionName = 'kon'
 global.prefa = ['','!','.','🐦','🐤','🗿']
 global.sp = '⭔'
 global.mess = {
-    success: '𝐍𝐢𝐡 𝐊𝐚𝐤, 𝐃𝐚𝐡 𝐉𝐚𝐝𝐢, 𝐉𝐚𝐧𝐠𝐚𝐧 𝐋𝐮𝐩𝐚 𝐅𝐨𝐥𝐥𝐨𝐰 𝐈𝐧𝐬𝐭𝐚𝐠𝐫𝐚𝐦 @_𝐝𝐚𝐚𝐚_1‎',
-    admin: 'Fitur Khusus Admin Group!',
-    botAdmin: 'Bot Harus Menjadi Admin Terlebih Dahulu!',
-    owner: 'Fitur Khusus Owner Bot',
-    group: 'Fitur Digunakan Hanya Untuk Group!',
-    private: 'Fitur Digunakan Hanya Untuk Private Chat!',
-    bot: 'Fitur Khusus Pengguna Nomor Bot',
-    wait: '𝐒𝐞𝐝𝐚𝐧𝐠 𝐃𝐢 𝐏𝐫𝐨𝐬𝐞𝐬, 𝐇𝐚𝐫𝐚𝐩 𝐓𝐮𝐧𝐠𝐠𝐮....‎',
+    success: 'done, dont forget to follow instagram https://instagram.com/_daaa_1',
+    admin: 'special features admin group',
+    botAdmin: 'bot must be admin',
+    owner: 'special owner bot features',
+    group: 'features can only be used in groups',
+    private: 'feature can only be used in private chat',
+    bot: 'special features of bot number users',
+    wait: 'in process please wait a few minutes....‎',
 }
 global.thumb = fs.readFileSync('./lib/hisoka.jpg')
 
