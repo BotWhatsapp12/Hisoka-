@@ -341,7 +341,7 @@ break
                 ]
                 let buttonMessage = {
                     text: `*Gak Ada Bang*`,
-                    footer: 'Downloader Instagram GuraBotz',
+                    footer: 'GuraBotz',
                     buttons: buttons,
                     headerType: 2
                 }
@@ -397,7 +397,7 @@ console.log(res)
     case 'tiktokaudio1':{
      if (!text) throw 'enter query link!'
 			    hx.ttdownloader(args[1]).then( data => {
-			      kon.sendMessage(m.chat, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: m })
+				  kon.sendMessage(m.chat, {document: { url: data.nowm }, mimetype: 'audio/mp4', fileName: `Sound Tiktok By ${kon.user.name}.mp3`}, { quoted : m })
 				}).catch(() => reply('Hmm Erorr Awoakwoakwok'))
 				}
 		        break
@@ -418,6 +418,13 @@ console.log(res)
                     headerType: 5
                 }
                 kon.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break
+   case 'twitter2':{
+   	if (!text) throw `Linknya...?`
+                m.reply(mess.wait)
+                ini = await fetchJson(`https://api.dapuhy.xyz/api/socialmedia/twitter?url=${text}&apikey=wC7ZLKWUPR`)
+                kon.sendMessage(m.chat, { video: { url: ini.download.hd}, fileName: `${ini.title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${ini.title}\n🖇 Url : ${ini.download.hd}\n Ext : MP4\n🗃 Resolusi : HD` }, { quoted: m })
             }
             break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
@@ -718,14 +725,6 @@ nat = `
 ➤ *Info Bot*➤
 ┃❒ *Kecepatan Bot* ${latensi.toFixed(4)} detik
 ┃❒ *Runtime Bot* ${runtime(process.uptime())}
-┃
-┃
-┃𝐆𝐮𝐫𝐚𝐁𝐨𝐭𝐳 𝐀𝐝𝐚𝐥𝐚𝐡 𝐁𝐨𝐭 𝐁𝐞𝐭𝐚 𝐌𝐮𝐥𝐭𝐢-𝐃𝐞𝐯𝐢𝐜𝐞 
-┃𝐉𝐢𝐤𝐚 𝐌𝐞𝐧𝐞𝐦𝐮𝐤𝐚𝐧 𝐁𝐮𝐠 𝐀𝐭𝐚𝐮 𝐄𝐫𝐨𝐫𝐫 𝐌𝐨𝐡𝐨𝐧 𝐝𝐢 
-┃𝐌𝐚𝐤𝐥𝐮𝐦𝐢. 𝐔𝐧𝐭𝐮𝐤 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐁𝐨𝐭 𝐓𝐞𝐫𝐝𝐚𝐩𝐚𝐭 𝐝𝐢 
-┃𝐌𝐞𝐧𝐮, 𝐔𝐧𝐭𝐮𝐤 𝐏𝐫𝐞𝐟𝐢𝐱 𝐁𝐨𝐭 𝐚𝐝𝐚𝐥𝐚𝐡 𝐌𝐮𝐥??𝐢𝐩𝐫𝐞𝐟𝐢𝐱.
-┃
-┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂?? 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
@@ -820,7 +819,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let media = medias.filter(v => v.videoAvailable == false && v.audioAvailable == true && v.quality == quality).map(v => v)
                 if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
                 kon.sendImage(m.chat, thumbnail, `🐣 Title : ${title}\n🗂 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\nâ­” Ext : MP3\n📷 Resolusi : ${args[1] || '128kbps'}`, m)
-                kon.sendMessage(m.chat, { audio: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3` }, { quoted: m })
+                kon.sendMessage(m.chat, {document: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3 by GuraBotz`}, { quoted : m })
             }
             break
             case 'getvideo': {
@@ -950,7 +949,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let media = medias.filter(v => v.videoAvailable == false && v.audioAvailable == true && v.quality == quality).map(v => v)
                 if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
                 kon.sendImage(m.chat, thumbnail, `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n🎶 Ext : MP3\n🗃 Resolusi : ${args[1] || '128kbps'}\n *Mohon Tunggu Sebentar Media Sedang Dikirim*`, m)
-                kon.sendMessage(m.chat, { audio: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3` }, { quoted: m })
+                kon.sendMessage(m.chat, {document: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3 by GuraBotz` }, { quoted : m })
             }
             break
             case 'ytmp4': case 'ytvideo': {
@@ -971,7 +970,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 ini = await fetchJson(`https://api.dapuhy.xyz/api/socialmedia/ytmp3?url=${text}&apikey=wC7ZLKWUPR`)
                 thumb = await getBuffer(ini.result.thumb)
                 kon.sendImage(m.chat, thumb, `🐣 Title : ${ini.result.title}\n📤 File Size : ${ini.result.size}\n🖇 Url : ${ini.result.url}\n🎶 Ext : MP3\n\n *Mohon Tunggu Sebentar Media Sedang Dikirim*`, m)
-                kon.sendMessage(m.chat, { audio: { url: ini.result.url }, mimetype: 'audio/mp4', fileName: `${ini.result.title}.mp3` }, { quoted: m })
+                kon.sendMessage(m.chat, {document: { url: ini.result.url }, mimetype: 'audio/mp4', fileName: `${ini.result.title}.mp3 by GuraBotz`}, { quoted : m })
             }
             break
             case 'ytmp42':{
@@ -1017,7 +1016,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}toaudio (reply audio)*
  ❒ *${prefix}togif (reply sticker gif)*
  ❒ *${prefix}toimg (reply sticker)*
- ❒ *${prefix}toaudio (reply video)*
+ ❒ *${prefix}tovn (reply audio)*
  ❒ *${prefix}tomp3 (reply video)*
  ❒ *${prefix}sticker (reply gambar)*
  
