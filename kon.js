@@ -99,6 +99,9 @@ const isUrl = (uri) => {
         }
 
         // Respon Cmd with media
+const buttonWithText = (m.chat, text, footer, buttons) => {
+			return kon.sendMessage(m.chat, { text: text, footer: footer, templateButtons: buttons })
+		}
 const sendFileFromUrl = async (from, url, caption, msg, men) => {
             let mime = '';
             let res = await axios.head(url)
@@ -166,6 +169,11 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
   {buttonId: `ping`, buttonText: {displayText: 'Bot Status'}, type: 1},
     {buttonId: `owner`, buttonText: {displayText: 'Creator Bot'}, type: 1}
 ]
+const buttonsDefault = [
+			{ urlButton: { displayText: `Group Bot`, url : `https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn` } },
+			{ quickReplyButton: { displayText: `🧑 Owner`, id: `owner` } },
+			{ quickReplyButton: { displayText: `🖇Status Bot`, id: `ping` } }
+		]
 
         if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in cmdmedia)) {
         let hash = cmdmedia[m.msg.fileSha256.toString('base64')]
@@ -1003,6 +1011,107 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
             kon.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
             }
             break
+            case 'menu2':{
+            	anu = `
+━➤ 「𝐌𝐄𝐍𝐔 𝐆𝐔𝐑𝐀𝐁𝐎𝐓𝐙」
+𝐈𝐧𝐟𝐨
+ ❒ *${prefix}menu*
+ ❒ *${prefix}ping*
+ ❒ *${prefix}owner*
+ 
+𝐂𝐨𝐧𝐯𝐞𝐫𝐭
+ ❒ *${prefix}tomp4 (reply sticker gif)*
+ ❒ *${prefix}toaudio (reply audio)*
+ ❒ *${prefix}togif (reply sticker gif)*
+ ❒ *${prefix}toimg (reply sticker)*
+ ❒ *${prefix}tovn (reply audio)*
+ ❒ *${prefix}tomp3 (reply video)*
+ ❒ *${prefix}sticker (reply gambar)*
+ 
+𝐓𝐨𝐨𝐥𝐬
+ ❒ *${prefix}removebg (reply gambar)*
+ ❒ *${prefix}emojimix (masukan emoji)*
+ ❒ *${prefix}del (reply pesan bot)*
+ ❒ *${prefix}q* 
+ 
+𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝
+ ❒ *${prefix}play (judul lagu)* 
+ ❒ *${prefix}ytmp3 (link youtube)* 
+ ❒ *${prefix}ytmp4 (link youtube)*
+ ❒ *${prefix}ytmp32* 
+ ❒ *${prefix}ytmp42* 
+ ❒ *${prefix}tiktok (link tiktok)*
+ ❒ *${prefix}twitter (link twitter)*
+ ❒ *${prefix}instagram (link instagram)*
+ ❒ *${prefix}getmusic* 
+ ❒ *${prefix}getvideo* 
+ ❒ *${prefix}mediafire (khusus owner)* 
+
+𝐎𝐰𝐧𝐞𝐫
+ ❒ *${prefix}bcgc* 
+ ❒ *${prefix}bcall* 
+ ❒ *${prefix}setppbot* 
+
+𝐆𝐫𝐨𝐮𝐩
+ ❒ *${prefix}tagall* 
+ ❒ *${prefix}hidetag*
+ ❒ *${prefix}grup*  
+ ❒ *${prefix}editinfo* 
+ ❒ *${prefix}linkgc*
+ ❒ *${prefix}setppgc [image]*
+ ❒ *${prefix}setname [text]*
+ ❒ *${prefix}setdesc [text]*
+ ❒ *${prefix}add @user*
+ ❒ *${prefix}kick @user*
+ ❒ *${prefix}promote @user*
+ ❒ *${prefix}demote @user*
+
+𝐒𝐞𝐚𝐫𝐜𝐡
+ ❒ *${prefix}wikipedia* 
+ ❒ *${prefix}ytsearch (judul lagu)*
+ ❒ *${prefix}google* 
+ ❒ *${prefix}gimage* 
+ 
+𝐕𝐨𝐢𝐜𝐞 𝐂𝐡𝐚𝐧𝐠𝐞𝐫
+ ❒ *${prefix}bass*
+ ❒ *${prefix}blown*
+ ❒ *${prefix}deep*
+ ❒ *${prefix}earrape*
+ ❒ *${prefix}fast*
+ ❒ *${prefix}fat*
+ ❒ *${prefix}nightcore*
+ ❒ *${prefix}reverse*
+ ❒ *${prefix}robot*
+ ❒ *${prefix}slow*
+ ❒ *${prefix}tupai*
+
+𝐍𝐬𝐟𝐰
+ ❒ *${prefix}yuri* 
+ ❒ *${prefix}pussy* 
+ ❒ *${prefix}panties* 
+ ❒ *${prefix}orgy* 
+ ❒ *${prefix}neko* 
+ ❒ *${prefix}masturbation* 
+ ❒ *${prefix}jahy* 
+ ❒ *${prefix}glasses* 
+ ❒ *${prefix}gangbang* 
+ ❒ *${prefix}foot* 
+ ❒ *${prefix}femdom* 
+ ❒ *${prefix}ero* 
+ ❒ *${prefix}cum* 
+ ❒ *${prefix}cuckkold* 
+ ❒ *${prefix}blowjob* 
+ ❒ *${prefix}bdsm* 
+ ❒ *${prefix}ahegao* 
+ ❒ *${prefix}ass*
+
+┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
+┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
+┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
+┗━━━━━━━`
+kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', mentions: [sender] })
+}
+break
             case 'list': case 'menu': case 'help': case '?': {
                 anu = `
 ━➤ 「𝐌𝐄𝐍𝐔 𝐆𝐔𝐑𝐀𝐁𝐎𝐓𝐙」
