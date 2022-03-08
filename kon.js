@@ -99,9 +99,6 @@ const isUrl = (uri) => {
         }
 
         // Respon Cmd with media
-const buttonWithText = (m.chat, text, footer, buttons) => {
-			return kon.sendMessage(m.chat, { text: text, footer: footer, templateButtons: buttons })
-		}
 const sendFileFromUrl = async (from, url, caption, msg, men) => {
             let mime = '';
             let res = await axios.head(url)
