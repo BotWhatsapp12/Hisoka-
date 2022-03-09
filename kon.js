@@ -827,37 +827,6 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
         })
         }
         break
-        case 'getmusic': {
-                if (!text) throw `Example : ${prefix + command} 1`
-                if (!m.quoted) return m.reply('Reply Pesan')
-                if (!m.quoted.isBaileys) throw `Hanya Bisa Membalas Pesan Dari Bot`
-                let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
-                if (!urls) throw `Mungkin pesan yang anda reply tidak mengandung result ytsearch`
-		let { aiovideodl } = require('./lib/scraper')
-                let result = await aiovideodl(urls[text - 1])
-                let { url, title, thumbnail, duration, medias } = result
-                let quality = args[1] ? args[1] : '128kbps'                
-                let media = medias.filter(v => v.videoAvailable == false && v.audioAvailable == true && v.quality == quality).map(v => v)
-                if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
-                kon.sendImage(m.chat, thumbnail, `🐣 Title : ${title}\n🗂 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\nâ­” Ext : MP3\n📷 Resolusi : ${args[1] || '128kbps'}`, m)
-                kon.sendMessage(m.chat, {document: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3 by GuraBotz`}, { quoted : m })
-            }
-            break
-            case 'getvideo': {
-                if (!text) throw `Example : ${prefix + command} 1`
-                if (!m.quoted) return m.reply('Reply Pesan')
-                if (!m.quoted.isBaileys) throw `Hanya Bisa Membalas Pesan Dari Bot`
-                let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
-                if (!urls) throw `Mungkin pesan yang anda reply tidak mengandung result ytsearch`
-		let { aiovideodl } = require('./lib/scraper')
-                let result = await aiovideodl(urls[text - 1])
-                let { url, title, thumbnail, duration, medias } = result
-                let quality = args[1] ? args[1] : '360p'                
-                let media = medias.filter(v => v.videoAvailable == true && v.audioAvailable == false && v.quality == quality).map(v => v)
-                if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
-                kon.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n🎬 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n📷 Ext : MP4\n🗂 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
-            }
-            break
         case 'q': case 'quoted': {
 		if (!m.quoted) return m.reply('Reply Pesannya!!')
 		let wokwol = await kon.serializeM(await m.getQuotedObj())
@@ -930,12 +899,12 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Music',
-                                    id: `ytmp32 ${anu.url}`
+                                    id: `ytmp3 ${anu.url}`
                                 }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Video',
-                                    id: `ytmp42 ${anu.url}`
+                                    id: `ytmp4 ${anu.url}`
                                 }  
                             }, {
                                 quickReplyButton: {
@@ -949,40 +918,66 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 kon.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
-        case 'clearall':{
-									if (!isCreator) throw mess.owner
-									let chiit = await kon.chats.all()
-									for (let i of chiit){
-										kon.modifyChat(i.jid, 'clear', {
-											includeStarred: false
-											})
-											}
-											m.reply(`*Succes*`)
-											}
-									break
-	    case 'ytmp3': case 'ytaudio': {
-                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
+        case 'tourl': {
                 m.reply(mess.wait)
-		let { aiovideodl } = require('./lib/scraper')
-                let result = await aiovideodl(isUrl(text)[0])
-                let { url, title, thumbnail, duration, medias } = result
-                let quality = args[1] ? args[1] : '128kbps'                
-                let media = medias.filter(v => v.videoAvailable == false && v.audioAvailable == true && v.quality == quality).map(v => v)
-                if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
-                kon.sendImage(m.chat, thumbnail, `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n🎶 Ext : MP3\n🗃 Resolusi : ${args[1] || '128kbps'}\n *Mohon Tunggu Sebentar Media Sedang Dikirim*`, m)
-                kon.sendMessage(m.chat, {document: { url: media[0].url }, mimetype: 'audio/mp4', fileName: `${title}.mp3 by GuraBotz` }, { quoted : m })
+		let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
+                let media = await kon.downloadAndSaveMediaMessage(quoted)
+                if (/image/.test(mime)) {
+                    let anu = await TelegraPh(media)
+                    m.reply(util.format(anu))
+                } else if (!/image/.test(mime)) {
+                    let anu = await UploadFileUgu(media)
+                    m.reply(util.format(anu))
+                }
+                await fs.unlinkSync(media)
+            }
+            break
+	    case 'ytmp3': case 'ytaudio': {
+                let { yta } = require('./lib/y2mate')
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
+                let quality = args[1] ? args[1] : '128kbps'
+                let media = await yta(text, quality)
+                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`
+                kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync(media.thumb) }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
+                kon.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
             break
             case 'ytmp4': case 'ytvideo': {
+                let { ytv } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
-                m.reply(mess.wait)
-		let { aiovideodl } = require('./lib/scraper')
-                let result = await aiovideodl(isUrl(text)[0])
-                let { url, title, thumbnail, duration, medias } = result
-                let quality = args[1] ? args[1] : '360p'                
-                let media = medias.filter(v => v.videoAvailable == true && v.audioAvailable == false && v.quality == quality).map(v => v)
-                if (media[0].formattedSize.split('MB')[0] >= 100.00) return m.reply('File Melebihi Batas'+util.format(media))
-                kon.sendMessage(m.chat, { video: { url: media[0].url }, fileName: `${title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${title}\n📤 File Size : ${media[0].formattedSize}\n🖇 Url : ${url}\n Ext : MP4\n🗃 Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+                let quality = args[1] ? args[1] : '360p'
+                let media = await ytv(text, quality)
+                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                kon.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+            }
+            break
+	    case 'getmusic': {
+                let { yta } = require('./lib/y2mate')
+                if (!text) throw `Example : ${prefix + command} 1`
+                if (!m.quoted) return m.reply('Reply Pesan')
+                if (!m.quoted.isBaileys) throw `Hanya Bisa Membalas Pesan Dari Bot`
+		let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
+                if (!urls) throw `Mungkin pesan yang anda reply tidak mengandung result ytsearch`
+                let quality = args[1] ? args[1] : '128kbps'
+                let media = await yta(urls[text - 1], quality)
+                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`
+                kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync(media.thumb) }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
+                kon.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+            }
+            break
+            case 'getvideo': {
+                let { ytv } = require('./lib/y2mate')
+                if (!text) throw `Example : ${prefix + command} 1`
+                if (!m.quoted) return m.reply('Reply Pesan')
+                if (!m.quoted.isBaileys) throw `Hanya Bisa Membalas Pesan Dari Bot`
+                let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
+                if (!urls) throw `Mungkin pesan yang anda reply tidak mengandung result ytsearch`
+                let quality = args[1] ? args[1] : '360p'
+                let media = await ytv(urls[text - 1], quality)
+                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                kon.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
             case 'ytmp32':{
