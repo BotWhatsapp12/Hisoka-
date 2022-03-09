@@ -98,6 +98,20 @@ if (global.db) global.db = {
     chats: {},
     ...(global.db || {})
 }
+
+let chats = global.db.chats[m.chat]
+                if (typeof chats !== 'object') global.db.chats[m.chat] = {}
+                if (chats) {
+                if (!('mute' in chats)) chats.mute = false
+                if (!('antilink' in chats)) chats.antilink = false
+             } else global.db.chats[m.chat] = {
+                mute: false,
+                antilink: false,
+        }
+        } catch (err) {
+            console.error(err)
+        }
+	    
         // Public & Self
         if (!kon.public) {
             if (!m.key.fromMe && !isCreator) return
