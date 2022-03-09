@@ -97,7 +97,21 @@ const isUrl = (uri) => {
         kon.sendReadReceipt(m.chat, m.sender, [m.key.id])
             console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> Dari'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
         }
-
+         
+         //Antilink
+         if (db.chats[m.chat].antilink) {
+        if (budy.match(`chat.whatsapp.com`)) {
+        m.reply(`「 ANTI LINK 」\n\nKamu terdeteksi mengirim link group, maaf kamu akan di kick !`)
+        if (!isBotAdmins) return m.reply(`Ehh bot gak admin T_T`)
+        let gclink = (`https://chat.whatsapp.com/`+await kon.groupInviteCode(m.chat))
+        let isLinkThisGc = new RegExp(gclink, 'i')
+        let isgclink = isLinkThisGc.test(m.text)
+        if (isgclink) return m.reply(`Ehh maaf gak jadi, karena kamu ngirim link group ini`)
+        if (isAdmins) return m.reply(`Ehh maaf kamu admin`)
+        if (isCreator) return m.reply(`Ehh maaf kamu owner bot ku`)
+        kon.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+        }
+        }
         // Respon Cmd with media
  const ftrol2 = {
 	key : {
@@ -852,6 +866,27 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
              }
             }
             break
+            case 'antilink': {
+                if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+                if (args[0] === "on") {
+                if (db.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
+                db.chats[m.chat].antilink = true
+                m.reply(`Antilink Aktif !`)
+                } else if (args[0] === "off") {
+                if (!db.chats[m.chat].antilink) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+                db.chats[m.chat].antilink = false
+                m.reply(`Antilink Tidak Aktif !`)
+                } else {
+                 let buttons = [
+                        { buttonId: 'antilink on', buttonText: { displayText: 'On' }, type: 1 },
+                        { buttonId: 'antilink off', buttonText: { displayText: 'Off' }, type: 1 }
+                    ]
+                    await kon.sendButtonText(m.chat, buttons, `Mode Antilink`, hisoka.user.name, m)
+                }
+             }
+             break
             case 'linkgroup': case 'linkgc': {
                 if (!m.isGroup) throw mess.group
                 let response = await kon.groupInviteCode(m.chat)
@@ -933,6 +968,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
 	    case 'ytmp3': case 'ytaudio': {
+		        m.reply(mess.wait)
                 let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
                 let quality = args[1] ? args[1] : '128kbps'
@@ -944,6 +980,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
             case 'ytmp4': case 'ytvideo': {
+            	m.reply(mess.wait)
                 let { ytv } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                 let quality = args[1] ? args[1] : '360p'
@@ -953,6 +990,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
 	    case 'getmusic': {
+		        m.reply(mess.wait)
                 let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} 1`
                 if (!m.quoted) return m.reply('Reply Pesan')
@@ -968,6 +1006,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
             case 'getvideo': {
+            	m.reply(mess.wait)
                 let { ytv } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} 1`
                 if (!m.quoted) return m.reply('Reply Pesan')
@@ -1067,6 +1106,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}grup*  
  ❒ *${prefix}editinfo* 
  ❒ *${prefix}linkgc*
+ ❒ *${prefix}antilink*
  ❒ *${prefix}setppgc [image]*
  ❒ *${prefix}setname [text]*
  ❒ *${prefix}setdesc [text]*
