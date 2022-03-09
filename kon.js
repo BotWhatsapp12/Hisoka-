@@ -1106,7 +1106,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
 ┗━━━━━━━`
-kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', mentions: [sender] })
+kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
 }
 break
             case 'list': case 'menu': case 'help': case '?': {
