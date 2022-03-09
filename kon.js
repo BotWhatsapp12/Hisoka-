@@ -107,8 +107,7 @@ let chats = global.db.chats[m.chat]
              } else global.db.chats[m.chat] = {
                 mute: false,
                 antilink: false,
-        }
-        } catch (err) {
+        }catch (err) {
             console.error(err)
         }
 	    
