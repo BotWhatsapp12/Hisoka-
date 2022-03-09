@@ -87,6 +87,17 @@ const isUrl = (uri) => {
             }
         })
 
+// read database
+global.db = JSON.parse(fs.readFileSync('./src/database.json'))
+if (global.db) global.db = {
+    sticker: {},
+    database: {},
+    game: {},
+    others: {},
+    users: {},
+    chats: {},
+    ...(global.db || {})
+}
         // Public & Self
         if (!kon.public) {
             if (!m.key.fromMe && !isCreator) return
