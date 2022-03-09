@@ -87,29 +87,6 @@ const isUrl = (uri) => {
             }
         })
 
-// read database
-global.db = JSON.parse(fs.readFileSync('./src/database.json'))
-if (global.db) global.db = {
-    sticker: {},
-    database: {},
-    game: {},
-    others: {},
-    users: {},
-    chats: {},
-    ...(global.db || {})
-}
-
-let chats = global.db.chats[m.chat]
-                if (typeof chats !== 'object') global.db.chats[m.chat] = {}
-                if (chats) {
-                if (!('mute' in chats)) chats.mute = false
-                if (!('antilink' in chats)) chats.antilink = false
-             } else global.db.chats[m.chat] = {
-                mute: false,
-                antilink: false,
-        }catch (err) {
-            console.error(err)
-        }
 	    
         // Public & Self
         if (!kon.public) {
@@ -121,22 +98,6 @@ let chats = global.db.chats[m.chat]
         kon.sendReadReceipt(m.chat, m.sender, [m.key.id])
             console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> Dari'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
         }
-         
-         //Antilink
-         if (db.chats[m.chat].antilink) {
-        if (budy.match(`chat.whatsapp.com`)) {
-        m.reply(`「 ANTI LINK 」\n\nKamu terdeteksi mengirim link group, maaf kamu akan di kick !`)
-        if (!isBotAdmins) return m.reply(`Ehh bot gak admin T_T`)
-        let gclink = (`https://chat.whatsapp.com/`+await kon.groupInviteCode(m.chat))
-        let isLinkThisGc = new RegExp(gclink, 'i')
-        let isgclink = isLinkThisGc.test(m.text)
-        if (isgclink) return m.reply(`Ehh maaf gak jadi, karena kamu ngirim link group ini`)
-        if (isAdmins) return m.reply(`Ehh maaf kamu admin`)
-        if (isCreator) return m.reply(`Ehh maaf kamu owner bot ku`)
-        kon.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
-        }
-        }
-        // Respon Cmd with media
  const ftrol2 = {
 	key : {
                           participant : '0@s.whatsapp.net'
@@ -370,11 +331,11 @@ break
 			}
 			    break
             case 'imagenobg': case 'removebg': case 'remove-bg': {
-	    if (!quoted) throw `Send/Reply Image With Caption ${prefix + command}`
-	    if (!/image/.test(mime)) throw `Send/Reply Image With Caption ${prefix + command}`
-	    if (/webp/.test(mime)) throw `Send/Reply Image With Caption ${prefix + command}`
+	    if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+	    if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+	    if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
 	    let remobg = require('remove.bg')
-	    let apirnobg = ['kdkHbCAaqTkzhAVSDXaSv6jm','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
+	    let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
 	    let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
 	    hmm = await './src/remobg-'+getRandom('')
 	    localFile = await kon.downloadAndSaveMediaMessage(quoted, hmm)
@@ -388,7 +349,7 @@ break
 	      scale: "100%",
 	      outputFile 
 	    }).then(async result => {
-	    kon.sendMessage(m.chat, {image: fs.readFileSync(outputFile), caption: mess.success}, {quoted:m})
+	    kon.sendMessage(m.chat, {image: fs.readFileSync(outputFile), caption: mess.success}, { quoted : m })
 	    await fs.unlinkSync(localFile)
 	    await fs.unlinkSync(outputFile)
 	    })
@@ -890,27 +851,6 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
              }
             }
             break
-            case 'antilink': {
-                if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isAdmins) throw mess.admin
-                if (args[0] === "on") {
-                if (db.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
-                db.chats[m.chat].antilink = true
-                m.reply(`Antilink Aktif !`)
-                } else if (args[0] === "off") {
-                if (!db.chats[m.chat].antilink) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
-                db.chats[m.chat].antilink = false
-                m.reply(`Antilink Tidak Aktif !`)
-                } else {
-                 let buttons = [
-                        { buttonId: 'antilink on', buttonText: { displayText: 'On' }, type: 1 },
-                        { buttonId: 'antilink off', buttonText: { displayText: 'Off' }, type: 1 }
-                    ]
-                    await kon.sendButtonText(m.chat, buttons, `Mode Antilink`, hisoka.user.name, m)
-                }
-             }
-             break
             case 'linkgroup': case 'linkgc': {
                 if (!m.isGroup) throw mess.group
                 let response = await kon.groupInviteCode(m.chat)
