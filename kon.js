@@ -939,7 +939,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let media = await yta(text, quality)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
                 anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`
-                kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync(media.thumb) }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
+                kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
                 kon.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
             break
@@ -963,7 +963,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let media = await yta(urls[text - 1], quality)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
                 anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`
-                kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync(media.thumb) }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
+                kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
                 kon.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
             break
@@ -1033,6 +1033,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}togif (reply sticker gif)*
  ❒ *${prefix}toimg (reply sticker)*
  ❒ *${prefix}tovn (reply audio)*
+ ❒ *${prefix}tourl (reply media)*
  ❒ *${prefix}tomp3 (reply video)*
  ❒ *${prefix}sticker (reply gambar)*
  
