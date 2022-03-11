@@ -292,7 +292,7 @@ const buttonsDefault = [
         	case 'igdl': case 'instagram': case 'ig':{
         	if (!text) throw 'enter query link!'
 			let buttons = [
-                    {buttonId: `ig1 ig1 ${text}`, buttonText: {displayText: 'Hasil Pencarian'}, type: 1},
+                    {buttonId: `ig2 ig2 ${text}`, buttonText: {displayText: 'Hasil Pencarian'}, type: 1},
                 ]
                 let buttonMessage = {
                     text: `Hasil Download Dari ${text}`,
@@ -315,6 +315,19 @@ const buttonsDefault = [
             }
             break
 break
+         case 'ig2':{
+		m.reply(mess.wait)
+hx.igdl(args[1]).then( result => {
+for(let i of result.medias){
+                if(i.url.includes('mp4')){
+                    kon.sendMessage(m.chat, { video: { url: i.url }})
+                } else {
+                    kon.sendMessage(m.chat, { image: { url: i.url }})
+                }
+            }
+            }).catch((err) => m.reply(`Link tidak valid atau mungkin user private`))
+            }
+            break
          case 'ig1':{
 			    m.reply(mess.wait)
 			    xfar.Instagram(args[1]).then( data => {
