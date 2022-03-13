@@ -629,7 +629,7 @@ ${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type =>
 _CPU Core(s) Usage (${cpus.length} Core CPU)_
 ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
                 `.trim()
-                m.reply(respon)
+                kon.sendMessage(m.chat, { caption: respon, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
             }
             break
             case 'bcgc': case 'bcgroup': {
@@ -865,24 +865,23 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 } else if (args[0] === 'open'){
                     await kon.groupSettingUpdate(m.chat, 'not_announcement').then((res) => m.reply(`Sukses Membuka Group`)).catch((err) => m.reply(jsonformat(err)))
                 } else {
-                let buttons = [
-                        { buttonId: 'group open', buttonText: { displayText: 'Open' }, type: 1 },
-                        { buttonId: 'group close', buttonText: { displayText: 'Close' }, type: 1 }
-                    ]
-                    await kon.sendButtonText(m.chat, buttons, `Mode Group`, kon.user.name, m)
+                	anu = `*Setelan Group*`
+                buttonsDefault3 = [
+			{ urlButton: { displayText: `Group Bot`, url : `https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn` } },
+			{ quickReplyButton: { displayText: `Group Open`, id: `group open` } },
+			{ quickReplyButton: { displayText: `Group Close`, id: `group close` } }
+		]
+                    kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault3, footer: 'GuraBotz by ArulGanz', quoted: m })
 
              }
             }
             break
             case 'linkgroup': case 'linkgc': {
                 if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
                 let response = await kon.groupInviteCode(m.chat)
                 tek = `https://chat.whatsapp.com/${response}\n\nLink Group : ${groupMetadata.subject}`
-                let buttons = [
-                        { buttonId: 'menu', buttonText: { displayText: 'Menu Bot' }, type: 1 },
-                        { buttonId: 'info', buttonText: { displayText: 'Info Bot' }, type: 1 }
-                    ]
-                    await kon.sendButtonText(m.chat, buttons, tek, kon.user.name, m, { detectLink: true })
+                kon.sendMessage(m.chat, { caption: tek, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
             }
             break
         case 'play': case 'ytplay': {
@@ -961,7 +960,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let quality = args[1] ? args[1] : '128kbps'
                 let media = await yta(text, quality)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`
+                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}\n\n*Mohon tunggu sebentar media sedang dikirim...*`
                 kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
                 kon.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
@@ -973,7 +972,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let quality = args[1] ? args[1] : '360p'
                 let media = await ytv(text, quality)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}`
+                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}\n\n*Mohon tunggu sebentar media sedang dikirim...*`
                 kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
                 kon.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: mess.success}, { quoted: m })
             }
@@ -989,7 +988,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let quality = args[1] ? args[1] : '128kbps'
                 let media = await yta(urls[text - 1], quality)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`
+                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}\n\n*Mohon tunggu sebentar media sedang di kirim....*`
                 kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
                 kon.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
@@ -1005,7 +1004,7 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let quality = args[1] ? args[1] : '360p'
                 let media = await ytv(urls[text - 1], quality)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` 
+                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}\n\n*Mohon tunggu sebentar media sedang dikirim...*` 
                 kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
                 kon.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: mess.success}, { quoted: m })
             }
