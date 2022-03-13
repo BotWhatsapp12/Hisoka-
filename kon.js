@@ -315,6 +315,16 @@ const buttonsDefault = [
             }
             break
 break
+case 'igstory':{
+if (!text) throw 'enter query link!'
+ini = await fetchJson(`https://megayaa.herokuapp.com/api/igstori?username=${text}`)
+                if(ini.url.includes('mp4')){
+                    kon.sendMessage(m.chat, { video: { url: ini.url }})
+                } else {
+                    kon.sendMessage(m.chat, { image: { url: ini.url }})
+                }
+            }
+            break
          case 'ig2':{
 		m.reply(mess.wait)
 hx.igdl(args[1]).then( result => {
@@ -963,7 +973,9 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let quality = args[1] ? args[1] : '360p'
                 let media = await ytv(text, quality)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                kon.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}`
+                kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
+                kon.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: mess.success}, { quoted: m })
             }
             break
 	    case 'getmusic': {
@@ -993,7 +1005,9 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 let quality = args[1] ? args[1] : '360p'
                 let media = await ytv(urls[text - 1], quality)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                kon.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+                anu = `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` 
+                kon.sendMessage(m.chat, { caption: anu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
+                kon.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: mess.success}, { quoted: m })
             }
             break
             case 'ytmp32':{
