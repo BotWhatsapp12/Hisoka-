@@ -205,9 +205,18 @@ const buttonsDefault = [
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+        	case 'coffe':{
+                if (!text) throw 'textnya?'
+                m.reply(mess.wait)
+					teks = q
+					anu = await fetchJson(`https://api.violetics.pw/api/photooxy/coffee?apikey=a62c-24ff-2fc2&text=${text}`)
+					kon.sendMessage(m.chat, { image: { url: anu.example}})
+}
+					break
         	case 'ssweb':
             case 'ss':{
                 if (!text) throw 'url ?'
+                m.reply(mess.wait)
 					teks = q
 					anu = await fetchJson(`https://shot.screenshotapi.net/screenshot?&url=${text}`)
 					buff = await getBuffer(anu.screenshot)
