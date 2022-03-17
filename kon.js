@@ -182,8 +182,8 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
     {buttonId: `owner`, buttonText: {displayText: 'Creator Bot'}, type: 1}
 ]
 const buttonsDefault = [
-            { callButton: { displayText: `Owner Bot`, url : `https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn` } },
-			{ urlButton: { displayText: `Group Bot`, phoneNumber: '+62 812-2985-9085'} },
+            { callButton: { displayText: `Owner Bot`, phoneNumber: '+62 812-2985-9085'} },
+			{ urlButton: { displayText: `Group Bot`, url : `https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn` } },
 			{ quickReplyButton: { displayText: `🖇Status Bot`, id: `ping` } }
 		]
         if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in cmdmedia)) {
@@ -211,7 +211,7 @@ const buttonsDefault = [
 					teks = q
 					anu = await fetchJson(`https://shot.screenshotapi.net/screenshot?&url=${text}`)
 					buff = await getBuffer(anu.screenshot)
-					kon.sendMessage(m.chat, { image: { url: buff }})
+					kon.sendMessage(m.chat, { image: { url: anu.screenshot}})
 }
 					break
         	case 'setname': case 'setsubject': {
@@ -326,7 +326,7 @@ break
 case 'igstory':{
 if (!text) throw 'enter query link!'
 ini = await fetchJson(`https://megayaa.herokuapp.com/api/igstori?username=${text}`)
-                if(ini.url.includes('mp4')){
+                {
                     kon.sendMessage(m.chat, { video: { url: ini.url }})
                 } else {
                     kon.sendMessage(m.chat, { image: { url: ini.url }})
