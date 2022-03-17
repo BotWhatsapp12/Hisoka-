@@ -210,7 +210,7 @@ const buttonsDefault = [
                 m.reply(mess.wait)
 					teks = q
 					anu = await fetchJson(`https://api.violetics.pw/api/photooxy/coffee?apikey=a62c-24ff-2fc2&text=${text}`)
-					kon.sendMessage(m.chat, { image: { url: anu.example}})
+					kon.sendMessage(m.chat, { image: { url: anu.message.Expected}})
 }
 					break
         	case 'ssweb':
