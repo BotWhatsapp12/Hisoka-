@@ -182,11 +182,10 @@ kon.relayMessage(id, buatpesan.message, { messageId: buatpesan.key.id })
     {buttonId: `owner`, buttonText: {displayText: 'Creator Bot'}, type: 1}
 ]
 const buttonsDefault = [
-			{ urlButton: { displayText: `Group Bot`, url : `https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn` } },
-			{ quickReplyButton: { displayText: `🧑 Owner`, id: `owner` } },
+            { callButton: { displayText: `Owner Bot`, url : `https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn` } },
+			{ urlButton: { displayText: `Group Bot`, phoneNumber: '+62 812-2985-9085'} },
 			{ quickReplyButton: { displayText: `🖇Status Bot`, id: `ping` } }
 		]
-
         if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in cmdmedia)) {
         let hash = cmdmedia[m.msg.fileSha256.toString('base64')]
         let { text, mentionedJid } = hash
@@ -206,6 +205,15 @@ const buttonsDefault = [
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+        	case 'ssweb':
+            case 'ss':{
+                if (!text) throw 'url ?'
+					teks = q
+					anu = await fetchJson(`https://shot.screenshotapi.net/screenshot?&url=${text}`)
+					buff = await getBuffer(anu.screenshot)
+					kon.sendMessage(m.chat, { image: { url: buff }})
+}
+					break
         	case 'setname': case 'setsubject': {
                 if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
