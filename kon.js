@@ -323,16 +323,6 @@ const buttonsDefault = [
             }
             break
 break
-case 'igstory':{
-if (!text) throw 'enter query link!'
-ini = await fetchJson(`https://megayaa.herokuapp.com/api/igstori?username=${text}`)
-                {
-                    kon.sendMessage(m.chat, { video: { url: ini.url }})
-                } else {
-                    kon.sendMessage(m.chat, { image: { url: ini.url }})
-                }
-            }
-            break
          case 'ig2':{
 		m.reply(mess.wait)
 hx.igdl(args[1]).then( result => {
