@@ -205,13 +205,12 @@ const buttonsDefault = [
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
-        	case 'coffe':{
+        	case 'bevel': case '8bit': case '3dwoodenblack': case '3dnature': case '3dglowing': case 'coffee':{
                 if (!text) throw 'textnya?'
                 m.reply(mess.wait)
-					teks = q
-					anu = await fetchJson(`https://api.violetics.pw/api/photooxy/coffee?apikey=a62c-24ff-2fc2&text=${text}`)
-					kon.sendMessage(m.chat, { image: { url: anu.message.Expected}})
+					kon.sendMessage(m.chat, { image: { url: `https://api.violetics.pw/api/photooxy/${command}?apikey=a62c-24ff-2fc2&text=${text}`}})
 }
+					break
 					break
         	case 'ssweb':
             case 'ss':{
