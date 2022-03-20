@@ -215,19 +215,9 @@ const buttonsDefault = [
 			if (!text) throw 'url nya?'
 			m.reply(mess.wait)
 			anu = await fetchJson(`https://zenzapi.xyz/downloader/soundcloud?url=${text}&apikey=87d718524e2a`)
-			anu2 =`🐵 *Judul : ${anu.result.title}*`
+			anu2 =`🐵 *Judul : ${anu.result.title}*\n*Mohon Tunggu Sebentar Media Sedang Dikirim....*`
 			kon.sendMessage(m.chat, { caption: anu2, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
 			kon.sendMessage(m.chat, { audio: { url: anu.result.url }, mimetype: 'audio/mpeg', fileName: anu.result.title }, { quoted: m })
-			}
-			break
-			case 'jx':
-			case 'joox':{
-			if (!text) throw 'judul nya?'
-			m.reply(mess.wait)
-			anu = await fetchJson(`https://zenzapi.xyz/downloader/joox?query=${text}&apikey=87d718524e2a`)
-			anu2 =`🐵 *Judul :* ${anu.result.lagu}\n*Penyanyi :* ${anu.result.penyanyi}\n*Lirik :* ${anu.result.lirik}`
-			kon.sendMessage(m.chat, { caption: anu2, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
-			kon.sendMessage(m.chat, { audio: { url: anu.result.mp3link}, mimetype: 'audio/mp3', fileName: anu.result.lagu}, { quoted: m })
 			}
 			break
         	case 'ssweb':
@@ -1097,7 +1087,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}q* 
  ❒ *${prefix}ssweb* 
  
-𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝
+??𝐨𝐰𝐧𝐥𝐨𝐚𝐝
  ❒ *${prefix}play (judul lagu)* 
  ❒ *${prefix}ytmp3 (link youtube)* 
  ❒ *${prefix}ytmp4 (link youtube)*
@@ -1109,7 +1099,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}getmusic* 
  ❒ *${prefix}getvideo* 
  ❒ *${prefix}mediafire (khusus owner)* 
-
+ ❒ *${prefix}soundcloud* 
 𝐎𝐰𝐧𝐞𝐫
  ❒ *${prefix}bcgc* 
  ❒ *${prefix}bcall* 
@@ -1211,7 +1201,6 @@ break
  ❒ *${prefix}getvideo* 
  ❒ *${prefix}mediafire (khusus owner)* 
  ❒ *${prefix}soundcloud* 
- ❒ *${prefix}joox* 
 
 𝐎𝐰𝐧𝐞𝐫
  ❒ *${prefix}bcgc* 
