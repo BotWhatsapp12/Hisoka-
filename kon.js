@@ -384,6 +384,13 @@ for(let i of result.medias){
 	    })
 	    }
 	    break
+	case 'attp':{
+       m.reply(mess.wait) 
+  if (!text) throw 'Text nya?'
+              buffer = await getBuffer(`https://api.xteam.xyz/attp?file&text=${text}`)
+              await kon.sendVideoAsSticker(m.chat, buffer, m, { packname: global.packname, author: global.author })
+              }
+              break
 	case 'sc': {
 		let buttons = [
                     {buttonId: `menu`, buttonText: {displayText: 'Back to Menu'}, type: 1},
@@ -1077,6 +1084,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}emojimix (masukan emoji)*
  ❒ *${prefix}del (reply pesan bot)*
  ❒ *${prefix}q* 
+ ❒ *${prefix}ssweb* 
  
 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝
  ❒ *${prefix}play (judul lagu)* 
@@ -1102,7 +1110,6 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}grup*  
  ❒ *${prefix}editinfo* 
  ❒ *${prefix}linkgc*
- ❒ *${prefix}antilink*
  ❒ *${prefix}setppgc [image]*
  ❒ *${prefix}setname [text]*
  ❒ *${prefix}setdesc [text]*
