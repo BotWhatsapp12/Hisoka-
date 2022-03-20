@@ -211,7 +211,19 @@ const buttonsDefault = [
 					kon.sendMessage(m.chat, { image: { url: `https://api.violetics.pw/api/photooxy/${command}?apikey=a62c-24ff-2fc2&text=${text}`}})
 }
 					break
-					break
+			case 'soundcloud':{
+			if (!text) throw 'url nya?'
+			m.reply(mess.wait)
+			kon.sendMessage(m.chat, { audio: { url: `https://api.violetics.pw/api/downloader/soundcloud?apikey=a62c-24ff-2fc2&url=${text}` }, mimetype: 'audio/mpeg', fileName: `downloader by gura.mp3` }, { quoted: m })
+			}
+			break
+			case 'fb':
+			case 'facebook':{
+			if (!text) throw 'url nya?'
+			m.reply(mess.wait)
+			kon.sendMessage(m.chat, { video: { url: `https://api.violetics.pw/api/downloader/facebook?apikey=a62c-24ff-2fc2&url=${text}` }, mimetype: 'video/mp4', fileName: `downloader by gura.mp3` }, { quoted: m })
+			}
+			break
         	case 'ssweb':
             case 'ss':{
                 if (!text) throw 'url ?'
@@ -384,13 +396,6 @@ for(let i of result.medias){
 	    })
 	    }
 	    break
-	case 'attp':{
-       m.reply(mess.wait) 
-  if (!text) throw 'Text nya?'
-              buffer = await getBuffer(`https://api.xteam.xyz/attp?file&text=${text}`)
-              await kon.sendVideoAsSticker(m.chat, buffer, m, { packname: global.packname, author: global.author })
-              }
-              break
 	case 'sc': {
 		let buttons = [
                     {buttonId: `menu`, buttonText: {displayText: 'Back to Menu'}, type: 1},
