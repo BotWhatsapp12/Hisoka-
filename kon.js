@@ -214,7 +214,8 @@ const buttonsDefault = [
 			case 'soundcloud':{
 			if (!text) throw 'url nya?'
 			m.reply(mess.wait)
-			kon.sendMessage(m.chat, { audio: { url: `https://api.violetics.pw/api/downloader/soundcloud?apikey=a62c-24ff-2fc2&url=${text}` }, mimetype: 'audio/mpeg', fileName: `downloader by gura.mp3` }, { quoted: m })
+			anu = await fetchJson(`https://zenzapi.xyz/downloader/soundcloud?url=${text}&apikey=87d718524e2a`)
+			kon.sendMessage(m.chat, { audio: { url: anu.result.url }, mimetype: 'audio/mpeg', fileName: anu.result.title }, { quoted: m })
 			}
 			break
 			case 'fb':
