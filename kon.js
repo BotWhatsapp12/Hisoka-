@@ -215,14 +215,19 @@ const buttonsDefault = [
 			if (!text) throw 'url nya?'
 			m.reply(mess.wait)
 			anu = await fetchJson(`https://zenzapi.xyz/downloader/soundcloud?url=${text}&apikey=87d718524e2a`)
+			anu2 =`🐵 *Judul : ${anu.result.title}*`
+			kon.sendMessage(m.chat, { caption: anu2, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
 			kon.sendMessage(m.chat, { audio: { url: anu.result.url }, mimetype: 'audio/mpeg', fileName: anu.result.title }, { quoted: m })
 			}
 			break
-			case 'fb':
-			case 'facebook':{
-			if (!text) throw 'url nya?'
+			case 'jx':
+			case 'joox':{
+			if (!text) throw 'judul nya?'
 			m.reply(mess.wait)
-			kon.sendMessage(m.chat, { video: { url: `https://api.violetics.pw/api/downloader/facebook?apikey=a62c-24ff-2fc2&url=${text}` }, mimetype: 'video/mp4', fileName: `downloader by gura.mp3` }, { quoted: m })
+			anu = await fetchJson(`https://zenzapi.xyz/downloader/joox?query=${text}&apikey=87d718524e2a`)
+			anu2 =`🐵 *Judul :* ${anu.result.lagu}\n*Penyanyi :* ${anu.result.penyanyi}\n*Lirik :* ${anu.result.lirik}`
+			kon.sendMessage(m.chat, { caption: anu2, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
+			kon.sendMessage(m.chat, { audio: { url: anu.result.mp3link}, mimetype: 'audio/mp3', fileName: anu.result.lagu}, { quoted: m })
 			}
 			break
         	case 'ssweb':
@@ -1205,6 +1210,8 @@ break
  ❒ *${prefix}getmusic* 
  ❒ *${prefix}getvideo* 
  ❒ *${prefix}mediafire (khusus owner)* 
+ ❒ *${prefix}soundcloud* 
+ ❒ *${prefix}joox* 
 
 𝐎𝐰𝐧𝐞𝐫
  ❒ *${prefix}bcgc* 
