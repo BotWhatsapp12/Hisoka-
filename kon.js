@@ -205,6 +205,24 @@ const buttonsDefault = [
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+        	case '3dchristmas': case '3ddeepsea': case 'americanflag': case '3dscifi': case '3drainbow': case '3dwaterpipe': case 'halloweenskeleton': case 'sketch': case 'bluecircuit': case 'space': case 'metallic': case 'fiction': case 'greenhorror': case 'transformer': case 'berry': case 'thunder': case 'magma': case '3dcrackedstone': case '3dneonlight': case 'impressiveglitch': case 'naturalleaves': case 'fireworksparkle': case 'matrix': case 'dropwater':  case 'harrypotter': case 'foggywindow': case 'neondevils': case 'christmasholiday': case '3dgradient': case 'blackpink': case 'gluetext': {
+                if (!text) throw `Example : ${prefix + command} text`
+                m.reply(mess.wait)
+                kon.sendMessage(m.chat, { image: { url: `https://zenzapi.xyz/textpro/${command}?text=${text}&apikey=87d718524e2a` }, caption: mess.success}, { quoted: m})
+	    }
+            break
+            case 'shadow': case 'romantic': case 'smoke': case 'burnpapper': case 'naruto': case 'lovemsg': case 'grassmsg': case 'lovetext': case 'coffecup': case 'butterfly': case 'harrypotter': case 'retrolol': {
+                if (!text) throw 'No Query Text'
+                m.reply(mess.wait)
+                kon.sendMessage(m.chat, { image: { url: `https://zenzapi.xyz/photooxy/${command}?text=${text}&apikey=87d718524e2a`}, caption: `Photo Oxy ${command}` }, { quoted: m })
+            }
+            break
+            case 'ffcover': case 'crossfire': case 'galaxy': case 'glass': case 'neon': case 'beach': case 'blackpink': case 'igcertificate': case 'ytcertificate': {
+                if (!text) throw 'No Query Text'
+                m.reply(mess.wait)
+                kon.sendMessage(m.chat, { image: { url: `https://zenzapi.xyz/ephoto/${command}?text=${text}&apikey=87d718524e2a` }, caption: `Ephoto ${command}` }, { quoted: m })
+            }
+            break
         	case 'bevel': case '8bit': case '3dwoodenblack': case '3dnature': case '3dglowing': case 'coffee':{
                 if (!text) throw 'textnya?'
                 m.reply(mess.wait)
