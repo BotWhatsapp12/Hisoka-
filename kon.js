@@ -208,20 +208,8 @@ const buttonsDefault = [
         	case '3dchristmas': case '3ddeepsea': case 'americanflag': case '3dscifi': case '3drainbow': case '3dwaterpipe': case 'halloweenskeleton': case 'sketch': case 'bluecircuit': case 'space': case 'metallic': case 'fiction': case 'greenhorror': case 'transformer': case 'berry': case 'thunder': case 'magma': case '3dcrackedstone': case '3dneonlight': case 'impressiveglitch': case 'naturalleaves': case 'fireworksparkle': case 'matrix': case 'dropwater':  case 'harrypotter': case 'foggywindow': case 'neondevils': case 'christmasholiday': case '3dgradient': case 'blackpink': case 'gluetext': {
                 if (!text) throw `Example : ${prefix + command} text`
                 m.reply(mess.wait)
-                kon.sendMessage(m.chat, { image: { url: `https://zenzapi.xyz/textpro/${command}?text=${text}&apikey=87d718524e2a` }, caption: mess.success}, { quoted: m})
+                kon.sendMessage(m.chat, { image: { url: `https://zenzapi.xyz/textpro/${command}?text=${text}&apikey=87d718524e2a` }, caption: mess.success}, { quoted: ftrol2})
 	    }
-            break
-            case 'shadow': case 'romantic': case 'smoke': case 'burnpapper': case 'naruto': case 'lovemsg': case 'grassmsg': case 'lovetext': case 'coffecup': case 'butterfly': case 'harrypotter': case 'retrolol': {
-                if (!text) throw 'No Query Text'
-                m.reply(mess.wait)
-                kon.sendMessage(m.chat, { image: { url: `https://zenzapi.xyz/photooxy/${command}?text=${text}&apikey=87d718524e2a`}, caption: `Photo Oxy ${command}` }, { quoted: m })
-            }
-            break
-            case 'ffcover': case 'crossfire': case 'galaxy': case 'glass': case 'neon': case 'beach': case 'blackpink': case 'igcertificate': case 'ytcertificate': {
-                if (!text) throw 'No Query Text'
-                m.reply(mess.wait)
-                kon.sendMessage(m.chat, { image: { url: `https://zenzapi.xyz/ephoto/${command}?text=${text}&apikey=87d718524e2a` }, caption: `Ephoto ${command}` }, { quoted: m })
-            }
             break
         	case 'bevel': case '8bit': case '3dwoodenblack': case '3dnature': case '3dglowing': case 'coffee':{
                 if (!text) throw 'textnya?'
@@ -801,7 +789,7 @@ nat = `
 ┃❒ *Kecepatan Bot* ${latensi.toFixed(4)} detik
 ┃❒ *Runtime Bot* ${runtime(process.uptime())}
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
-┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂?? 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
+┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂?? 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑??𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
 ┗━━━━━━━ `
 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: kon.waUploadToServer })
@@ -1105,7 +1093,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}q* 
  ❒ *${prefix}ssweb* 
  
-??𝐨𝐰𝐧𝐥𝐨𝐚𝐝
+𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝
  ❒ *${prefix}play (judul lagu)* 
  ❒ *${prefix}ytmp3 (link youtube)* 
  ❒ *${prefix}ytmp4 (link youtube)*
@@ -1118,6 +1106,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}getvideo* 
  ❒ *${prefix}mediafire (khusus owner)* 
  ❒ *${prefix}soundcloud* 
+ 
 𝐎𝐰𝐧𝐞𝐫
  ❒ *${prefix}bcgc* 
  ❒ *${prefix}bcall* 
@@ -1156,6 +1145,39 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}slow*
  ❒ *${prefix}tupai*
 
+*Text Pro*
+ ❒ *${prefix}3dchristmas* 
+ ❒ *${prefix}3ddeepsea* 
+ ❒ *${prefix}americanflag* 
+ ❒ *${prefix}3dscifi* 
+ ❒ *${prefix}3drainbow* 
+ ❒ *${prefix}3dwaterpipe* 
+ ❒ *${prefix}halloweenskeleton* 
+ ❒ *${prefix}sketch* 
+ ❒ *${prefix}bluecircuit* 
+ ❒ *${prefix}space* 
+ ❒ *${prefix}metallic* 
+ ❒ *${prefix}fiction* 
+ ❒ *${prefix}greenhorror* 
+ ❒ *${prefix}transformer* 
+ ❒ *${prefix}berry* 
+ ❒ *${prefix}thunder* 
+ ❒ *${prefix}magma* 
+ ❒ *${prefix}3dcrackedstone* 
+ ❒ *${prefix}3dneonlight* 
+ ❒ *${prefix}impressiveglitch* 
+ ❒ *${prefix}naturalleaves* 
+ ❒ *${prefix}fireworksparkle* 
+ ❒ *${prefix}matrix* 
+ ❒ *${prefix}dropwater*  
+ ❒ *${prefix}harrypotter* 
+ ❒ *${prefix}foggywindow* 
+ ❒ *${prefix}neondevils* 
+ ❒ *${prefix}christmasholiday* 
+ ❒ *${prefix}3dgradient* 
+ ❒ *${prefix}blackpink* 
+ ❒ *${prefix}gluetext* 
+
 𝐍𝐬𝐟𝐰
  ❒ *${prefix}yuri* 
  ❒ *${prefix}pussy* 
@@ -1175,7 +1197,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}bdsm* 
  ❒ *${prefix}ahegao* 
  ❒ *${prefix}ass*
-
+┃
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂𝒌 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑𝒐𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
 ┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
@@ -1257,6 +1279,39 @@ break
  ❒ *${prefix}robot*
  ❒ *${prefix}slow*
  ❒ *${prefix}tupai*
+
+*Text Pro*
+❒ *${prefix}3dchristmas* 
+❒ *${prefix}3ddeepsea* 
+❒ *${prefix}americanflag* 
+❒ *${prefix}3dscifi* 
+❒ *${prefix}3drainbow* 
+❒ *${prefix}3dwaterpipe* 
+❒ *${prefix}halloweenskeleton* 
+❒ *${prefix}sketch* 
+❒ *${prefix}bluecircuit* 
+❒ *${prefix}space* 
+❒ *${prefix}metallic* 
+❒ *${prefix}fiction* 
+❒ *${prefix}greenhorror* 
+❒ *${prefix}transformer* 
+❒ *${prefix}berry* 
+❒ *${prefix}thunder* 
+❒ *${prefix}magma* 
+❒ *${prefix}3dcrackedstone* 
+❒ *${prefix}3dneonlight* 
+❒ *${prefix}impressiveglitch* 
+❒ *${prefix}naturalleaves* 
+❒ *${prefix}fireworksparkle* 
+❒ *${prefix}matrix* 
+❒ *${prefix}dropwater*  
+❒ *${prefix}harrypotter* 
+❒ *${prefix}foggywindow* 
+❒ *${prefix}neondevils* 
+❒ *${prefix}christmasholiday* 
+❒ *${prefix}3dgradient* 
+❒ *${prefix}blackpink* 
+❒ *${prefix}gluetext* 
 
 𝐍𝐬𝐟𝐰
  ❒ *${prefix}yuri* 
