@@ -228,7 +228,7 @@ case 'halloween':{
 	m.reply(mess.wait)
 	anu = await fetchJson(`https://myselfff.herokuapp.com/docs/textpro/${command}?text=${text}`)
     anu2 = await getBuffer(anu.result)
-                kon.sendMessage(m.chat, { image: { url: anu2 }, caption: mess.success}, { quoted: ftrol2})
+                kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
         	case 'bevel': case '8bit': case '3dwoodenblack': case '3dnature': case '3dglowing': case 'coffee':{
@@ -817,7 +817,7 @@ nat = `
 ┃❒ *Runtime Bot* ${runtime(process.uptime())}
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂?? 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑??𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
-┃𝑲??𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
+┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
 ┗━━━━━━━ `
 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: kon.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
