@@ -205,10 +205,30 @@ const buttonsDefault = [
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
-        	case '3dchristmas': case '3ddeepsea': case 'americanflag': case '3dscifi': case '3drainbow': case '3dwaterpipe': case 'halloweenskeleton': case 'sketch': case 'bluecircuit': case 'space': case 'metallic': case 'fiction': case 'greenhorror': case 'transformer': case 'berry': case 'thunder': case 'magma': case '3dcrackedstone': case '3dneonlight': case 'impressiveglitch': case 'naturalleaves': case 'fireworksparkle': case 'matrix': case 'dropwater':  case 'harrypotter': case 'foggywindow': case 'neondevils': case 'christmasholiday': case '3dgradient': case 'blackpink': case 'gluetext': {
-                if (!text) throw `Example : ${prefix + command} text`
-                m.reply(mess.wait)
-                kon.sendMessage(m.chat, { image: { url: `https://zenzapi.xyz/textpro/${command}?text=${text}&apikey=87d718524e2a` }, caption: mess.success}, { quoted: ftrol2})
+case 'rainbow': 
+case 'scfi': 
+case 'blue': 
+case 'juice': 
+case 'purple': 
+case 'toxic': 
+case 'peridot':
+case 'metal': 
+case 'realistic': 
+case 'impressive': 
+case 'cracked': 
+case 'magma': 
+case 'thunder': 
+case 'berry': 
+case 'transformer': 
+case 'horror': 
+case 'metallic': 
+case 'circuit': 
+case 'sketch': 
+case 'halloween':{
+	m.reply(mess.wait)
+	anu = await fetchJson(`https://myselfff.herokuapp.com/docs/textpro/${command}?text=${text}`)
+    anu2 = await getBuffer(anu.result)
+                kon.sendMessage(m.chat, { image: { url: anu2 }, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
         	case 'bevel': case '8bit': case '3dwoodenblack': case '3dnature': case '3dglowing': case 'coffee':{
@@ -495,13 +515,6 @@ console.log(res)
     m.reply(mess.wait)
     anu = `https://myselfff.herokuapp.com/docs/random/ttp?query=${text}`
     kon.sendImageAsSticker(m.chat, anu, m, { packname: global.packname, author: global.author })
-}
-break
-case 'attp':{
-	if (!text) throw `text nya...?`
-    m.reply(mess.wait)
-    anu = `https://myselfff.herokuapp.com/docs/random/attp?query=${text}`
-    kon.sendVideoAsSticker(m.chat, anu, m, { packname: global.packname, author: global.author })
 }
 break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
@@ -804,7 +817,7 @@ nat = `
 ┃❒ *Runtime Bot* ${runtime(process.uptime())}
 ┃𝑵𝒐𝒕𝒆 : 𝑱𝒂𝒏𝒈𝒂𝒏 𝑺𝒑𝒂𝒎!!, 
 ┃𝑱𝒊𝒌𝒂 𝑭𝒊𝒕𝒖𝒓 𝑻𝒊𝒅𝒂?? 𝑾𝒐𝒓𝒌 𝑳𝒂𝒑??𝒓𝒌𝒂𝒏 𝑲𝒆 𝑶𝒘𝒏𝒆𝒓, 
-┃𝑲𝒆𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
+┃𝑲??𝒕𝒊𝒌 .𝒐𝒘𝒏𝒆𝒓 𝑼𝒏𝒕𝒖𝒌 𝑵𝒐𝒎𝒐𝒓 𝑶𝒘𝒏𝒆𝒓.
 ┗━━━━━━━ `
 let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka.jpg') }, { upload: kon.waUploadToServer })
                 const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
@@ -1098,6 +1111,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}tovn (reply audio)*
  ❒ *${prefix}tourl (reply media)*
  ❒ *${prefix}tomp3 (reply video)*
+ ❒ *${prefix}ttp (masukan text)*
  ❒ *${prefix}sticker (reply gambar)*
  
 𝐓𝐨𝐨𝐥𝐬
