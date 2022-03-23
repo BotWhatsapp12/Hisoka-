@@ -231,12 +231,13 @@ case 'halloween':{
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
-        	case 'bevel': case '8bit': case '3dwoodenblack': case '3dnature': case '3dglowing': case 'coffee':{
-                if (!text) throw 'textnya?'
-                m.reply(mess.wait)
-					kon.sendMessage(m.chat, { image: { url: `https://api.violetics.pw/api/photooxy/${command}?apikey=a62c-24ff-2fc2&text=${text}`}})
-}
-					break
+            case 'pinterest':{
+	m.reply(mess.wait)
+	anu = await fetchJson(`https://myselfff.herokuapp.com/docs/search/pinterest?query=${text}`)
+    anu2 = await getBuffer(anu.result.list)
+                kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
+	    }
+            break
 			case 'soundcloud':{
 			if (!text) throw 'url nya?'
 			m.reply(mess.wait)
@@ -1159,6 +1160,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}ytsearch (judul lagu)*
  ❒ *${prefix}google* 
  ❒ *${prefix}gimage* 
+ ❒ *${prefix}pinterest* 
  
 𝐕𝐨𝐢𝐜𝐞 𝐂𝐡𝐚𝐧𝐠𝐞𝐫
  ❒ *${prefix}bass*
@@ -1174,37 +1176,26 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}tupai*
 
 *Text Pro*
- ❒ *${prefix}3dchristmas* 
- ❒ *${prefix}3ddeepsea* 
- ❒ *${prefix}americanflag* 
- ❒ *${prefix}3dscifi* 
- ❒ *${prefix}3drainbow* 
- ❒ *${prefix}3dwaterpipe* 
- ❒ *${prefix}halloweenskeleton* 
- ❒ *${prefix}sketch* 
- ❒ *${prefix}bluecircuit* 
- ❒ *${prefix}space* 
- ❒ *${prefix}metallic* 
- ❒ *${prefix}fiction* 
- ❒ *${prefix}greenhorror* 
- ❒ *${prefix}transformer* 
- ❒ *${prefix}berry* 
- ❒ *${prefix}thunder* 
+  ❒ *${prefix}rainbow* 
+ ❒ *${prefix}scfi* 
+ ❒ *${prefix}blue* 
+ ❒ *${prefix}juice* 
+ ❒ *${prefix}purple* 
+ ❒ *${prefix}toxic* 
+ ❒ *${prefix}peridot*
+ ❒ *${prefix}metal* 
+ ❒ *${prefix}realistic* 
+ ❒ *${prefix}impressive* 
+ ❒ *${prefix}cracked* 
  ❒ *${prefix}magma* 
- ❒ *${prefix}3dcrackedstone* 
- ❒ *${prefix}3dneonlight* 
- ❒ *${prefix}impressiveglitch* 
- ❒ *${prefix}naturalleaves* 
- ❒ *${prefix}fireworksparkle* 
- ❒ *${prefix}matrix* 
- ❒ *${prefix}dropwater*  
- ❒ *${prefix}harrypotter* 
- ❒ *${prefix}foggywindow* 
- ❒ *${prefix}neondevils* 
- ❒ *${prefix}christmasholiday* 
- ❒ *${prefix}3dgradient* 
- ❒ *${prefix}blackpink* 
- ❒ *${prefix}gluetext* 
+ ❒ *${prefix}thunder* 
+ ❒ *${prefix}berry* 
+ ❒ *${prefix}transformer* 
+ ❒ *${prefix}horror* 
+ ❒ *${prefix}metallic* 
+ ❒ *${prefix}circuit* 
+ ❒ *${prefix}sketch* 
+ ❒ *${prefix}halloween*
 
 𝐍𝐬𝐟𝐰
  ❒ *${prefix}yuri* 
