@@ -457,6 +457,23 @@ console.log(res)
                 kon.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
+    case 'wallml':
+    case 'wallpubg':
+    case 'wallneon':
+    case 'wallcode':
+    case 'wallrandom':{
+    m.reply(mess.wait)
+    anu = await fetchJson('https://myselfff.herokuapp.com/docs/wallpaper/${command}')
+    kon.sendMessage(m.chat, { image: { url: anu.list.gambar}, caption: mess.success}, { quoted: ftrol2})
+}
+break
+case 'pinterest':{
+	if (!text) throw 'Cari apa?'
+    m.reply(mess.wait)
+    anu = await fetchJson('https://myselfff.herokuapp.com/docs/search/pinterest?query=${text}')
+    kon.sendMessage(m.chat, { image: { url: anu.result.list}, caption: mess.success}, { quoted: ftrol2})
+}
+break
     case 'tiktokaudio1':{
      if (!text) throw 'enter query link!'
 			    hx.ttdownloader(args[1]).then( data => {
@@ -490,6 +507,13 @@ console.log(res)
                 kon.sendMessage(m.chat, { video: { url: ini.download.hd}, fileName: `${ini.title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${ini.title}\n🖇 Url : ${ini.download.hd}\n Ext : MP4\n🗃 Resolusi : HD` }, { quoted: m })
             }
             break
+            case 'ttp':{
+	if (!text) throw `text nya...?`
+    m.reply(mess.wait)
+    anu = 'https://myselfff.herokuapp.com/docs/random/ttp?query=${text}'
+    kon.sendImageAsSticker(m.chat, anu, m, { packname: global.packname, author: global.author })
+}
+break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw`Send Image/Video With Caption ${prefix + command}\nVideo Duration 1-9 Seconds`
             m.reply(mess.wait)
