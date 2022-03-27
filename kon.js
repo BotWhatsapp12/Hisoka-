@@ -238,6 +238,13 @@ case 'halloween':{
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
+            case 'facebook': case 'fb':{
+            if (!text) throw 'url nya?'
+            m.reply(mess.wait)
+            anu = await fetchJson(`https://api.xteam.xyz/dl/fb?url=${text}&APIKEY=9b504b7490559450`)
+            kon.sendMessage(m.chat, { video: { url: anu.result.url }, mimetype: 'video/mp4', fileName: `gurabotz.mp4`, caption: mess.success}, { quoted: m })
+            }
+            break
 			case 'soundcloud':{
 			if (!text) throw 'url nya?'
 			m.reply(mess.wait)
