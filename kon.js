@@ -231,9 +231,9 @@ case 'halloween':{
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
-            case 'imaddictedto':{
+            case 'meme':{
             	m.reply(mess.wait)
-             let apirnobg = ['https://a.uguu.se/zFrzAfJQ.mp4','https://a.uguu.se/nCcHlUCQ.mp4','https://a.uguu.se/inuFrBcL.mp4','https://a.uguu.se/RXXZlchC.mp4','https://a.uguu.se/lqdJfpJ.mp4']
+             let apirnobg = ['https://a.uguu.se/VwEonHhS.mp4','https://a.uguu.se/PdbwExqq.mp4','https://a.uguu.se/VdKyhEVp.mp4','https://a.uguu.se/xdwWznet.mp4','https://a.uguu.se/szMgwuxv.mp4','https://a.uguu.se/DxNHUSWp.mp4','https://a.uguu.se/ykAJvZsJ.mp4','https://a.uguu.se/NZKymYwH.mp4','https://a.uguu.se/elEmXEdt.mp4','https://a.uguu.se/evKADdGS.mp4','https://a.uguu.se/opMxxaZz.mp4','https://a.uguu.se/PlBWvogb.mp4','https://a.uguu.se/zFrzAfJQ.mp4','https://a.uguu.se/nCcHlUCQ.mp4','https://a.uguu.se/inuFrBcL.mp4','https://a.uguu.se/RXXZlchC.mp4','https://a.uguu.se/lqdJfpJ.mp4']
 	         let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
 kon.sendMessage(m.chat, { video: { url: apinobg}, mimetype: 'video/mp4', fileName: `gurabotz.mp4`, caption: mess.success}, { quoted: m })
 }
@@ -1135,6 +1135,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}del (reply pesan bot)*
  ❒ *${prefix}q* 
  ❒ *${prefix}ssweb* 
+ ❒ *${prefix}meme* 
  
 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝
  ❒ *${prefix}play (judul lagu)* 
@@ -1190,7 +1191,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}tupai*
 
 *Text Pro*
-  ❒ *${prefix}rainbow* 
+ ❒ *${prefix}rainbow* 
  ❒ *${prefix}scfi* 
  ❒ *${prefix}blue* 
  ❒ *${prefix}juice* 
