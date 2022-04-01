@@ -205,6 +205,35 @@ const buttonsDefault = [
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+case 'gon':
+case 'killua':
+case 'kakashi':
+case 'tsunade':
+case 'orochimaru':
+case 'mitsuki':
+case 'sarada':
+case 'boruto':
+case 'sakura':
+case 'sasuke':
+case 'minato':
+case 'naruto':
+case 'copper':
+case 'nami':
+case 'ussop':
+case 'sanji':
+case 'luffy':
+case 'senku':
+case 'nezuko':
+case 'tanjirou':
+case 'natsu':
+case 'sagiri':
+case 'rimuru':{
+	m.reply(mess.wait)
+	anu = await fetchJson(`https://myselfff.herokuapp.com/docs/anime/${command}`)
+    anu2 = await getBuffer(anu.result.list)
+                kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
+	    }
+            break
 case 'rainbow': 
 case 'scfi': 
 case 'blue': 
@@ -1212,6 +1241,31 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}sketch* 
  ❒ *${prefix}halloween*
 
+*Anime*
+ ❒ *${prefix}gon*
+ ❒ *${prefix}killua*
+ ❒ *${prefix}kakashi*
+ ❒ *${prefix}tsunade*
+ ❒ *${prefix}orochimaru*
+ ❒ *${prefix}mitsuki*
+ ❒ *${prefix}sarada*
+ ❒ *${prefix}boruto*
+ ❒ *${prefix}sakura*
+ ❒ *${prefix}sasuke*
+ ❒ *${prefix}minato*
+ ❒ *${prefix}naruto*
+ ❒ *${prefix}copper*
+ ❒ *${prefix}nami*
+ ❒ *${prefix}ussop*
+ ❒ *${prefix}sanji*
+ ❒ *${prefix}luffy*
+ ❒ *${prefix}senku*
+ ❒ *${prefix}nezuko*
+ ❒ *${prefix}tanjirou*
+ ❒ *${prefix}natsu*
+ ❒ *${prefix}sagiri*
+ ❒ *${prefix}rimuru*
+ 
 𝐍𝐬𝐟𝐰
  ❒ *${prefix}yuri* 
  ❒ *${prefix}pussy* 
