@@ -20,6 +20,8 @@ const primbon = new Primbon()
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 const content = JSON.stringify(m.message)
+const { EmojiAPI } = require("emoji-api");
+const emoji = new EmojiAPI()
 const from = m.key.remoteJid
 const type = Object.keys(m.message)[0]
 const ofrply = fs.readFileSync('./lib/hisoka.jpg')
@@ -561,6 +563,15 @@ console.log(res)
     kon.sendImageAsSticker(m.chat, anu, m, { packname: global.packname, author: global.author })
 }
 break
+case 'emoji':case 'semoji':{
+						m.reply(mess.wait) 
+									if (!text) throw `Example : !semoji 😁`
+									emoji.get(`${text}`).then(emoji => {
+										teks = `${emoji.images[4].url}`
+										kon.sendImageAsSticker(m.chat, teks, m, { packname: global.packname, author: global.author })
+									})
+									}
+									break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw`Send Image/Video With Caption ${prefix + command}\nVideo Duration 1-9 Seconds`
             m.reply(mess.wait)
@@ -883,7 +894,7 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
             }
             break
   case 'yuri': case 'pussy': case 'panties': case 'orgy': case 'neko': case 'masturbation': case 'jahy': case 'glasses': case 'gangbang': case 'foot': case 'femdom': case 'ero': case 'cum': case 'cuckkold': case 'blowjob': case 'bdsm': case 'ahegao': case 'ass':{
-  m.reply(mess.wait)
+ 	if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
   var data = await fetchJson(`https://docs-jojoapi.herokuapp.com/api/nsfw/ass?apikey=Syaa`)
 var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, type: 1 }]
 					kon.sendMessage(m.chat, { caption: mess.success, image: { url: data.result }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
