@@ -25,6 +25,7 @@ const emoji = new EmojiAPI()
 const from = m.key.remoteJid
 const type = Object.keys(m.message)[0]
 const ofrply = fs.readFileSync('./lib/hisoka.jpg')
+tamnel = fs.readFileSync('./lib/hisoka.jpg')
 const { mediafiredl } = require('./lib/mediafiredl')
 let cmdmedia = JSON.parse(fs.readFileSync('./src/cmdmedia.json'))
 
@@ -134,6 +135,9 @@ const sendFileFromUrl = async (from, url, caption, msg, men) => {
                 return kon.sendMessage(from, { document: await getBuffer(url), mimetype: mime, caption: caption, mentions: men ? men : []}, {quoted: m })
             }
         }
+const reply2 = (teks) => {
+			kon.sendMessage(m.chat, teks, text, { thumbnail: tamnel, sendEphemeral: true, quoted: m, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title: `Gura Botz`,body:"Bot WhatsApp by ArulGanz",previewType:"PHOTO",thumbnail:tamnel,sourceUrl:`https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn`}}})
+		}
 const sendButton5 = async (id, text1, desc1, yo) => {
 var buatpesan = await generateWAMessageFromContent(from, {
     "templateMessage": {
@@ -236,6 +240,10 @@ case 'rimuru':{
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
+case 'tes2':{
+reply2(`On`)
+}
+break
 case 'rainbow': 
 case 'scfi': 
 case 'blue': 
