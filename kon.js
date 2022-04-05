@@ -238,7 +238,8 @@ case 'tanjirou':
 case 'natsu':
 case 'sagiri':
 case 'rimuru':{
-	m.reply(mess.wait)
+	ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 	anu = await fetchJson(`https://myselfff.herokuapp.com/docs/anime/${command}`)
     anu2 = await getBuffer(anu.result.list)
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
@@ -269,21 +270,24 @@ case 'metallic':
 case 'circuit': 
 case 'sketch': 
 case 'halloween':{
-	m.reply(mess.wait)
+	ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 	anu = await fetchJson(`https://myselfff.herokuapp.com/docs/textpro/${command}?text=${text}`)
     anu2 = await getBuffer(anu.result)
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
             case 'meme':{
-            	m.reply(mess.wait)
+            	ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
              let apirnobg = ['https://a.uguu.se/VwEonHhS.mp4','https://a.uguu.se/PdbwExqq.mp4','https://a.uguu.se/VdKyhEVp.mp4','https://a.uguu.se/xdwWznet.mp4','https://a.uguu.se/szMgwuxv.mp4','https://a.uguu.se/DxNHUSWp.mp4','https://a.uguu.se/ykAJvZsJ.mp4','https://a.uguu.se/NZKymYwH.mp4','https://a.uguu.se/elEmXEdt.mp4','https://a.uguu.se/evKADdGS.mp4','https://a.uguu.se/opMxxaZz.mp4','https://a.uguu.se/PlBWvogb.mp4','https://a.uguu.se/zFrzAfJQ.mp4','https://a.uguu.se/nCcHlUCQ.mp4','https://a.uguu.se/inuFrBcL.mp4','https://a.uguu.se/RXXZlchC.mp4','https://a.uguu.se/lqdJfpJ.mp4']
 	         let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
 kon.sendMessage(m.chat, { video: { url: apinobg}, mimetype: 'video/mp4', fileName: `gurabotz.mp4`, caption: mess.success}, { quoted: m })
 }
 	break
             case 'pinterest':{
-	m.reply(mess.wait)
+	ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 	anu = await fetchJson(`https://myselfff.herokuapp.com/docs/search/pinterest?query=${text}`)
     anu2 = await getBuffer(anu.result.list)
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
@@ -291,14 +295,16 @@ kon.sendMessage(m.chat, { video: { url: apinobg}, mimetype: 'video/mp4', fileNam
             break
             case 'facebook': case 'fb':{
             if (!text) throw 'url nya?'
-            m.reply(mess.wait)
+            ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
             anu = await fetchJson(`https://api.xteam.xyz/dl/fb?url=${text}&APIKEY=9b504b7490559450`)
             kon.sendMessage(m.chat, { video: { url: anu.result.url }, mimetype: 'video/mp4', fileName: `gurabotz.mp4`, caption: mess.success}, { quoted: m })
             }
             break
 			case 'soundcloud':{
 			if (!text) throw 'url nya?'
-			m.reply(mess.wait)
+			ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 			anu = await fetchJson(`https://zenzapi.xyz/downloader/soundcloud?url=${text}&apikey=87d718524e2a`)
 			anu2 =`🐵 *Judul : ${anu.result.title}*\n*Mohon Tunggu Sebentar Media Sedang Dikirim....*`
 			kon.sendMessage(m.chat, { caption: anu2, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
@@ -308,7 +314,8 @@ kon.sendMessage(m.chat, { video: { url: apinobg}, mimetype: 'video/mp4', fileNam
         	case 'ssweb':
             case 'ss':{
                 if (!text) throw 'url ?'
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 					teks = q
 					anu = await fetchJson(`https://shot.screenshotapi.net/screenshot?&url=${text}`)
 					buff = await getBuffer(anu.screenshot)
@@ -356,7 +363,8 @@ kon.sendMessage(m.chat, { video: { url: apinobg}, mimetype: 'video/mp4', fileNam
                 if (!isCreator) throw mess.owner
                 if (!text) throw 'Masukkan Link Group!'
                 if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let result = args[0].split('https://chat.whatsapp.com/')[1]
                 await kon.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
             }
@@ -425,7 +433,8 @@ kon.sendMessage(m.chat, { video: { url: apinobg}, mimetype: 'video/mp4', fileNam
             break
 break
          case 'ig2':{
-		m.reply(mess.wait)
+		ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 hx.igdl(args[1]).then( result => {
 for(let i of result.medias){
                 if(i.url.includes('mp4')){
@@ -438,7 +447,8 @@ for(let i of result.medias){
             }
             break
          case 'ig1':{
-			    m.reply(mess.wait)
+			    ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 			    xfar.Instagram(args[1]).then( data => {
 			     var teks = `*Instagram Downloader*\n\n*≻ Title :* ${data.title}\n*≻ Jumlah Media :* ${data.medias.length}\n*≻ Url Source :* ${data.url}\n\n_wait a minute sending media..._`
 			     m.reply(teks)
@@ -462,7 +472,8 @@ for(let i of result.medias){
 	    hmm = await './src/remobg-'+getRandom('')
 	    localFile = await kon.downloadAndSaveMediaMessage(quoted, hmm)
 	    outputFile = await './src/hremo-'+getRandom('.png')
-	    m.reply(mess.wait)
+	    ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 	    remobg.removeBackgroundFromImageFile({
 	      path: localFile,
 	      apiKey: apinobg,
@@ -492,7 +503,8 @@ for(let i of result.medias){
                 break
 	case 'tiktok': case 'tiktoknowm': {
                 if (!text) throw 'enter query link!'
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 var { TiktokDownloader } = require('./lib/tiktokdl')
 res = await TiktokDownloader(`${text}`).catch(e => {
 m.reply('error')
@@ -515,7 +527,8 @@ console.log(res)
             break
             case 'tiktokwm': case 'tiktokwatermark': {
                 if (!text) throw 'enter query link!'
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 var { TiktokDownloader } = require('./lib/tiktokdl')
 res = await TiktokDownloader(`${text}`).catch(e => {
 m.reply('error')
@@ -545,7 +558,8 @@ console.log(res)
 		        break
     case'twitter':{
             if (!text) throw 'Linknya?'
-            m.reply(mess.wait)
+            ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
             var res = await hx.twitter(`${text}`)
             ren = `${res.HD}`
             let buttons = [
@@ -564,20 +578,23 @@ console.log(res)
             break
    case 'twitter2':{
    	if (!text) throw `Linknya...?`
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 ini = await fetchJson(`https://api.dapuhy.xyz/api/socialmedia/twitter?url=${text}&apikey=wC7ZLKWUPR`)
                 kon.sendMessage(m.chat, { video: { url: ini.download.hd}, fileName: `${ini.title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${ini.title}\n🖇 Url : ${ini.download.hd}\n Ext : MP4\n🗃 Resolusi : HD` }, { quoted: m })
             }
             break
             case 'ttp':{
 	if (!text) throw `text nya...?`
-    m.reply(mess.wait)
+    ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
     anu = `https://myselfff.herokuapp.com/docs/random/ttp?query=${text}`
     kon.sendImageAsSticker(m.chat, anu, m, { packname: global.packname, author: global.author })
 }
 break
 case 'emoji':case 'semoji':{
-						m.reply(mess.wait) 
+						ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author }) 
 									if (!text) throw `Example : !semoji 😁`
 									emoji.get(`${text}`).then(emoji => {
 										teks = `${emoji.images[4].url}`
@@ -587,7 +604,8 @@ case 'emoji':case 'semoji':{
 									break
 	case 'sticker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw`Send Image/Video With Caption ${prefix + command}\nVideo Duration 1-9 Seconds`
-            m.reply(mess.wait)
+            ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                     if (/image/.test(mime)) {
                 let media = await quoted.download()
                 let encmedia = await kon.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
@@ -605,7 +623,8 @@ case 'emoji':case 'semoji':{
 	case 'toimage': case 'toimg': {
                 if (!quoted) m.reply('Reply Sticker')
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let media = await kon.downloadAndSaveMediaMessage(quoted)
                 let ran = await getRandom('.png')
                 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -643,7 +662,8 @@ case 'emoji':case 'semoji':{
                 if (/smooth/.test(command)) set = '-filter:v "minterpolate=\'mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=120\'"'
                 if (/tupai/.test(command)) set = '-filter:a "atempo=0.5,asetrate=65100"'
                 if (/audio/.test(mime)) {
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let media = await kon.downloadAndSaveMediaMessage(quoted)
                 let ran = getRandom('.mp3')
                 exec(`ffmpeg -i ${media} ${set} ${ran}`, (err, stderr, stdout) => {
@@ -661,7 +681,8 @@ case 'emoji':case 'semoji':{
 	case 'toaud': case 'toaudio': {
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
             if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
+            ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
             let media = await quoted.download()
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
@@ -672,7 +693,8 @@ case 'emoji':case 'semoji':{
             if (!isCreator) throw mess.owner
             if (/document/.test(mime)) throw `Link?`
             if (!text) throw `Example : ${prefix + command} https://mediafire.com/snekjdakkk`
-m.reply(mess.wait)
+ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 rescun = await mediafiredl(text)
 result = `
 ❒「MediaFire Download」
@@ -688,7 +710,8 @@ break
             if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
             if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
+            ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
             let media = await quoted.download()
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
@@ -698,7 +721,8 @@ break
             case 'tovn': case 'toptt': {
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
             if (!quoted) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
+            ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
             let media = await quoted.download()
             let { toPTT } = require('./lib/converter')
             let audio = await toPTT(media, 'mp4')
@@ -708,7 +732,8 @@ break
 	        case 'tomp4': case 'tovideo': {
                 if (!quoted) m.reply('Reply Sticker Gif')
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let media = await kon.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
                 await kon.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: mess.success} }, { quoted: m })
@@ -718,7 +743,8 @@ break
             case 'togif': {
                 if (!quoted) m.reply('Reply Image')
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let media = await kon.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
                 await kon.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m })
@@ -915,7 +941,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
 					break
         case 'yts': case 'ytsearch': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let yts = require("yt-search")
                 let search = await yts(text)
                 let teks = 'YouTube Search\n\n Result From '+text+'\n\n'
@@ -928,7 +955,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             break
         case 'google': {
                 if (!text) throw `Example : ${prefix + command} Gawr Gura`
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let google = require('google-it')
                 google({'query': text}).then(res => {
                 let teks = `Google Search From : ${text}\n\n`
@@ -943,7 +971,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
                 break
         case 'gimage': {
         if (!text) throw `Example : ${prefix + command} kaori cicak`
-        m.reply(mess.wait)
+        ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
         let gis = require('g-i-s')
         gis(text, async (error, result) => {
         n = result
@@ -1055,7 +1084,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
         case 'tourl': {
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 		let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
                 let media = await kon.downloadAndSaveMediaMessage(quoted)
                 if (/image/.test(mime)) {
@@ -1069,7 +1099,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
 	    case 'ytmp3': case 'ytaudio': {
-		        m.reply(mess.wait)
+		        ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
                 let quality = args[1] ? args[1] : '128kbps'
@@ -1081,7 +1112,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
             case 'ytmp4': case 'ytvideo': {
-            	m.reply(mess.wait)
+            	ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let { ytv } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                 let quality = args[1] ? args[1] : '360p'
@@ -1093,7 +1125,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
 	    case 'getmusic': {
-		        m.reply(mess.wait)
+		        ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} 1`
                 if (!m.quoted) return m.reply('Reply Pesan')
@@ -1109,7 +1142,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             }
             break
             case 'getvideo': {
-            	m.reply(mess.wait)
+            	ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 let { ytv } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} 1`
                 if (!m.quoted) return m.reply('Reply Pesan')
@@ -1126,7 +1160,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             break
             case 'ytmp32':{
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27`
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 ini = await fetchJson(`https://api.dapuhy.xyz/api/socialmedia/ytmp3?url=${text}&apikey=wC7ZLKWUPR`)
                 thumb = await getBuffer(ini.result.thumb)
                 kon.sendImage(m.chat, thumb, `🐣 Title : ${ini.result.title}\n📤 File Size : ${ini.result.size}\n🖇 Url : ${ini.result.url}\n🎶 Ext : MP3\n\n *Mohon Tunggu Sebentar Media Sedang Dikirim*`, m)
@@ -1135,7 +1170,8 @@ var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, t
             break
             case 'ytmp42':{
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27`
-                m.reply(mess.wait)
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 ini = await fetchJson(`https://api.dapuhy.xyz/api/socialmedia/ytmp4?url=${text}&apikey=wC7ZLKWUPR`)
                 kon.sendMessage(m.chat, { video: { url: ini.result.url}, fileName: `${ini.result.title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${ini.result.title}\n📤 File Size : ${ini.result.size}\n🖇 Url : ${ini.result.url}\n Ext : MP4\n🗃 Resolusi : ${ini.result.quality}` }, { quoted: m })
             }
