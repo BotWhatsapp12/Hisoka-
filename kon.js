@@ -245,7 +245,8 @@ case 'rimuru':{
 	    }
             break
 case 'tes2':{
-sticWait(m.chat)
+ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 }
 break
 case 'rainbow': 
