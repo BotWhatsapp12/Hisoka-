@@ -8,6 +8,8 @@ require('./config')
 const { default: konConnect, useSingleFileAuthState, DisconnectReason, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
 const pino = require('pino')
+const { Boom } = require('@hapi/boom')
+const yargs = require('yargs/yargs')
 const fs = require('fs')
 const chalk = require('chalk')
 const FileType = require('file-type')
@@ -19,6 +21,34 @@ global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.
 
 const store = makeInMemoryStore({ logger: pino().child({ level: 'fatal', stream: 'store' }) })
 
+
+var low
+try {
+  low = require('lowdb')
+} catch (e) {
+  low = require('./lib/lowdb')
+}
+
+const { Low, JSONFile } = low
+const mongoDB = require('./lib/mongoDB')
+
+global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+global.db = new Low(
+  /https?:\/\//.test(opts['db'] || '') ?
+    new cloudDBAdapter(opts['db']) : /mongodb/.test(opts['db']) ?
+      new mongoDB(opts['db']) :
+      new JSONFile(`src/database.json`)
+)
+global.db.data = {
+    users: {},
+    chats: {},
+    database: {},
+    game: {},
+    settings: {},
+    others: {},
+    sticker: {},
+    ...(global.db.data || {})
+}
 
 async function startkon() {
     const kon = konConnect({
