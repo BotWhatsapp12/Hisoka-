@@ -1,6 +1,6 @@
 
 require('./config')
-const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType } = require('@adiwajshing/baileys')
+const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
@@ -89,7 +89,8 @@ const isUrl = (uri) => {
 			    irq: 0
             }
         })
-        
+
+	    
         // Public & Self
         if (!kon.public) {
             if (!m.key.fromMe && !isCreator) return
@@ -213,7 +214,7 @@ const buttonsDefault = [
         }
         kon.ev.emit('messages.upsert', msg)
         }
-        switch(command){
+        switch(command) {
 case 'gon':
 case 'killua':
 case 'kakashi':
