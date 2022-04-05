@@ -135,6 +135,10 @@ const sendFileFromUrl = async (from, url, caption, msg, men) => {
                 return kon.sendMessage(from, { document: await getBuffer(url), mimetype: mime, caption: caption, mentions: men ? men : []}, {quoted: m })
             }
         }
+const sticWait = (hehe) => {
+			ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, hehe, ano, m, { packname: global.packname, author: global.author })
+		}
 const reply2 = (teks) => {
 			kon.sendMessage(m.chat, teks, text, { thumbnail: tamnel, sendEphemeral: true, quoted: m, contextInfo: { forwardingScore: 508, isForwarded: true, externalAdReply:{title: `Gura Botz`,body:"Bot WhatsApp by ArulGanz",previewType:"PHOTO",thumbnail:tamnel,sourceUrl:`https://chat.whatsapp.com/C3jhijq3xS0AVuJykrhxMn`}}})
 		}
@@ -241,7 +245,7 @@ case 'rimuru':{
 	    }
             break
 case 'tes2':{
-reply2(`On`)
+sticWait(m.chat)
 }
 break
 case 'rainbow': 
