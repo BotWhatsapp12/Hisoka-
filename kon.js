@@ -91,6 +91,56 @@ const isUrl = (uri) => {
         })
 
 	    
+	try {
+            let chats = global.db.data.chats[m.chat]
+            if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
+            if (chats) {
+                if (!('mute' in chats)) chats.mute = false
+                if (!('antilink' in chats)) chats.antilink = false
+            } else global.db.data.chats[m.chat] = {
+                mute: false,
+                antilink: false,
+            }
+		
+	    let setting = global.db.data.settings[botNumber]
+            if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
+	    if (setting) {
+		if (!isNumber(setting.status)) setting.status = 0
+		if (!('autobio' in setting)) setting.autobio = false
+	    } else global.db.data.settings[botNumber] = {
+		status: 0,
+		autobio: false,
+	    }
+	    
+        } catch (err) {
+            console.error(err)
+        }
+	    
+	// auto set bio
+	if (db.data.settings[botNumber].autobio) {
+	    let setting = global.db.data.settings[botNumber]
+	    if (new Date() * 1 - setting.status > 1000) {
+		let uptime = await runtime(process.uptime())
+		await kon.setStatus(`${kon.user.name} | Runtime : ${runtime(uptime)} | Mode Publik`)
+		setting.status = new Date() * 1
+	    }
+	}
+	    
+	  // Anti Link
+        if (db.data.chats[m.chat].antilink) {
+        if (budy.match(`chat.whatsapp.com`)) {
+        m.reply(`「 ANTI LINK 」\n\nKamu terdeteksi mengirim link group, maaf kamu akan di kick !`)
+        if (!isBotAdmins) return m.reply(`Ehh bot gak admin T_T`)
+        let gclink = (`https://chat.whatsapp.com/`+await kon.groupInviteCode(m.chat))
+        let isLinkThisGc = new RegExp(gclink, 'i')
+        let isgclink = isLinkThisGc.test(m.text)
+        if (isgclink) return m.reply(`Ehh maaf gak jadi, karena kamu ngirim link group ini`)
+        if (isAdmins) return m.reply(`Ehh maaf kamu admin`)
+        if (isCreator) return m.reply(`Ehh maaf kamu owner bot ku`)
+        kon.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+        }
+        }
+        
         // Public & Self
         if (!kon.public) {
             if (!m.key.fromMe && !isCreator) return
@@ -215,6 +265,27 @@ const buttonsDefault = [
         kon.ev.emit('messages.upsert', msg)
         }
         switch(command) {
+case 'antilink': {
+                if (!m.isGroup) throw mess.group
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+                if (args[0] === "on") {
+                if (db.data.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
+                db.data.chats[m.chat].antilink = true
+                m.reply(`Antilink Aktif !`)
+                } else if (args[0] === "off") {
+                if (!db.data.chats[m.chat].antilink) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+                db.data.chats[m.chat].antilink = false
+                m.reply(`Antilink Tidak Aktif !`)
+                } else {
+                 let buttons = [
+                        { buttonId: 'antilink on', buttonText: { displayText: 'On' }, type: 1 },
+                        { buttonId: 'antilink off', buttonText: { displayText: 'Off' }, type: 1 }
+                    ]
+                    await kon.sendButtonText(m.chat, buttons, `Mode Antilink`, kon.user.name, m)
+                }
+             }
+             break
 case 'gon':
 case 'killua':
 case 'kakashi':
@@ -934,6 +1005,8 @@ let message = await prepareWAMessageMedia({ image: fs.readFileSync('./lib/hisoka
             break
   case 'yuri': case 'pussy': case 'panties': case 'orgy': case 'neko': case 'masturbation': case 'jahy': case 'glasses': case 'gangbang': case 'foot': case 'femdom': case 'ero': case 'cum': case 'cuckkold': case 'blowjob': case 'bdsm': case 'ahegao': case 'ass':{
  	if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
+ ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
   var data = await fetchJson(`https://docs-jojoapi.herokuapp.com/api/nsfw/ass?apikey=Syaa`)
 var but = [{buttonId: `${command}`, buttonText: { displayText: 'Next Photo' }, type: 1 }]
 					kon.sendMessage(m.chat, { caption: mess.success, image: { url: data.result }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: m })
