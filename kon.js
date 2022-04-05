@@ -89,57 +89,6 @@ const isUrl = (uri) => {
 			    irq: 0
             }
         })
-
-	    
-	try {
-            let chats = global.db.data.chats[m.chat]
-            if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
-            if (chats) {
-                if (!('mute' in chats)) chats.mute = false
-                if (!('antilink' in chats)) chats.antilink = false
-            } else global.db.data.chats[m.chat] = {
-                mute: false,
-                antilink: false,
-            }
-		
-	    let setting = global.db.data.settings[botNumber]
-            if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
-	    if (setting) {
-		if (!isNumber(setting.status)) setting.status = 0
-		if (!('autobio' in setting)) setting.autobio = false
-	    } else global.db.data.settings[botNumber] = {
-		status: 0,
-		autobio: false,
-	    }
-	    
-        } catch (err) {
-            console.error(err)
-        }
-	    
-	// auto set bio
-	if (db.data.settings[botNumber].autobio) {
-	    let setting = global.db.data.settings[botNumber]
-	    if (new Date() * 1 - setting.status > 1000) {
-		let uptime = await runtime(process.uptime())
-		await kon.setStatus(`${kon.user.name} | Runtime : ${runtime(uptime)} | Mode Publik`)
-		setting.status = new Date() * 1
-	    }
-	}
-	    
-	  // Anti Link
-        if (db.data.chats[m.chat].antilink) {
-        if (budy.match(`chat.whatsapp.com`)) {
-        m.reply(`「 ANTI LINK 」\n\nKamu terdeteksi mengirim link group, maaf kamu akan di kick !`)
-        if (!isBotAdmins) return m.reply(`Ehh bot gak admin T_T`)
-        let gclink = (`https://chat.whatsapp.com/`+await kon.groupInviteCode(m.chat))
-        let isLinkThisGc = new RegExp(gclink, 'i')
-        let isgclink = isLinkThisGc.test(m.text)
-        if (isgclink) return m.reply(`Ehh maaf gak jadi, karena kamu ngirim link group ini`)
-        if (isAdmins) return m.reply(`Ehh maaf kamu admin`)
-        if (isCreator) return m.reply(`Ehh maaf kamu owner bot ku`)
-        kon.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
-        }
-        }
         
         // Public & Self
         if (!kon.public) {
@@ -264,28 +213,7 @@ const buttonsDefault = [
         }
         kon.ev.emit('messages.upsert', msg)
         }
-        switch(command) {
-case 'antilink': {
-                if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isAdmins) throw mess.admin
-                if (args[0] === "on") {
-                if (db.data.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
-                db.data.chats[m.chat].antilink = true
-                m.reply(`Antilink Aktif !`)
-                } else if (args[0] === "off") {
-                if (!db.data.chats[m.chat].antilink) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
-                db.data.chats[m.chat].antilink = false
-                m.reply(`Antilink Tidak Aktif !`)
-                } else {
-                 let buttons = [
-                        { buttonId: 'antilink on', buttonText: { displayText: 'On' }, type: 1 },
-                        { buttonId: 'antilink off', buttonText: { displayText: 'Off' }, type: 1 }
-                    ]
-                    await kon.sendButtonText(m.chat, buttons, `Mode Antilink`, kon.user.name, m)
-                }
-             }
-             break
+        switch(command){
 case 'gon':
 case 'killua':
 case 'kakashi':
