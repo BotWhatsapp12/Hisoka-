@@ -621,8 +621,8 @@ case 'emoji':case 'semoji':{
             }
             break
     case 'swm2': {
-    	   top = arg.split('|')[0]
-           bot = arg.split('|')[1]
+    	   top = text.split('|')[0]
+           bot = text.split('|')[1]
             if (!quoted) throw`Example : #swm GuraBotz|ArulGanz`
             ano = fs.readFileSync('./lib/loading.jpg')
 			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
