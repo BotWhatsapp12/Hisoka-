@@ -620,9 +620,10 @@ case 'emoji':case 'semoji':{
                 }
             }
             break
-    case 'swm2': {
-    	   top = text.split('|')[0]
-           bot = text.split('|')[1]
+    case 'swm': {
+    	if (!text) throw `Example : !swm Gura.Botz`
+    	   top = text.split('.')[0]
+           bot = text.split('.')[1]
             if (!quoted) throw`Example : #swm GuraBotz|ArulGanz`
             ano = fs.readFileSync('./lib/loading.jpg')
 			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
@@ -1239,6 +1240,7 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
  ❒ *${prefix}tomp3 (reply video)*
  ❒ *${prefix}ttp (masukan text)*
  ❒ *${prefix}sticker (reply gambar)*
+ ❒ *${prefix}swm (reply gambar)*
  
 𝐓𝐨𝐨𝐥𝐬
  ❒ *${prefix}removebg (reply gambar)*
