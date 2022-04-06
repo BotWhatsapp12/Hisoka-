@@ -20,6 +20,7 @@ const primbon = new Primbon()
 const { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 const { smsg, getGroupAdmins, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 const content = JSON.stringify(m.message)
+const imgbb = require('imgbb-uploader');
 const { EmojiAPI } = require("emoji-api");
 const emoji = new EmojiAPI()
 const from = m.key.remoteJid
@@ -135,6 +136,14 @@ const sendFileFromUrl = async (from, url, caption, msg, men) => {
                 return kon.sendMessage(from, { document: await getBuffer(url), mimetype: mime, caption: caption, mentions: men ? men : []}, {quoted: m })
             }
         }
+async function uptoibb(path){
+return new Promise (async (resolve, reject) => {
+imgbb('91904762b2cd230ce1d861279bd6bf1d', path).then((res) =>{
+resolve(res.url)
+}).catch(reject)
+})
+}
+ 
 const sticWait = (hehe) => {
 			ano = fs.readFileSync('./lib/loading.jpg')
 			kon.sendImageAsSticker(m.chat, hehe, ano, m, { packname: global.packname, author: global.author })
@@ -620,7 +629,26 @@ case 'emoji':case 'semoji':{
                 }
             }
             break
-    case 'swm': {
+    case 'smeme': 
+ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
+top = text.split('|')[0]
+bottom = text.split('|')[1]
+var imgbb = require('imgbb-uploader')
+if ((isMedia && !m.message.videoMessage || isQuotedImage || isQuotedSticker) && args.length > 0) {
+ger = isQuotedImage || isQuotedSticker ? JSON.parse(JSON.stringify(m).replace('quotedM','m')).message.extendedTextMessage.contextInfo : m
+owgi = await  kon.downloadAndSaveMediaMessage(ger)
+anu = await imgbb("91904762b2cd230ce1d861279bd6bf1d", owgi)
+teks = `${anu.display_url}`
+ranp = getRandom('.gif')
+rano = getRandom('.webp')
+anu1 = `https://api.memegen.link/images/custom8/${top}/${bottom}.png?background=${teks}`
+kon.sendImageAsSticker(m.chat, anu1, m, { packname: global.packname, author: global.author })
+} else {
+m.reply('Gunakan foto/stiker!')
+}
+break
+    case 'wm': case 'swm': {
     	if (!text) throw `Example : !swm Gura.Botz`
     	   top = text.split('.')[0]
            bot = text.split('.')[1]

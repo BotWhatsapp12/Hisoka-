@@ -1,1 +1,1 @@
-worker: npm i emoji-api && npm i jsdom && npm i xfarr-api && npm i hxz-api && npm i fluent-ffmpeg && npm install && npm i -g pm2 && pm2 start node index.js && pm2 save && pm2 logs
+worker: npm i imgbb-uploader && npm i emoji-api && npm i jsdom && npm i xfarr-api && npm i hxz-api && npm i fluent-ffmpeg && npm install && npm i -g pm2 && pm2 start node index.js && pm2 save && pm2 logs
