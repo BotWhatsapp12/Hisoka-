@@ -580,7 +580,7 @@ console.log(res)
 				}).catch(() => reply('Hmm Erorr Awoakwoakwok'))
 				}
 		        break
-    case'twitter':{
+    case'twitter3':{
             if (!text) throw 'Linknya?'
             ano = fs.readFileSync('./lib/loading.jpg')
 			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
@@ -606,6 +606,25 @@ console.log(res)
 			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
                 ini = await fetchJson(`https://api.dapuhy.xyz/api/socialmedia/twitter?url=${text}&apikey=wC7ZLKWUPR`)
                 kon.sendMessage(m.chat, { video: { url: ini.download.hd}, fileName: `${ini.title}.mp4`, mimetype: 'video/mp4', caption: `🐣 Title : ${ini.title}\n🖇 Url : ${ini.download.hd}\n Ext : MP4\n🗃 Resolusi : HD` }, { quoted: m })
+            }
+            break
+    case 'twitter':{
+    	if (!text) throw `Linknya...?`
+                ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
+                ini = await fetchJson(`https://api.violetics.pw/api/downloader/twitter?apikey=241d-7b1c-a1b3&url=${text}`)
+                let buttons = [
+                    {buttonId: `owner`, buttonText: {displayText: 'Owner'}, type: 1},
+                    {buttonId: `menu`, buttonText: {displayText: 'Back To Menu'}, type: 1}
+                ]
+                let buttonMessage = {
+                    video: { url: result.hd },
+                    caption: mess.success,
+                    footer: 'Downloader Twitter GuraBotz',
+                    buttons: buttons,
+                    headerType: 5
+                }
+                kon.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
             case 'ttp':{
