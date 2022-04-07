@@ -286,6 +286,21 @@ case 'halloween':{
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
+            case 'stickerurl'{
+            	if (!text) throw 'url nya?'
+            teks = fs.readFileSync(text)
+            kon.sendImageAsSticker(m.chat, teks, m, { packname: global.packname, author: global.author })
+            }
+            break
+            case 'telestick2':{
+            	if (!text) throw 'url nya?'
+            	anu = await fetchJson(`https://api.violetics.pw/api/downloader/telestiker?apikey=241d-7b1c-a1b3&url=${text}`)
+            ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
+			teks = await getBuffer(anu.result.sticker)
+			kon.sendImageAsSticker(m.chat, teks, m, { packname: global.packname, author: global.author })
+			}
+			break
             case 'meme':{
             	ano = fs.readFileSync('./lib/loading.jpg')
 			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
