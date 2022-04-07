@@ -286,7 +286,7 @@ case 'halloween':{
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
-            case 'stickerurl'{
+            case 'stickerurl':{
             	if (!text) throw 'url nya?'
             teks = fs.readFileSync(text)
             kon.sendImageAsSticker(m.chat, teks, m, { packname: global.packname, author: global.author })
