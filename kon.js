@@ -898,6 +898,25 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 m.reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
             }
             break
+            case 'bc3':{
+         if (!isCreator) throw mess.owner
+         if (args.length < 1) return m.reply('.......')
+         anu = await kon.chats.all()
+         if (isMedia && !m.message.videoMessage || isQuotedImage) {
+         const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
+         bc = await kon.downloadMediaMessage(encmedia)
+         for (let _ of anu) {
+         kon.sendMessage(_.jid, bc, image, { caption: `[ Bot Broadcast ]\n\n${body.slice(4)}` })
+         }
+         m.reply('Suksess broadcast')
+         } else {
+         for (let _ of anu) {
+         sendMessage(_.jid, `[ *BOT BROADCAST* ]\n\n${body.slice(4)}`)
+         }
+         m.reply('Suksess broadcast')
+         }
+         }
+		break
             case 'bc': case 'broadcast': case 'bcall': {
                 if (!isCreator) throw mess.owner
                 if (!text) throw `Text mana?\n\nExample : ${prefix + command} BroadCast`
