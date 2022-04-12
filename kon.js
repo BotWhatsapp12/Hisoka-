@@ -911,7 +911,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
          m.reply('Suksess broadcast')
          } else {
          for (let _ of anu) {
-         kon.sendMessage(_.jid, `[ *BOT BROADCAST* ]\n\n${body.slice(4)}`)
+         anuu = `⭔ [ *BOT BROADCAST* ]⭔`
+         kon.sendMessage(_.jid, { caption: anuu, location: { jpegThumbnail: fs.readFileSync('./lib/hisoka.jpg') }, templateButtons: buttonsDefault, footer: 'GuraBotz by ArulGanz', quoted: m })
          }
          m.reply('Suksess broadcast')
          }
