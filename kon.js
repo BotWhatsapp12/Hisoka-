@@ -911,7 +911,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
          m.reply('Suksess broadcast')
          } else {
          for (let _ of anu) {
-         sendMessage(_.jid, `[ *BOT BROADCAST* ]\n\n${body.slice(4)}`)
+         kon.sendMessage(_.jid, `[ *BOT BROADCAST* ]\n\n${body.slice(4)}`)
          }
          m.reply('Suksess broadcast')
          }
