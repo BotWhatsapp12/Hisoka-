@@ -901,7 +901,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             case 'bc3':{
          if (!isCreator) throw mess.owner
          if (args.length < 1) return m.reply('.......')
-         anu = await kon.chats.all()
+         anu = await store.chats.all().map(v => v.id)
          if (isMedia && !m.message.videoMessage || isQuotedImage) {
          const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
          bc = await kon.downloadMediaMessage(encmedia)
