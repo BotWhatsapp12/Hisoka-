@@ -762,7 +762,7 @@ break
             if (/document/.test(mime)) throw `Link?`
             if (!text) throw `Example : ${prefix + command} https://mediafire.com/snekjdakkk`
 rescun = await mediafiredl(text)
-       if (rescun[0].size >= 10000) return m.reply('File Melebihi Batas Silahkan Download Menggunakan Link\n${rescun[0].link}')
+       if (rescun.size >= 10000) return m.reply('File Melebihi Batas Silahkan Download Menggunakan Link\n${rescun[0].link}')
        ano = fs.readFileSync('./lib/loading.jpg')
 			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 result = `
