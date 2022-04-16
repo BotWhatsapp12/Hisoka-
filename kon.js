@@ -884,10 +884,36 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 m.reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
             }
             break
+            case 'bc4':{
+                if (!isCreator) throw mess.owner
+                if (!q)return reply(`Reply image , video , atau teks biasa dan Masukan Ingfo`)
+                bcc = await kon.chats.all()
+                if (isMedia && !m.message.imageMessage || isQuotedImage) {
+                let encmedia = isQuotedImage ? JSON.parse(JSON.stringify(kon).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
+                let media = await kon.downloadMediaMessage(encmedia)
+                for (let i of bcc){
+                kon.sendMessage(i.jid, media, image, {contextInfo: { forwardingScore: 9999, isForwarded:true},caption: `*「 BROADCAST 」*\n\n${q}`})
+                }
+                m.reply(`Sukses`)
+                } else if (isMedia && !m.message.videoMessage || isQuotedVideo) {
+                const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(kon).replace('quotedM','m')).message.extendedTextMessage.contextInfo : m
+                bc = await kon.downloadMediaMessage(encmedia)
+                for (let _ of bcc) {
+                kon.sendMessage(_.jid, bc, video, {caption: `*「 BROADCAST 」*\n\n${q}`})
+                }
+                m.reply('Suksess broadcast')
+                }   else {
+                for (let _ of bcc) {
+                kon.sendMessage(_.jid, `*「 BROADCAST 」*\n\n${q}`)
+                    }
+                m.reply(`Succses`)
+                }
+                }
+            break
             case 'bc3':{
          if (!isCreator) throw mess.owner
          if (args.length < 1) return m.reply('.......')
-         anu = await store.chats.all().map(v => v.id)
+         anu = await kon.chats.all().map(v => v.id)
          if (isMedia && !m.message.videoMessage || isQuotedImage) {
          const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
          bc = await kon.downloadMediaMessage(encmedia)
