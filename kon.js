@@ -286,21 +286,6 @@ case 'halloween':{
                 kon.sendMessage(m.chat, { image: anu2, caption: mess.success}, { quoted: ftrol2})
 	    }
             break
-            case 'stickerurl':{
-            	if (!text) throw 'url nya?'
-            teks = fs.readFileSync(text)
-            kon.sendImageAsSticker(m.chat, teks, m, { packname: global.packname, author: global.author })
-            }
-            break
-            case 'telestick2':{
-            	if (!text) throw 'url nya?'
-            	anu = await fetchJson(`https://api.violetics.pw/api/downloader/telestiker?apikey=241d-7b1c-a1b3&url=${text}`)
-            ano = fs.readFileSync('./lib/loading.jpg')
-			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
-			teks = await getBuffer(anu.result.sticker)
-			kon.sendImageAsSticker(m.chat, teks, m, { packname: global.packname, author: global.author })
-			}
-			break
             case 'meme':{
             	ano = fs.readFileSync('./lib/loading.jpg')
 			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
@@ -776,9 +761,10 @@ break
             if (!isCreator) throw mess.owner
             if (/document/.test(mime)) throw `Link?`
             if (!text) throw `Example : ${prefix + command} https://mediafire.com/snekjdakkk`
-ano = fs.readFileSync('./lib/loading.jpg')
-			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 rescun = await mediafiredl(text)
+       if (rescun[0].size >= 10000) return m.reply('File Melebihi Batas Silahkan Download Menggunakan Link\n${rescun[0].link}')
+       ano = fs.readFileSync('./lib/loading.jpg')
+			kon.sendImageAsSticker(m.chat, ano, m, { packname: global.packname, author: global.author })
 result = `
 ❒「MediaFire Download」
 ├ Nama : ${rescun[0].nama}
@@ -924,7 +910,6 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 let anu = await store.chats.all().map(v => v.id)
                 m.reply(`Mengirim Broadcast Ke ${anu.length} Chat\nWaktu Selesai ${anu.length * 1.5} detik`)
 		for (let yoi of anu) {
-		    await sleep(1500)
 		    let btn = [{
                                 urlButton: {
                                     displayText: 'Github Owner',
